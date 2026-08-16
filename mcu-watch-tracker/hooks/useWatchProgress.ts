@@ -33,6 +33,13 @@ function sanitizeWatched(value: unknown): string[] | null {
   return Array.from(new Set(cleaned));
 }
 
+function parseStoredProgress(value: unknown): string[] | null {
+  if (typeof value !== "object" || value === null) return null;
+  const stored = value as Partial<StoredProgress>;
+  if (stored.version !== STORAGE_VERSION) return null;
+  return sanitizeWatched(stored.watched);
+}
+
 function readStoredProgress(): string[] | null {
   if (typeof window === "undefined") return null;
 
@@ -41,12 +48,7 @@ function readStoredProgress(): string[] | null {
     if (!raw) return null;
 
     const parsed: unknown = JSON.parse(raw);
-    if (typeof parsed !== "object" || parsed === null) return null;
-
-    const stored = parsed as Partial<StoredProgress>;
-    if (stored.version !== STORAGE_VERSION) return null;
-
-    return sanitizeWatched(stored.watched);
+    return parseStoredProgress(parsed);
   } catch {
     // Corrupt or unavailable storage: fall back to the known progress.
     return null;
@@ -72,6 +74,8 @@ export type WatchProgress = {
   completeNextMovie: () => void;
   undo: () => void;
   reset: () => void;
+  exportProgress: () => string;
+  importProgress: (value: unknown) => boolean;
 };
 
 export function useWatchProgress(): WatchProgress {
@@ -184,6 +188,26 @@ export function useWatchProgress(): WatchProgress {
     commit(() => [...DEFAULT_WATCHED_IDS]);
   }, [commit]);
 
+  const exportProgress = useCallback(
+    () =>
+      JSON.stringify(
+        { version: STORAGE_VERSION, watched: watchedRef.current },
+        null,
+        2,
+      ),
+    [],
+  );
+
+  const importProgress = useCallback(
+    (value: unknown) => {
+      const imported = parseStoredProgress(value);
+      if (!imported) return false;
+      commit(() => imported);
+      return true;
+    },
+    [commit],
+  );
+
   const watchedMovies = useMemo(
     () => MOVIES_IN_TIMELINE_ORDER.filter((movie) => watchedSet.has(movie.id)),
     [watchedSet],
@@ -222,5 +246,7 @@ export function useWatchProgress(): WatchProgress {
     completeNextMovie,
     undo,
     reset,
+    exportProgress,
+    importProgress,
   };
 }

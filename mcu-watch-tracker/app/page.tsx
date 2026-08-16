@@ -33,6 +33,8 @@ export default function HomePage() {
     completeNextMovie,
     undo,
     reset,
+    exportProgress,
+    importProgress,
   } = useWatchProgress();
 
   const connections = useMemo(
@@ -78,6 +80,15 @@ export default function HomePage() {
 
   const dismissUndoNotice = useCallback(() => setUndoNotice(null), []);
 
+  const handleImport = useCallback(
+    (value: unknown) => {
+      const imported = importProgress(value);
+      if (imported) notify("ההתקדמות יובאה בהצלחה");
+      return imported;
+    },
+    [importProgress, notify],
+  );
+
   return (
     <div
       className={`min-h-screen transition-opacity duration-200 ${
@@ -93,6 +104,8 @@ export default function HomePage() {
         canUndo={canUndo}
         onUndo={handleUndo}
         onReset={handleReset}
+        onExport={exportProgress}
+        onImport={handleImport}
       />
 
       <main>
