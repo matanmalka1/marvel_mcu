@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 import ConnectionsSection from "@/components/ConnectionsSection";
 import Header from "@/components/Header";
@@ -9,11 +9,13 @@ import KnowledgeSection from "@/components/KnowledgeSection";
 import NextUpCard from "@/components/NextUpCard";
 import ProgressOverview from "@/components/ProgressOverview";
 import Timeline from "@/components/Timeline";
+import UndoToast, { type UndoNotice } from "@/components/UndoToast";
 import { getUnlockedConnections } from "@/data/connections";
-import { MOVIES_IN_TIMELINE_ORDER } from "@/data/movies";
+import { getMovieById, MOVIES_IN_TIMELINE_ORDER } from "@/data/movies";
 import { useWatchProgress } from "@/hooks/useWatchProgress";
 
 export default function HomePage() {
+  const [undoNotice, setUndoNotice] = useState<UndoNotice | null>(null);
   const {
     hydrated,
     watchedSet,
@@ -38,6 +40,44 @@ export default function HomePage() {
     [watchedSet],
   );
 
+  const notify = useCallback((message: string) => {
+    setUndoNotice({ id: Date.now(), message });
+  }, []);
+
+  const handleToggle = useCallback(
+    (id: string) => {
+      const movie = getMovieById(id);
+      const wasWatched = watchedSet.has(id);
+      toggleWatched(id);
+      notify(
+        movie
+          ? wasWatched
+            ? `${movie.title} הוסר מהסרטים שנצפו`
+            : `${movie.title} סומן כנצפה`
+          : "ההתקדמות עודכנה",
+      );
+    },
+    [notify, toggleWatched, watchedSet],
+  );
+
+  const handleCompleteNext = useCallback(() => {
+    if (!nextMovie) return;
+    completeNextMovie();
+    notify(`${nextMovie.title} סומן כנצפה`);
+  }, [completeNextMovie, nextMovie, notify]);
+
+  const handleReset = useCallback(() => {
+    reset();
+    notify("ההתקדמות אופסה");
+  }, [notify, reset]);
+
+  const handleUndo = useCallback(() => {
+    undo();
+    setUndoNotice(null);
+  }, [undo]);
+
+  const dismissUndoNotice = useCallback(() => setUndoNotice(null), []);
+
   return (
     <div
       className={`min-h-screen transition-opacity duration-200 ${
@@ -51,8 +91,8 @@ export default function HomePage() {
         totalMovies={totalMovies}
         percentWatched={percentWatched}
         canUndo={canUndo}
-        onUndo={undo}
-        onReset={reset}
+        onUndo={handleUndo}
+        onReset={handleReset}
       />
 
       <main>
@@ -61,7 +101,7 @@ export default function HomePage() {
             <NextUpCard
               movie={nextMovie}
               totalMovies={totalMovies}
-              onComplete={completeNextMovie}
+              onComplete={handleCompleteNext}
             />
           }
         />
@@ -84,7 +124,7 @@ export default function HomePage() {
           movies={MOVIES_IN_TIMELINE_ORDER}
           watchedIds={watchedSet}
           nextMovieId={nextMovie?.id ?? null}
-          onToggle={toggleWatched}
+          onToggle={handleToggle}
         />
       </main>
 
@@ -100,6 +140,12 @@ export default function HomePage() {
           <p className="font-slate">MCU Watch Tracker</p>
         </div>
       </footer>
+
+      <UndoToast
+        notice={undoNotice}
+        onDismiss={dismissUndoNotice}
+        onUndo={handleUndo}
+      />
     </div>
   );
 }

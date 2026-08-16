@@ -1,7 +1,7 @@
 "use client";
 
 import { Check, Flag } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 
 import { TIMELINE_FLAG_LABELS } from "@/data/movies";
 import type { Movie, MovieStatus } from "@/types/movie";
@@ -11,9 +11,6 @@ type TimelineRowProps = {
   status: MovieStatus;
   onToggle: (id: string) => void;
 };
-
-/** How long a primed "confirm?" row waits for the second click before resetting. */
-const CONFIRM_WINDOW_MS = 2500;
 
 const ROW_STYLES: Record<MovieStatus, string> = {
   watched: "border-[var(--accent)]/40 hover:bg-white/[0.03]",
@@ -47,14 +44,6 @@ export default function TimelineRow({
   const isWatched = status === "watched";
   const slateNumber = String(movie.timelineOrder).padStart(2, "0");
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const confirmTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const [confirming, setConfirming] = useState(false);
-
-  useEffect(() => {
-    return () => {
-      if (confirmTimeoutRef.current) clearTimeout(confirmTimeoutRef.current);
-    };
-  }, []);
 
   // Toggling watched state resizes sections above the timeline (new knowledge
   // card, updated "next up" panel), which shifts this row on screen even
@@ -71,53 +60,22 @@ export default function TimelineRow({
     });
   };
 
-  const handleClick = () => {
-    // Unwatching is a correction (and Undo already covers mistakes) — no
-    // extra step needed. Marking watched gets a tap-to-confirm since it's
-    // otherwise one accidental click away.
-    if (isWatched) {
-      commitToggle();
-      return;
-    }
-
-    if (!confirming) {
-      setConfirming(true);
-      confirmTimeoutRef.current = setTimeout(
-        () => setConfirming(false),
-        CONFIRM_WINDOW_MS,
-      );
-      return;
-    }
-
-    if (confirmTimeoutRef.current) clearTimeout(confirmTimeoutRef.current);
-    setConfirming(false);
-    commitToggle();
-  };
-
   return (
     <li>
       <button
         ref={buttonRef}
         type="button"
-        onClick={handleClick}
+        onClick={commitToggle}
         aria-pressed={isWatched}
         aria-label={
           isWatched
             ? `${movie.title} — נצפה. לחיצה תסיר את הסימון`
-            : confirming
-              ? `${movie.title} — לחיצה נוספת תאשר סימון כנצפה`
-              : `${movie.title} — לא נצפה. לחיצה תסמן כנצפה`
+            : `${movie.title} — לא נצפה. לחיצה תסמן כנצפה`
         }
-        className={[
-          "flex w-full items-center gap-3 border-s-2 px-3 py-3 text-start transition-colors sm:gap-4 sm:px-4",
-          confirming ? "border-[var(--accent)] bg-[var(--accent)]/[0.12]" : ROW_STYLES[status],
-        ].join(" ")}
+        className={`flex w-full items-center gap-3 border-s-2 px-3 py-3 text-start transition-colors sm:gap-4 sm:px-4 ${ROW_STYLES[status]}`}
       >
         <span
-          className={[
-            "font-slate relative z-10 grid h-9 w-9 shrink-0 place-items-center rounded-lg border text-xs font-semibold",
-            confirming ? "border-[var(--accent)] bg-[var(--accent)] text-white animate-pulse" : BADGE_STYLES[status],
-          ].join(" ")}
+          className={`font-slate relative z-10 grid h-9 w-9 shrink-0 place-items-center rounded-lg border text-xs font-semibold ${BADGE_STYLES[status]}`}
           aria-hidden="true"
         >
           {isWatched ? <Check className="h-4 w-4" /> : slateNumber}
@@ -162,14 +120,9 @@ export default function TimelineRow({
         </span>
 
         <span
-          className={[
-            "shrink-0 rounded-full border px-2 py-1 text-center text-[11px] w-[58px]",
-            confirming
-              ? "animate-pulse border-[var(--accent)] bg-[var(--accent)] text-white"
-              : STATUS_PILL_STYLES[status],
-          ].join(" ")}
+          className={`w-[58px] shrink-0 rounded-full border px-2 py-1 text-center text-[11px] ${STATUS_PILL_STYLES[status]}`}
         >
-          {confirming ? "לאשר?" : STATUS_LABELS[status]}
+          {STATUS_LABELS[status]}
         </span>
       </button>
     </li>
