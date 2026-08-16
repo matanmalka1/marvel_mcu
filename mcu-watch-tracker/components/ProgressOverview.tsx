@@ -10,15 +10,7 @@ type ProgressOverviewProps = {
   endgamePercent: number;
 };
 
-function Bar({
-  value,
-  color,
-  label,
-}: {
-  value: number;
-  color: string;
-  label: string;
-}) {
+function Bar({ value, color, label }: { value: number; color: string; label: string }) {
   return (
     <div
       role="progressbar"
@@ -40,9 +32,7 @@ function Stat({ label, value }: { label: string; value: number }) {
   return (
     <div className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-5">
       <p className="text-xs text-[var(--muted)]">{label}</p>
-      <p className="font-slate mt-2 text-3xl font-semibold leading-none">
-        {value}
-      </p>
+      <p className="font-slate mt-2 text-3xl font-semibold leading-none">{value}</p>
     </div>
   );
 }
@@ -69,9 +59,7 @@ export default function ProgressOverview({
         <div className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-5 sm:col-span-2">
           <div className="flex items-baseline justify-between gap-3">
             <p className="text-xs text-[var(--muted)]">התקדמות כוללת</p>
-            <p className="font-slate text-xs text-[var(--muted)]">
-              {percentWatched}%
-            </p>
+            <p className="font-slate text-xs text-[var(--muted)]">{percentWatched}%</p>
           </div>
           <p className="font-slate mt-2 text-3xl font-semibold leading-none">
             {watchedCount}
@@ -95,9 +83,7 @@ export default function ProgressOverview({
               <Flag className="h-3.5 w-3.5" aria-hidden="true" />
               אבן דרך
             </p>
-            <p className="font-slate text-xs text-[var(--muted)]">
-              {endgamePercent}%
-            </p>
+            <p className="font-slate text-xs text-[var(--muted)]">{endgamePercent}%</p>
           </div>
 
           <div className="mt-2 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
@@ -119,8 +105,8 @@ export default function ProgressOverview({
           </div>
 
           <p className="mt-4 max-w-2xl text-xs leading-relaxed text-[var(--muted)]">
-            Endgame היא נקודת שיא מרכזית ב-MCU, אבל לא סוף המעקב — אחריה ממשיך
-            ציר הזמן עם עוד {totalMovies - endgameTotal} סרטים.
+            Endgame היא נקודת שיא מרכזית ב-MCU, אבל לא סוף המעקב — אחריה ממשיך ציר הזמן עם
+            עוד {totalMovies - endgameTotal} סרטים.
           </p>
         </div>
       </div>

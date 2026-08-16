@@ -11,11 +11,7 @@ type NextUpCardProps = {
   onComplete: () => void;
 };
 
-export default function NextUpCard({
-  movie,
-  totalMovies,
-  onComplete,
-}: NextUpCardProps) {
+export default function NextUpCard({ movie, totalMovies, onComplete }: NextUpCardProps) {
   if (!movie) {
     return (
       <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-raised)] p-6 sm:p-8">
@@ -27,8 +23,8 @@ export default function NextUpCard({
           סיימת את כל {totalMovies} הסרטים
         </h2>
         <p className="mt-3 text-sm leading-relaxed text-[var(--muted)]">
-          אפשר להסיר סימון מכל סרט בציר הזמן כדי לחזור אליו, או לאפס את ההתקדמות
-          מהכותרת העליונה.
+          אפשר להסיר סימון מכל סרט בציר הזמן כדי לחזור אליו, או לאפס את ההתקדמות מהכותרת
+          העליונה.
         </p>
       </div>
     );

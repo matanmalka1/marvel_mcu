@@ -14,9 +14,7 @@ export default function KnowledgeSection({
   const watchedMovies = MOVIES_IN_TIMELINE_ORDER.filter((movie) =>
     watchedSet.has(movie.id),
   );
-  const [expandedIds, setExpandedIds] = useState<ReadonlySet<string>>(
-    () => new Set(),
-  );
+  const [expandedIds, setExpandedIds] = useState<ReadonlySet<string>>(() => new Set());
 
   const toggleExpanded = (id: string) => {
     setExpandedIds((current) => {
@@ -28,8 +26,7 @@ export default function KnowledgeSection({
   };
 
   const allExpanded =
-    watchedMovies.length > 0 &&
-    watchedMovies.every((movie) => expandedIds.has(movie.id));
+    watchedMovies.length > 0 && watchedMovies.every((movie) => expandedIds.has(movie.id));
 
   return (
     <section
@@ -49,9 +46,7 @@ export default function KnowledgeSection({
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <p className="text-xs text-[var(--muted)]">
-            {watchedMovies.length} סרטים
-          </p>
+          <p className="text-xs text-[var(--muted)]">{watchedMovies.length} סרטים</p>
           {watchedMovies.length > 1 ? (
             <button
               type="button"

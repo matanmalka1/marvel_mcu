@@ -10,10 +10,7 @@ type ProgressTransferProps = {
 
 const MAX_FILE_SIZE = 1024 * 1024;
 
-export default function ProgressTransfer({
-  onExport,
-  onImport,
-}: ProgressTransferProps) {
+export default function ProgressTransfer({ onExport, onImport }: ProgressTransferProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [status, setStatus] = useState("");
 
@@ -40,11 +37,7 @@ export default function ProgressTransfer({
 
     try {
       const parsed: unknown = JSON.parse(await file.text());
-      setStatus(
-        onImport(parsed)
-          ? "ההתקדמות יובאה בהצלחה"
-          : "קובץ ההתקדמות אינו תקין",
-      );
+      setStatus(onImport(parsed) ? "ההתקדמות יובאה בהצלחה" : "קובץ ההתקדמות אינו תקין");
     } catch {
       setStatus("לא ניתן לקרוא את קובץ ההתקדמות");
     }

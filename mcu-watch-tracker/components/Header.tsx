@@ -39,10 +39,7 @@ export default function Header({
             className="h-8 w-8 shrink-0 rounded-lg ring-1 ring-inset ring-white/10"
           />
           <div>
-            <p
-              dir="ltr"
-              className="font-display text-[15px] font-bold leading-none"
-            >
+            <p dir="ltr" className="font-display text-[15px] font-bold leading-none">
               MCU Watch Tracker
             </p>
             <p className="font-slate mt-1.5 text-[10px] uppercase leading-none tracking-[0.2em] text-[var(--muted)]">

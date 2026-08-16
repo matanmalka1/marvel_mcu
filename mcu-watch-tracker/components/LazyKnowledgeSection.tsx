@@ -42,7 +42,10 @@ export default function LazyKnowledgeSection({
         aria-labelledby="knowledge-heading"
         className="mx-auto max-w-[1240px] px-4 py-12 sm:px-6"
       >
-        <h2 id="knowledge-heading" className="font-display text-2xl font-bold sm:text-3xl">
+        <h2
+          id="knowledge-heading"
+          className="font-display text-2xl font-bold sm:text-3xl"
+        >
           מה הבנת עד עכשיו
         </h2>
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[var(--muted)]">

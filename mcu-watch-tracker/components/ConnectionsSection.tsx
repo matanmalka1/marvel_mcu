@@ -9,10 +9,7 @@ function Chain({ items }: { items: string[] }) {
         <li key={item} className="flex items-center gap-2">
           <span className="text-sm text-[var(--text)]/90">{item}</span>
           {index < items.length - 1 ? (
-            <ArrowLeft
-              className="h-3.5 w-3.5 text-[var(--accent)]"
-              aria-hidden="true"
-            />
+            <ArrowLeft className="h-3.5 w-3.5 text-[var(--accent)]" aria-hidden="true" />
           ) : null}
         </li>
       ))}
@@ -42,9 +39,7 @@ export default function ConnectionsSection({
             חוטים שחוזרים בין הסרטים שראית. חיבורים חדשים נפתחים לבד ככל שתתקדם.
           </p>
         </div>
-        <p className="text-xs text-[var(--muted)]">
-          {connections.length} חיבורים
-        </p>
+        <p className="text-xs text-[var(--muted)]">{connections.length} חיבורים</p>
       </div>
 
       {connections.length === 0 ? (
@@ -63,9 +58,7 @@ export default function ConnectionsSection({
                   : "border-[var(--border)] bg-[var(--surface)]",
               ].join(" ")}
             >
-              <h3 className="font-display text-lg font-bold">
-                {connection.title}
-              </h3>
+              <h3 className="font-display text-lg font-bold">{connection.title}</h3>
               <div className="mt-3">
                 <Chain items={connection.chain} />
               </div>

@@ -37,8 +37,8 @@ export default function Hero({ nextUp }: { nextUp: ReactNode }) {
           </h1>
 
           <p className="mt-5 max-w-xl text-base leading-relaxed text-[var(--muted)] sm:text-lg">
-            צפייה לפי ציר הזמן הכרונולוגי, מעקב התקדמות והבנת כל החיבורים — בלי
-            ספוילרים קדימה.
+            צפייה לפי ציר הזמן הכרונולוגי, מעקב התקדמות והבנת כל החיבורים — בלי ספוילרים
+            קדימה.
           </p>
 
           <ul className="mt-7 flex flex-wrap gap-2">
@@ -47,7 +47,10 @@ export default function Hero({ nextUp }: { nextUp: ReactNode }) {
                 key={label}
                 className="flex items-center gap-1.5 rounded-full border border-[var(--border)] bg-[var(--surface)] px-3 py-1.5 text-xs text-[var(--muted)]"
               >
-                <Icon className="h-3.5 w-3.5 text-[var(--accent-soft)]" aria-hidden="true" />
+                <Icon
+                  className="h-3.5 w-3.5 text-[var(--accent-soft)]"
+                  aria-hidden="true"
+                />
                 {label}
               </li>
             ))}

@@ -111,7 +111,12 @@ export const CONNECTIONS: Connection[] = [
   {
     id: "thanos-threat",
     title: "האיום של Thanos",
-    chain: ["רמז ב-Guardians of the Galaxy", "רמז ב-Age of Ultron", "Infinity War", "Endgame"],
+    chain: [
+      "רמז ב-Guardians of the Galaxy",
+      "רמז ב-Age of Ultron",
+      "Infinity War",
+      "Endgame",
+    ],
     description:
       "Thanos נראה לראשונה בסצנת הפוסט-קרדיטס של The Avengers, ואז צלו ממשיך לרחף ברקע דרך רמזים נוספים לפני שהוא הופך לנבל הראשי ב-Infinity War.",
     requires: [
@@ -124,9 +129,14 @@ export const CONNECTIONS: Connection[] = [
   {
     id: "loki",
     title: "Loki",
-    chain: ["Thor", "The Avengers", "Thor: The Dark World", "Thor: Ragnarok", "Infinity War"],
-    description:
-      "מנבל מוקדם ב-MCU ועד קורבן בפתיחת Infinity War — המסע המפותל של Loki.",
+    chain: [
+      "Thor",
+      "The Avengers",
+      "Thor: The Dark World",
+      "Thor: Ragnarok",
+      "Infinity War",
+    ],
+    description: "מנבל מוקדם ב-MCU ועד קורבן בפתיחת Infinity War — המסע המפותל של Loki.",
     requires: [
       "thor",
       "the-avengers",
@@ -138,7 +148,13 @@ export const CONNECTIONS: Connection[] = [
   {
     id: "wakanda-vibranium",
     title: "וואקנדה וויבראניום",
-    chain: ["Civil War", "Black Panther", "Infinity War", "Wakanda Forever", "Brave New World"],
+    chain: [
+      "Civil War",
+      "Black Panther",
+      "Infinity War",
+      "Wakanda Forever",
+      "Brave New World",
+    ],
     description:
       "מממלכה נסתרת ועד משאב מבוקש בעולם כולו — וואקנדה והוויבראניום שלה נמצאים במרכז מתיחות בין-לאומית לאורך שנים.",
     requires: [
@@ -166,7 +182,12 @@ export const CONNECTIONS: Connection[] = [
   {
     id: "multiverse",
     title: "המולטיוורס",
-    chain: ["No Way Home", "Multiverse of Madness", "Quantumania", "Deadpool & Wolverine"],
+    chain: [
+      "No Way Home",
+      "Multiverse of Madness",
+      "Quantumania",
+      "Deadpool & Wolverine",
+    ],
     description:
       "מכישוף שהשתבש ועד רודן מולטיברסלי ועד ה-TVA עצמה — המולטיוורס הופך לאיום מרכזי בפאזה הזו.",
     requires: [
@@ -179,7 +200,13 @@ export const CONNECTIONS: Connection[] = [
   {
     id: "caps-shield",
     title: "המגן של Captain America",
-    chain: ["The First Avenger", "The Winter Soldier", "Civil War", "Endgame", "Brave New World"],
+    chain: [
+      "The First Avenger",
+      "The Winter Soldier",
+      "Civil War",
+      "Endgame",
+      "Brave New World",
+    ],
     description:
       "מגן שעבר מ-Steve Rogers ל-Sam Wilson — סמל שממשיך לשאת משמעות גם כשמחליפים ידיים.",
     requires: [
@@ -220,7 +247,13 @@ export const CONNECTIONS: Connection[] = [
   {
     id: "gamora-thanos",
     title: "Gamora ומשפחת Thanos",
-    chain: ["Guardians of the Galaxy", "Guardians Vol. 2", "Infinity War", "Endgame", "Guardians Vol. 3"],
+    chain: [
+      "Guardians of the Galaxy",
+      "Guardians Vol. 2",
+      "Infinity War",
+      "Endgame",
+      "Guardians Vol. 3",
+    ],
     description:
       "בת מאומצת שהפכה לכלי נשק, ואז לקורבן, ואז לגרסה אחרת לגמרי של עצמה — הקשר בין Gamora ל-Thanos רודף את שני הצדדים.",
     requires: [
@@ -281,7 +314,13 @@ export const CONNECTIONS: Connection[] = [
   {
     id: "bruce-banner",
     title: "Bruce Banner / Hulk",
-    chain: ["The Incredible Hulk", "The Avengers", "Age of Ultron", "Ragnarok", "Endgame"],
+    chain: [
+      "The Incredible Hulk",
+      "The Avengers",
+      "Age of Ultron",
+      "Ragnarok",
+      "Endgame",
+    ],
     description:
       "ממדען בורח שמנסה למצוא תרופה ועד גיבור שמשלב סוף-סוף את שני הצדדים שלו לאחד — המסע השלם של Bruce Banner.",
     requires: [
@@ -298,12 +337,7 @@ export const CONNECTIONS: Connection[] = [
     chain: ["Thor", "The Dark World", "Ragnarok", "Love and Thunder"],
     description:
       "מיורש יהיר ועד מלך אבל שמאבד כמעט הכל — המסע הרגשי של Thor דרך אובדן חוזר ונשנה.",
-    requires: [
-      "thor",
-      "thor-the-dark-world",
-      "thor-ragnarok",
-      "thor-love-and-thunder",
-    ],
+    requires: ["thor", "thor-the-dark-world", "thor-ragnarok", "thor-love-and-thunder"],
   },
   {
     id: "tony-trauma",
@@ -322,8 +356,7 @@ export const CONNECTIONS: Connection[] = [
     id: "loki-first-clash",
     title: "Loki, האויב הראשון",
     chain: ["Thor", "The Avengers"],
-    description:
-      "Loki עובר מנסיך מודח לאויב שמאחד סופית את ה-Avengers כצוות.",
+    description: "Loki עובר מנסיך מודח לאויב שמאחד סופית את ה-Avengers כצוות.",
     requires: ["thor", "the-avengers"],
   },
   {
@@ -338,16 +371,14 @@ export const CONNECTIONS: Connection[] = [
     id: "hydra-roots",
     title: "HYDRA, השורשים הישנים",
     chain: ["HYDRA (1945)", "S.H.I.E.L.D מבפנים"],
-    description:
-      "ארגון שהוכרז כמובס חוזר לפתע ומתגלה כמעולם לא נעלם.",
+    description: "ארגון שהוכרז כמובס חוזר לפתע ומתגלה כמעולם לא נעלם.",
     requires: ["captain-america-the-first-avenger", "captain-america-the-winter-soldier"],
   },
   {
     id: "tony-trauma-begins",
     title: "הטראומה של Tony מתחילה",
     chain: ["The Avengers", "Iron Man 3"],
-    description:
-      "הפלישה החייזרית לניו יורק משאירה על Tony צלקת שלא נראית על השריון.",
+    description: "הפלישה החייזרית לניו יורק משאירה על Tony צלקת שלא נראית על השריון.",
     requires: ["the-avengers", "iron-man-3"],
   },
   {
@@ -393,9 +424,7 @@ export const CONNECTIONS: Connection[] = [
 ];
 
 /** Only threads whose required movies have all been watched. */
-export function getUnlockedConnections(
-  watchedIds: ReadonlySet<string>,
-): Connection[] {
+export function getUnlockedConnections(watchedIds: ReadonlySet<string>): Connection[] {
   return CONNECTIONS.filter((connection) =>
     connection.requires.every((id) => watchedIds.has(id)),
   );

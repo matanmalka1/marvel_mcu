@@ -16,11 +16,7 @@ type UndoToastProps = {
 
 const DISMISS_AFTER_MS = 5000;
 
-export default function UndoToast({
-  notice,
-  onDismiss,
-  onUndo,
-}: UndoToastProps) {
+export default function UndoToast({ notice, onDismiss, onUndo }: UndoToastProps) {
   useEffect(() => {
     if (!notice) return;
     const timeout = window.setTimeout(onDismiss, DISMISS_AFTER_MS);
@@ -34,9 +30,7 @@ export default function UndoToast({
       role="status"
       className="fixed inset-x-4 bottom-4 z-50 mx-auto flex max-w-md items-center gap-3 rounded-xl border border-[var(--border-strong)] bg-[var(--bg-raised)] p-3 shadow-2xl"
     >
-      <p className="min-w-0 flex-1 text-sm text-[var(--text)]">
-        {notice.message}
-      </p>
+      <p className="min-w-0 flex-1 text-sm text-[var(--text)]">{notice.message}</p>
       <button
         type="button"
         onClick={onUndo}

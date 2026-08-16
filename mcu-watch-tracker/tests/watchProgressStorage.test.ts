@@ -9,9 +9,9 @@ import {
 
 describe("watch progress serialization", () => {
   it("keeps known ids and removes duplicates", () => {
-    expect(
-      sanitizeWatched(["iron-man", "unknown", "iron-man", 42]),
-    ).toEqual(["iron-man"]);
+    expect(sanitizeWatched(["iron-man", "unknown", "iron-man", 42])).toEqual([
+      "iron-man",
+    ]);
   });
 
   it("rejects malformed and incompatible payloads", () => {
@@ -27,9 +27,6 @@ describe("watch progress serialization", () => {
 
   it("round-trips a valid payload", () => {
     const serialized = serializeProgress(["iron-man", "thor"]);
-    expect(parseStoredProgress(JSON.parse(serialized))).toEqual([
-      "iron-man",
-      "thor",
-    ]);
+    expect(parseStoredProgress(JSON.parse(serialized))).toEqual(["iron-man", "thor"]);
   });
 });

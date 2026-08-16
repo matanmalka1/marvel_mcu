@@ -35,10 +35,7 @@ describe("useWatchProgress", () => {
     act(() => result.current.toggleWatched("iron-man"));
     expect(result.current.canUndo).toBe(true);
 
-    window.localStorage.setItem(
-      WATCH_PROGRESS_STORAGE_KEY,
-      serializeProgress(["thor"]),
-    );
+    window.localStorage.setItem(WATCH_PROGRESS_STORAGE_KEY, serializeProgress(["thor"]));
     act(() =>
       window.dispatchEvent(
         new StorageEvent("storage", { key: WATCH_PROGRESS_STORAGE_KEY }),
@@ -54,9 +51,7 @@ describe("useWatchProgress", () => {
     await waitFor(() => expect(result.current.hydrated).toBe(true));
 
     act(() => result.current.toggleWatched("iron-man"));
-    expect(result.current.importProgress({ version: 999, watched: [] })).toBe(
-      false,
-    );
+    expect(result.current.importProgress({ version: 999, watched: [] })).toBe(false);
 
     act(() => result.current.reset());
     expect(result.current.watchedIds).toEqual([]);

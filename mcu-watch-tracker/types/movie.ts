@@ -13,11 +13,7 @@ export type Saga = "infinity" | "multiverse";
 /**
  * Honest metadata for movies that do not sit cleanly on a single linear historical timeline.
  */
-export type TimelineFlag =
-  | "post-endgame"
-  | "multiverse"
-  | "tva"
-  | "alternate-universe";
+export type TimelineFlag = "post-endgame" | "multiverse" | "tva" | "alternate-universe";
 
 /**
  * Everything a viewer is allowed to know *after* finishing the movie.

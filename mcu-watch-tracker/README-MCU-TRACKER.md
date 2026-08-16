@@ -29,9 +29,11 @@ types/
 ## לפני הרצה
 
 1. **Alias** — הקוד מייבא `@/...`. אם ה-tsconfig לא מכיל את זה, הוסף:
+
    ```json
    "paths": { "@/*": ["./*"] }
    ```
+
    (אם הריפו משתמש ב-`src/`, העבר את התיקיות לשם והתאם ל-`["./src/*"]`.)
 
 2. **Tailwind** — `globals.css` נכתב ל-Tailwind v4 (`@import "tailwindcss";`).
@@ -39,9 +41,11 @@ types/
    כל שאר הסגנון משתמש ב-utilities סטנדרטיים + CSS variables, כך שאין תלות ב-`tailwind.config`.
 
 3. **פונטים** — יש stack מערכתי ב-`globals.css`. אם תרצה Rubik/Assistant אמיתיים:
+
    ```ts
    import { Rubik, Assistant } from "next/font/google";
    ```
+
    וקשור את המשתנים `--font-display` / `--font-body`.
 
 4. `npm install lucide-react` אם עוד לא מותקן.

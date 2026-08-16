@@ -44,10 +44,7 @@ export default function KnowledgeCard({
           {slateNumber}
         </span>
         <div className="min-w-0 flex-1">
-          <h3
-            dir="ltr"
-            className="font-display text-lg font-bold leading-snug"
-          >
+          <h3 dir="ltr" className="font-display text-lg font-bold leading-snug">
             {movie.title}
           </h3>
           <p className="mt-1 text-[11px] text-[var(--muted)]">
@@ -164,7 +161,11 @@ export default function KnowledgeCard({
           <code dir="ltr" className="font-slate text-[var(--text)]">
             data/movies.ts
           </code>{" "}
-          תחת המפתח <code dir="ltr" className="font-slate text-[var(--text)]">knowledge</code>.
+          תחת המפתח{" "}
+          <code dir="ltr" className="font-slate text-[var(--text)]">
+            knowledge
+          </code>
+          .
         </p>
       ) : null}
     </article>

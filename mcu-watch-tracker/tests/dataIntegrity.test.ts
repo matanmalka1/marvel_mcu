@@ -58,9 +58,7 @@ describe("connection data integrity", () => {
     for (const connection of CONNECTIONS) {
       expect(connection.requires.length).toBeGreaterThan(0);
       for (const requiredId of connection.requires) {
-        expect(movieIds.has(requiredId), `${connection.id}: ${requiredId}`).toBe(
-          true,
-        );
+        expect(movieIds.has(requiredId), `${connection.id}: ${requiredId}`).toBe(true);
       }
     }
   });

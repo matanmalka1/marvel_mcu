@@ -18,8 +18,8 @@ import type { MovieSummary } from "@/types/movie";
 const MAX_HISTORY = 25;
 
 const ENDGAME_ORDER =
-  MOVIES_IN_TIMELINE_ORDER.find((movie) => movie.id === ENDGAME_ID)
-    ?.timelineOrder ?? MOVIES_IN_TIMELINE_ORDER.length;
+  MOVIES_IN_TIMELINE_ORDER.find((movie) => movie.id === ENDGAME_ID)?.timelineOrder ??
+  MOVIES_IN_TIMELINE_ORDER.length;
 
 function readStoredProgress(): string[] | null {
   if (typeof window === "undefined") return null;
@@ -59,9 +59,7 @@ export type WatchProgress = {
 };
 
 export function useWatchProgress(): WatchProgress {
-  const [watchedIds, setWatchedIds] = useState<string[]>(() => [
-    ...DEFAULT_WATCHED_IDS,
-  ]);
+  const [watchedIds, setWatchedIds] = useState<string[]>(() => [...DEFAULT_WATCHED_IDS]);
   const [hydrated, setHydrated] = useState(false);
 
   // Mirrors state so actions can read the latest value without stale closures,
@@ -136,18 +134,14 @@ export function useWatchProgress(): WatchProgress {
   const watchedSet = useMemo(() => new Set(watchedIds), [watchedIds]);
 
   const nextMovie = useMemo(
-    () =>
-      MOVIES_IN_TIMELINE_ORDER.find((movie) => !watchedSet.has(movie.id)) ??
-      null,
+    () => MOVIES_IN_TIMELINE_ORDER.find((movie) => !watchedSet.has(movie.id)) ?? null,
     [watchedSet],
   );
 
   const completeNextMovie = useCallback(() => {
     commit((previous) => {
       const currentSet = new Set(previous);
-      const next = MOVIES_IN_TIMELINE_ORDER.find(
-        (movie) => !currentSet.has(movie.id),
-      );
+      const next = MOVIES_IN_TIMELINE_ORDER.find((movie) => !currentSet.has(movie.id));
       return next ? [...previous, next.id] : previous;
     });
   }, [commit]);
@@ -167,10 +161,7 @@ export function useWatchProgress(): WatchProgress {
     commit(() => [...DEFAULT_WATCHED_IDS]);
   }, [commit]);
 
-  const exportProgress = useCallback(
-    () => serializeProgress(watchedRef.current),
-    [],
-  );
+  const exportProgress = useCallback(() => serializeProgress(watchedRef.current), []);
 
   const importProgress = useCallback(
     (value: unknown) => {
@@ -187,8 +178,7 @@ export function useWatchProgress(): WatchProgress {
   const endgameWatched = useMemo(
     () =>
       MOVIES_IN_TIMELINE_ORDER.filter(
-        (movie) =>
-          movie.timelineOrder <= ENDGAME_ORDER && watchedSet.has(movie.id),
+        (movie) => movie.timelineOrder <= ENDGAME_ORDER && watchedSet.has(movie.id),
       ).length,
     [watchedSet],
   );
@@ -201,9 +191,7 @@ export function useWatchProgress(): WatchProgress {
     totalMovies,
     watchedCount,
     remainingCount: totalMovies - watchedCount,
-    percentWatched: totalMovies
-      ? Math.round((watchedCount / totalMovies) * 100)
-      : 0,
+    percentWatched: totalMovies ? Math.round((watchedCount / totalMovies) * 100) : 0,
     endgameWatched,
     endgameTotal: ENDGAME_ORDER,
     endgamePercent: ENDGAME_ORDER

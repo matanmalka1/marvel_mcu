@@ -16,12 +16,13 @@
   --text: #f4f4f6;
   --muted: #8a8a94;
 
-  --font-display: "Rubik", "Heebo", "Assistant", ui-sans-serif, system-ui,
-    -apple-system, "Segoe UI", sans-serif;
-  --font-body: "Assistant", "Heebo", "Rubik", ui-sans-serif, system-ui,
-    -apple-system, "Segoe UI", sans-serif;
-  --font-slate: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas,
-    monospace;
+  --font-display:
+    "Rubik", "Heebo", "Assistant", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    sans-serif;
+  --font-body:
+    "Assistant", "Heebo", "Rubik", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    sans-serif;
+  --font-slate: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
 }
 
 html {

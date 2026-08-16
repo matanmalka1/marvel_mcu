@@ -11,10 +11,7 @@ import ProgressOverview from "@/components/ProgressOverview";
 import Timeline from "@/components/Timeline";
 import UndoToast, { type UndoNotice } from "@/components/UndoToast";
 import { getUnlockedConnections } from "@/data/connections";
-import {
-  getMovieSummaryById,
-  MOVIES_IN_TIMELINE_ORDER,
-} from "@/data/movieCatalog";
+import { getMovieSummaryById, MOVIES_IN_TIMELINE_ORDER } from "@/data/movieCatalog";
 import { useWatchProgress } from "@/hooks/useWatchProgress";
 
 export default function HomePage() {
@@ -40,10 +37,7 @@ export default function HomePage() {
     importProgress,
   } = useWatchProgress();
 
-  const connections = useMemo(
-    () => getUnlockedConnections(watchedSet),
-    [watchedSet],
-  );
+  const connections = useMemo(() => getUnlockedConnections(watchedSet), [watchedSet]);
 
   const notify = useCallback((message: string) => {
     setUndoNotice({ id: Date.now(), message });
@@ -156,11 +150,7 @@ export default function HomePage() {
         </div>
       </footer>
 
-      <UndoToast
-        notice={undoNotice}
-        onDismiss={dismissUndoNotice}
-        onUndo={handleUndo}
-      />
+      <UndoToast notice={undoNotice} onDismiss={dismissUndoNotice} onUndo={handleUndo} />
     </div>
   );
 }

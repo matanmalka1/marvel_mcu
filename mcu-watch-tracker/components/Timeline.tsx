@@ -42,11 +42,7 @@ function SelectControl({
   );
 }
 
-export default function Timeline({
-  movies,
-  watchedIds,
-  onToggle,
-}: TimelineProps) {
+export default function Timeline({ movies, watchedIds, onToggle }: TimelineProps) {
   const [query, setQuery] = useState("");
   const [orderMode, setOrderMode] = useState<OrderMode>("timeline");
   const [phaseFilter, setPhaseFilter] = useState("all");
@@ -57,9 +53,7 @@ export default function Timeline({
   const trimmedQuery = query.trim().toLowerCase();
 
   const orderedMovies = orderMode === "timeline" ? movies : MOVIES_IN_RELEASE_ORDER;
-  const nextVisibleOrderId = orderedMovies.find(
-    (movie) => !watchedIds.has(movie.id),
-  )?.id;
+  const nextVisibleOrderId = orderedMovies.find((movie) => !watchedIds.has(movie.id))?.id;
   const phases = useMemo(
     () => Array.from(new Set(movies.map((movie) => movie.phase))).sort((a, b) => a - b),
     [movies],
@@ -76,8 +70,7 @@ export default function Timeline({
           !trimmedQuery ||
           movie.title.toLowerCase().includes(trimmedQuery) ||
           movie.titleHe?.includes(trimmedQuery);
-        const matchesPhase =
-          phaseFilter === "all" || movie.phase === Number(phaseFilter);
+        const matchesPhase = phaseFilter === "all" || movie.phase === Number(phaseFilter);
         const matchesSaga = sagaFilter === "all" || movie.saga === sagaFilter;
         const matchesWatch =
           watchFilter === "all" ||
@@ -86,14 +79,7 @@ export default function Timeline({
             : !watchedIds.has(movie.id));
         return matchesQuery && matchesPhase && matchesSaga && matchesWatch;
       }),
-    [
-      orderedMovies,
-      phaseFilter,
-      sagaFilter,
-      trimmedQuery,
-      watchFilter,
-      watchedIds,
-    ],
+    [orderedMovies, phaseFilter, sagaFilter, trimmedQuery, watchFilter, watchedIds],
   );
 
   const statusOf = (movie: MovieSummary): MovieStatus => {
@@ -116,8 +102,7 @@ export default function Timeline({
             ציר הזמן המלא
           </h2>
           <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
-            {movies.length} סרטים בסדר כרונולוגי. לחיצה על שורה מסמנת או מבטלת
-            צפייה.
+            {movies.length} סרטים בסדר כרונולוגי. לחיצה על שורה מסמנת או מבטלת צפייה.
           </p>
         </div>
 
@@ -152,7 +137,11 @@ export default function Timeline({
           ))}
         </div>
 
-        <SelectControl label="סינון לפי Phase" value={phaseFilter} onChange={setPhaseFilter}>
+        <SelectControl
+          label="סינון לפי Phase"
+          value={phaseFilter}
+          onChange={setPhaseFilter}
+        >
           <option value="all">כל השלבים</option>
           {phases.map((phase) => (
             <option key={phase} value={phase}>
@@ -183,7 +172,10 @@ export default function Timeline({
       </div>
 
       <div className="relative mt-6 overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--bg-raised)]/60">
-        {!trimmedQuery && phaseFilter === "all" && sagaFilter === "all" && watchFilter === "all" ? (
+        {!trimmedQuery &&
+        phaseFilter === "all" &&
+        sagaFilter === "all" &&
+        watchFilter === "all" ? (
           <span
             aria-hidden="true"
             className="pointer-events-none absolute inset-y-6 start-[32px] w-px bg-white/10 sm:start-[36px]"
