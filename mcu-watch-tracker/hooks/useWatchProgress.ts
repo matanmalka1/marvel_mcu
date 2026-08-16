@@ -8,43 +8,24 @@ import {
   MOVIES_IN_TIMELINE_ORDER,
   MOVIE_IDS,
 } from "@/data/movieCatalog";
+import {
+  parseStoredProgress,
+  serializeProgress,
+  WATCH_PROGRESS_STORAGE_KEY,
+} from "@/lib/watchProgressStorage";
 import type { MovieSummary } from "@/types/movie";
 
-/** Versioned: bumping the suffix invalidates older, incompatible payloads. */
-const STORAGE_KEY = "mcu-watch-progress-v1";
-const STORAGE_VERSION = 1;
 const MAX_HISTORY = 25;
-
-type StoredProgress = {
-  version: number;
-  watched: string[];
-};
 
 const ENDGAME_ORDER =
   MOVIES_IN_TIMELINE_ORDER.find((movie) => movie.id === ENDGAME_ID)
     ?.timelineOrder ?? MOVIES_IN_TIMELINE_ORDER.length;
 
-/** Keeps only known ids, drops duplicates. Returns null when the payload is unusable. */
-function sanitizeWatched(value: unknown): string[] | null {
-  if (!Array.isArray(value)) return null;
-  const cleaned = value.filter(
-    (id): id is string => typeof id === "string" && MOVIE_IDS.has(id),
-  );
-  return Array.from(new Set(cleaned));
-}
-
-function parseStoredProgress(value: unknown): string[] | null {
-  if (typeof value !== "object" || value === null) return null;
-  const stored = value as Partial<StoredProgress>;
-  if (stored.version !== STORAGE_VERSION) return null;
-  return sanitizeWatched(stored.watched);
-}
-
 function readStoredProgress(): string[] | null {
   if (typeof window === "undefined") return null;
 
   try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
+    const raw = window.localStorage.getItem(WATCH_PROGRESS_STORAGE_KEY);
     if (!raw) return null;
 
     const parsed: unknown = JSON.parse(raw);
@@ -101,7 +82,7 @@ export function useWatchProgress(): WatchProgress {
   // Keeps tabs in sync: fires in other tabs whenever this key changes in localStorage.
   useEffect(() => {
     const handleStorage = (event: StorageEvent) => {
-      if (event.key !== STORAGE_KEY) return;
+      if (event.key !== WATCH_PROGRESS_STORAGE_KEY) return;
       const stored = readStoredProgress();
       const next = stored ?? [...DEFAULT_WATCHED_IDS];
 
@@ -119,11 +100,10 @@ export function useWatchProgress(): WatchProgress {
   useEffect(() => {
     if (!hydrated) return;
     try {
-      const payload: StoredProgress = {
-        version: STORAGE_VERSION,
-        watched: watchedIds,
-      };
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+      window.localStorage.setItem(
+        WATCH_PROGRESS_STORAGE_KEY,
+        serializeProgress(watchedIds),
+      );
     } catch {
       // Storage full or blocked — progress simply stays in memory for this session.
     }
@@ -188,12 +168,7 @@ export function useWatchProgress(): WatchProgress {
   }, [commit]);
 
   const exportProgress = useCallback(
-    () =>
-      JSON.stringify(
-        { version: STORAGE_VERSION, watched: watchedRef.current },
-        null,
-        2,
-      ),
+    () => serializeProgress(watchedRef.current),
     [],
   );
 
