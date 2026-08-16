@@ -1,0 +1,76 @@
+/* Tailwind CSS v4. For v3, replace the line below with:
+   @tailwind base; @tailwind components; @tailwind utilities; */
+@import "tailwindcss";
+
+:root {
+  /* Palette — near-black film stock, one signal red, one bronze reserved for milestones. */
+  --bg: #07070a;
+  --bg-raised: #0c0c11;
+  --surface: rgba(255, 255, 255, 0.035);
+  --surface-strong: rgba(255, 255, 255, 0.06);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.14);
+  --accent: #e5122e;
+  --accent-soft: #ff3b4e;
+  --milestone: #c8a05a;
+  --text: #f4f4f6;
+  --muted: #8a8a94;
+
+  --font-display: "Rubik", "Heebo", "Assistant", ui-sans-serif, system-ui,
+    -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Assistant", "Heebo", "Rubik", ui-sans-serif, system-ui,
+    -apple-system, "Segoe UI", sans-serif;
+  --font-slate: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas,
+    monospace;
+}
+
+html {
+  background-color: var(--bg);
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Display face — headings and movie titles. */
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.015em;
+}
+
+/* Utility face — slate numbers, eras, phases, anything counted. */
+.font-slate {
+  font-family: var(--font-slate);
+  font-variant-numeric: tabular-nums;
+}
+
+::selection {
+  background: rgba(229, 18, 46, 0.35);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-soft);
+  outline-offset: 2px;
+}
+
+/* Latin titles inside an RTL document keep their own direction. */
+[dir="ltr"] {
+  text-align: start;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
