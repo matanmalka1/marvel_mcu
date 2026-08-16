@@ -54,8 +54,6 @@ export type WatchProgress = {
   completeNextMovie: () => void;
   undo: () => void;
   reset: () => void;
-  exportProgress: () => string;
-  importProgress: (value: unknown) => boolean;
 };
 
 export function useWatchProgress(): WatchProgress {
@@ -167,18 +165,6 @@ export function useWatchProgress(): WatchProgress {
     commit(() => [...DEFAULT_WATCHED_IDS]);
   }, [commit]);
 
-  const exportProgress = useCallback(() => serializeProgress(watchedRef.current), []);
-
-  const importProgress = useCallback(
-    (value: unknown) => {
-      const imported = parseStoredProgress(value);
-      if (!imported) return false;
-      commit(() => imported);
-      return true;
-    },
-    [commit],
-  );
-
   const totalMovies = MOVIES_IN_TIMELINE_ORDER.length;
   const watchedCount = watchedSet.size;
   const endgameWatched = useMemo(
@@ -208,7 +194,5 @@ export function useWatchProgress(): WatchProgress {
     completeNextMovie,
     undo,
     reset,
-    exportProgress,
-    importProgress,
   };
 }

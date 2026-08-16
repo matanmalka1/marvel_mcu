@@ -3,8 +3,6 @@
 import Image from "next/image";
 import { RotateCcw, Undo2 } from "lucide-react";
 
-import ProgressTransfer from "@/components/ProgressTransfer";
-
 type HeaderProps = {
   watchedCount: number;
   totalMovies: number;
@@ -12,8 +10,6 @@ type HeaderProps = {
   canUndo: boolean;
   onUndo: () => void;
   onReset: () => void;
-  onExport: () => string;
-  onImport: (value: unknown) => boolean;
 };
 
 export default function Header({
@@ -23,8 +19,6 @@ export default function Header({
   canUndo,
   onUndo,
   onReset,
-  onExport,
-  onImport,
 }: HeaderProps) {
   return (
     <header className="sticky top-0 z-40 border-b border-[var(--border)] bg-[#07070a]/85 backdrop-blur-md">
@@ -58,8 +52,6 @@ export default function Header({
             </span>
             <span>{percentWatched}%</span>
           </p>
-
-          <ProgressTransfer onExport={onExport} onImport={onImport} />
 
           <button
             type="button"

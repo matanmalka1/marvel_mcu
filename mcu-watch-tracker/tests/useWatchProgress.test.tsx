@@ -46,13 +46,11 @@ describe("useWatchProgress", () => {
     expect(result.current.canUndo).toBe(false);
   });
 
-  it("validates imports and lets reset be undone", async () => {
+  it("lets reset be undone", async () => {
     const { result } = renderHook(() => useWatchProgress());
     await waitFor(() => expect(result.current.hydrated).toBe(true));
 
     act(() => result.current.toggleWatched("iron-man"));
-    expect(result.current.importProgress({ version: 999, watched: [] })).toBe(false);
-
     act(() => result.current.reset());
     expect(result.current.watchedIds).toEqual([]);
     act(() => result.current.undo());
