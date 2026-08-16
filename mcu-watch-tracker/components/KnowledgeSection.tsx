@@ -70,7 +70,7 @@ export default function KnowledgeSection({
           עדיין לא סימנת סרטים. סמן את הסרט הראשון בציר הזמן וההסבר יופיע כאן.
         </p>
       ) : (
-        <div className="mt-8 grid gap-4 lg:grid-cols-2">
+        <div className="mt-8 grid items-start gap-4 lg:grid-cols-2">
           {watchedMovies.map((movie) => (
             <KnowledgeCard
               key={movie.id}
