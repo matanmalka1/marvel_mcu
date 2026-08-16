@@ -373,6 +373,40 @@ export const MOVIES: Movie[] = [
     saga: "infinity",
     releaseYear: 2013,
     timelineLabel: "2012–2013",
+    knowledge: {
+      summary:
+        "טרור בדמות \"Mandarin\" תוקף את ארה\"ב בזמן ש-Tony Stark מתמודד עם התקפי חרדה בעקבות האירועים בניו יורק. מאחורי הקלעים מסתתרת מזימה של מדען זנוח שפיתח טיפול ביולוגי הרסני בשם Extremis.",
+      concepts: [
+        "Tony סובל מטראומה בעקבות הפלישה החייזרית ב-The Avengers — הצלחה לא באה בלי מחיר",
+        "ה\"Mandarin\" הציבורי מתגלה כשחקן שכור, בעוד האיום האמיתי הוא Aldrich Killian ו-Extremis",
+        "Extremis הוא טיפול שמשפר גוף אנושי אך הופך אותו לבלתי-יציב ולעיתים נפיץ",
+        "Tony נאלץ לאלתר בלי חליפה מלאה, ומוכיח שהגאונות שלו — לא רק השריון — היא הכוח האמיתי",
+      ],
+      characters: [
+        "Tony Stark / Iron Man",
+        "Pepper Potts",
+        "James Rhodes / War Machine-Iron Patriot",
+        "Aldrich Killian",
+        "Maya Hansen",
+        "Trevor Slattery",
+        "Happy Hogan",
+        "Harley Keener",
+      ],
+      organizations: ["Advanced Idea Mechanics (AIM)", "Stark Industries"],
+      objects: ["Extremis", "חליפות ה-Iron Legion", "כור ה-Arc"],
+      connections: [
+        "ההתקפה על ניו יורק ב-The Avengers היא הטריגר הישיר לחרדה של Tony בסרט הזה",
+        "James Rhodes, שהכרת כ-War Machine מ-Iron Man 2, חוזר בזהות חדשה — Iron Patriot",
+      ],
+    },
+    review: {
+      rottenTomatoesScore: 79,
+      metacriticScore: 62,
+      consensus:
+        "בעזרת כוכב ראשי כריזמטי, סצנות אקשן מרשימות וכמה הפתעות, Iron Man 3 הוא הרפתקה שנונה ומהנה ותוספת חזקה לקאנון של מארוול.",
+      source: "Rotten Tomatoes",
+      sourceUrl: "https://www.rottentomatoes.com/m/iron_man_3",
+    },
   },
   {
     id: "captain-america-the-winter-soldier",
