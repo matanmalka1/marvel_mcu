@@ -1,72 +1,67 @@
 # MCU Watch Tracker
 
-קבצי מקור להטמעה בריפו Next.js קיים (App Router). אין backend, אין DB, אין ספריית state.
+אפליקציית Next.js בעברית למעקב צפייה בסרטי MCU, לפי סדר כרונולוגי או סדר יציאה. אין backend או DB; ההתקדמות נשמרת מקומית בדפדפן וניתנת לייצוא ולייבוא.
 
-## מבנה
+## יכולות
 
-```
-app/
-  layout.tsx          html lang="he" dir="rtl" + מטא-דאטה
-  page.tsx            הדשבורד — מרכיב את כל הסקשנים
-  globals.css         טוקנים, פוקוס, reduced-motion
-components/
-  Header.tsx          מותג, התקדמות, ביטול, איפוס
-  Hero.tsx            כותרת, תגיות, סלוט ל-Next Up
-  NextUpCard.tsx      הסרט הבא + CTA
-  ProgressOverview.tsx התקדמות כוללת + אבן דרך Endgame
-  KnowledgeSection.tsx / KnowledgeCard.tsx
-  ConnectionsSection.tsx
-  Timeline.tsx / TimelineRow.tsx / SearchInput.tsx
-data/
-  movies.ts           38 סרטים, כרונולוגי
-  connections.ts      חוטים נושאיים + פילטר לפי נצפים
-hooks/
-  useWatchProgress.ts מקור אמת יחיד: watchedIds, נגזרות, localStorage, undo, reset
-types/
-  movie.ts
+- סימון צפייה בלחיצה אחת עם Undo והיסטוריה של עד 25 פעולות.
+- סנכרון בטוח בין טאבים ושמירה מגורסת ב־`localStorage`.
+- ייצוא וייבוא של ההתקדמות כקובץ JSON.
+- מעבר בין סדר כרונולוגי לסדר יציאה.
+- חיפוש וסינון לפי Phase, Saga ומצב צפייה.
+- מידע מוגן מספוילרים וחיבורים שנפתחים רק לאחר צפייה בסרטים הנדרשים.
+- כרטיסי ידע מתקפלים וטעינה עצלה של תוכן הידע והביקורות.
+- תמיכה ב־RTL, נגישות מקלדת, reduced motion ו־PWA manifest.
+
+## פיתוח
+
+נדרש Node.js 22 ומעלה.
+
+```bash
+npm ci
+npm run dev
 ```
 
-## לפני הרצה
+פקודות האימות:
 
-1. **Alias** — הקוד מייבא `@/...`. אם ה-tsconfig לא מכיל את זה, הוסף:
+```bash
+npm run lint
+npm run format:check
+npm run typecheck
+npm test
+npm run build
+npm run check
+```
 
-   ```json
-   "paths": { "@/*": ["./*"] }
-   ```
+`npm run check` מריץ את כל הבדיקות ואת production build. אותו רצף רץ גם ב־GitHub Actions, יחד עם audit של תלויות production.
 
-   (אם הריפו משתמש ב-`src/`, העבר את התיקיות לשם והתאם ל-`["./src/*"]`.)
+## מבנה מרכזי
 
-2. **Tailwind** — `globals.css` נכתב ל-Tailwind v4 (`@import "tailwindcss";`).
-   ב-v3 החלף את השורה הראשונה ב-`@tailwind base; @tailwind components; @tailwind utilities;`.
-   כל שאר הסגנון משתמש ב-utilities סטנדרטיים + CSS variables, כך שאין תלות ב-`tailwind.config`.
+```text
+app/                         App Router, metadata וסגנון גלובלי
+components/                  רכיבי הדשבורד והאינטראקציה
+data/movieCatalog.ts         מטא־דאטה קל ל־38 הסרטים ושני סדרי הצפייה
+data/movieDetails.ts         ידע וביקורות שנטענים באופן עצל
+data/movies.ts               חיבור הקטלוג והפרטים עבור סקשן הידע
+data/connections.ts          חיבורים נושאיים ותנאי פתיחה
+hooks/useWatchProgress.ts    מקור האמת להתקדמות, Undo וסנכרון טאבים
+lib/watchProgressStorage.ts  ולידציה ופורמט import/export
+tests/                       בדיקות מצב, אחסון ושלמות נתונים
+```
 
-3. **פונטים** — יש stack מערכתי ב-`globals.css`. אם תרצה Rubik/Assistant אמיתיים:
+## כללי נתונים וספוילרים
 
-   ```ts
-   import { Rubik, Assistant } from "next/font/google";
-   ```
+- ב־state נשמרים רק `watchedIds`; כל הנתונים הנגזרים מחושבים.
+- payload לא תקין או מגרסה אחרת נדחה בבטחה.
+- `KnowledgeSection` מקבל IDs של סרטים שנצפו ומרכיב רק את המידע המותר להצגה.
+- חיבור מוצג רק כאשר כל הערכים ב־`requires` סומנו כנצפים.
+- בדיקות שלמות מוודאות IDs ייחודיים, סדר כרונולוגי רציף, התאמה מלאה לסדר היציאה, קישורים חוקיים וטווחי ציונים.
 
-   וקשור את המשתנים `--font-display` / `--font-body`.
+## הוספת סרט
 
-4. `npm install lucide-react` אם עוד לא מותקן.
+1. הוסף מטא־דאטה ל־`data/movieCatalog.ts` ועדכן את `RELEASE_ORDER_IDS`.
+2. הוסף `knowledge` ו־`review` תואמים ב־`data/movieDetails.ts`.
+3. הוסף חיבורים רלוונטיים ב־`data/connections.ts`.
+4. הרץ `npm run validate:data` ולאחר מכן `npm run check`.
 
-5. `npm run build` + `npm run typecheck` (אצלי בסביבה אין רשת, אז ה-build עצמו לא רץ כאן —
-   הקוד עבר typecheck מול טיפוסים מדומים, בלי שגיאות).
-
-## כללי מוצר שנאכפים בקוד
-
-- **ספוילרים**: `knowledge` ו-`review` כתובים מראש עבור כל הסרטים ב-`movies.ts`, לא רק לנצפים.
-  ההגנה מפני ספוילרים נאכפת במלואה על ידי סינון לפי מצב-נצפה ב-UI: הקומפוננטה מקבלת ומציגה
-  רק סרטים שסומנו כנצפים, ולא מסתמכת על נוכחות/היעדר הנתונים בקובץ. חיבור ב-`connections.ts`
-  מוצג רק אם **כל** ה-`requires` שלו נצפו.
-- **אין נגזרות ב-state**: נשמר רק `watchedIds`. אחוזים, נותרו, הסרט הבא ואבן הדרך מחושבים.
-- **אחסון מגורסה**: `mcu-watch-progress-v1`, ולידציה על כל id, נפילה חיננית לרשימה ריקה
-  אם ה-payload פגום או מגרסה אחרת.
-- **Reset** מחזיר לרשימה ריקה — התחלה מאפס.
-- **Undo** בזיכרון בלבד (עד 25 פעולות), לא נשמר בין רענונים.
-
-## להוספת סרט/סדרה בהמשך
-
-הוסף רשומה ל-`MOVIES` (או מלא `knowledge` בקיימת) והוסף חוטים ל-`CONNECTIONS`.
-המודל כבר מפריד `phase` / `timelineOrder` / `timelineLabel`, ולכן הוספת poster, rating,
-notes, watchDate או מצב release-order היא הוספת שדות אופציונליים בלבד.
+ציוני ביקורות וקישורי מקור הם נתונים סטטיים; יש לבדוק ולעדכן אותם בעת עדכון הקטלוג.
