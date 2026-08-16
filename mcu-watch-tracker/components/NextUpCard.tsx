@@ -1,6 +1,7 @@
 "use client";
 
 import { Check, PartyPopper } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 import { TIMELINE_FLAG_LABELS } from "@/data/movies";
 import type { Movie } from "@/types/movie";
@@ -11,11 +12,45 @@ type NextUpCardProps = {
   onComplete: () => void;
 };
 
+/** How long a primed "confirm?" button waits for the second click before resetting. */
+const CONFIRM_WINDOW_MS = 2500;
+
 export default function NextUpCard({
   movie,
   totalMovies,
   onComplete,
 }: NextUpCardProps) {
+  const confirmTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [confirming, setConfirming] = useState(false);
+
+  // A new "next" movie (e.g. after completing one, or an out-of-order undo)
+  // should never inherit a stale confirm prompt meant for a different movie.
+  useEffect(() => {
+    setConfirming(false);
+    if (confirmTimeoutRef.current) clearTimeout(confirmTimeoutRef.current);
+  }, [movie?.id]);
+
+  useEffect(() => {
+    return () => {
+      if (confirmTimeoutRef.current) clearTimeout(confirmTimeoutRef.current);
+    };
+  }, []);
+
+  const handleClick = () => {
+    if (!confirming) {
+      setConfirming(true);
+      confirmTimeoutRef.current = setTimeout(
+        () => setConfirming(false),
+        CONFIRM_WINDOW_MS,
+      );
+      return;
+    }
+
+    if (confirmTimeoutRef.current) clearTimeout(confirmTimeoutRef.current);
+    setConfirming(false);
+    onComplete();
+  };
+
   if (!movie) {
     return (
       <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-raised)] p-6 sm:p-8">
@@ -97,15 +132,22 @@ export default function NextUpCard({
 
         <button
           type="button"
-          onClick={onComplete}
-          className="mt-7 flex w-full items-center justify-center gap-2 rounded-xl bg-[var(--accent)] px-5 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[var(--accent-soft)]"
+          onClick={handleClick}
+          className={[
+            "mt-7 flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3.5 text-sm font-semibold text-white transition-colors",
+            confirming
+              ? "animate-pulse bg-[var(--accent-soft)]"
+              : "bg-[var(--accent)] hover:bg-[var(--accent-soft)]",
+          ].join(" ")}
         >
           <Check className="h-4 w-4" aria-hidden="true" />
-          סיימתי את הסרט
+          {confirming ? "לאשר סיום צפייה?" : "סיימתי את הסרט"}
         </button>
 
         <p className="mt-3 text-center text-xs text-[var(--muted)]">
-          הסימון מקדם אוטומטית לסרט הבא בציר הזמן
+          {confirming
+            ? "לחיצה נוספת תסמן כנצפה ותקדם לסרט הבא"
+            : "הסימון מקדם אוטומטית לסרט הבא בציר הזמן"}
         </p>
       </div>
     </div>
