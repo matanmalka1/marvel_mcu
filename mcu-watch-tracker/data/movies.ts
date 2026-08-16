@@ -416,6 +416,41 @@ export const MOVIES: Movie[] = [
     saga: "infinity",
     releaseYear: 2014,
     timelineLabel: "2014",
+    knowledge: {
+      summary:
+        "Steve Rogers מגלה ש-S.H.I.E.L.D, הארגון שהוא משרת, חדור מבפנים על ידי HYDRA — אויב שחשב שהובס עוד במלחמת העולם השנייה. בדרך הוא נתקל במתנקש מסתורי שמתברר כחברו הטוב ביותר, שנחשב מת.",
+      concepts: [
+        "HYDRA לא הובסה ב-1945 — היא שרדה והסתננה ל-S.H.I.E.L.D בסתר במשך עשורים",
+        "Project Insight מתוכנן לחסל איומים עתידיים מראש, לפני שהם מתרחשים",
+        "The Winter Soldier מתגלה כ-Bucky Barnes, ידידו הקרוב מהמלחמה, שנשבה ועבר שטיפת מוח",
+        "S.H.I.E.L.D מתפרק פומבית בעקבות החשיפה",
+      ],
+      characters: [
+        "Steve Rogers / Captain America",
+        "Natasha Romanoff / Black Widow",
+        "Sam Wilson / Falcon",
+        "Bucky Barnes / Winter Soldier",
+        "Alexander Pierce",
+        "Nick Fury",
+        "Maria Hill",
+        "Arnim Zola",
+      ],
+      organizations: ["S.H.I.E.L.D", "HYDRA"],
+      objects: ["הליקופטרי ה-Insight", "שבבי הבקרה של HYDRA", "הזרוע הביונית של Bucky"],
+      connections: [
+        "Bucky Barnes, שנעלם ונחשב מת עוד ב-The First Avenger, מתגלה כ-Winter Soldier",
+        "Nick Fury ו-Maria Hill, שהכרת כבר מ-Iron Man 2 ו-The Avengers, נמצאים במרכז קריסת S.H.I.E.L.D",
+        "HYDRA, שהובסה כביכול ב-The First Avenger, מתגלה כאיום שמעולם לא נעלם",
+      ],
+    },
+    review: {
+      rottenTomatoesScore: 90,
+      metacriticScore: 70,
+      consensus:
+        "מותח ומחוכם מבחינה פוליטית, Captain America: The Winter Soldier הוא פרק מעולה בקאנון האווינג'רס שבטוח יהנה את מעריצי מארוול.",
+      source: "Rotten Tomatoes",
+      sourceUrl: "https://www.rottentomatoes.com/m/captain_america_the_winter_soldier",
+    },
   },
   {
     id: "guardians-of-the-galaxy",
