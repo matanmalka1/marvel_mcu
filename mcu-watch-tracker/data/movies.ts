@@ -332,7 +332,7 @@ export const MOVIES: Movie[] = [
     timelineLabel: "2013",
     knowledge: {
       summary:
-        "כוח קדום בשם Aether, שפעם כמעט החזיר את היקום לחשכה, מתעורר מחדש ומאיים על Jane Foster. Thor נאלץ להסתמך על אחיו הכלוא, Loki, כדי להצילה ולעצור את ענקי האופל.",
+        "כוח קדום בשם Aether, שפעם כמעט החזיר את היקום לחשכה, מתעורר מחדש ומאיים על Jane Foster. Thor נאלץ להסתמך על אחיו הכלוא, Loki, כדי להצילה ולעצור את האלפים האפלים.",
       concepts: [
         "ה-Convergence הוא תופעה קוסמית נדירה שמיישרת בין תשעת העולמות",
         "ה-Aether מתגלה כאבן אינסוף נוספת שהוסתרה מאז מלחמה עתיקה",
@@ -482,7 +482,7 @@ export const MOVIES: Movie[] = [
       organizations: ["Ravagers", "כוחות Ronan", "Nova Corps / Nova Empire"],
       objects: ["ה-Orb", "המוט הקוסמי של Ronan", "הספינה Milano"],
       connections: [
-        "אבן האינסוף השנייה שנתקלת בה (אחרי ה-Tesseract) מרמזת שיש עוד אבנים כאלה מפוזרות ביקום",
+        "אבן אינסוף נוספת שנתקלים בה (אחרי ה-Tesseract וה-Aether מ-Thor: The Dark World) מרמזת שיש עוד אבנים כאלה מפוזרות ביקום",
       ],
     },
     review: {
@@ -851,7 +851,7 @@ export const MOVIES: Movie[] = [
         "Hela, אחותו הבכורה של Thor, הייתה כובשת אכזרית שהוסתרה מההיסטוריה הרשמית של אסגרד",
         "רק ה-Ragnarok עצמו (חורבן אסגרד) יכול לעצור את Hela",
         "Thor מאבד את Mjolnir ולומד שכוחו לא תלוי בפטיש",
-        "Bruce Banner / Hulk נמצא בגלות מרצון על Sakaar מאז אירועי Age of Ultron",
+        "מאז אירועי Age of Ultron, Hulk השתלט על הגוף ונשאר על Sakaar כשנתיים — Banner עצמו נעדר בפועל מההכרה כל אותו זמן",
       ],
       characters: [
         "Thor",
@@ -1087,7 +1087,7 @@ export const MOVIES: Movie[] = [
       objects: ["משקפי E.D.I.T.H", "הדרונים ההולוגרפיים של Mysterio"],
       connections: [
         "הסרט מתרחש בעקבות ה\"Blip\" וה-Endgame — Peter חוזר לחיים אחרי חמש שנות היעדרות",
-        "Nick Fury, שהכרת מסרטים רבים קודמים, מגייס את Peter שוב, ממש כפי שגייס גיבורים אחרים לאורך השנים",
+        "מי שנראה כמו Nick Fury ומגייס את Peter שוב מתגלה בסוף הסרט כ-Talos המחופש; Fury האמיתי נמצא מחוץ לכדור הארץ באותה עת",
       ],
     },
     review: {
@@ -1216,7 +1216,7 @@ export const MOVIES: Movie[] = [
       organizations: ["Kamar-Taj", "Illuminati (יקום חלופי)"],
       objects: ["ה-Darkhold", "ספר Vishanti", "יכולת הקפיצה בין יקומים של America"],
       connections: [
-        "Wanda, שהכרת כ-Scarlet Witch מ-Age of Ultron ומ-Infinity War/Endgame, ממשיכה ישירות מהאירועים שעברה",
+        "Wanda, שהכרת כ-Scarlet Witch מ-Age of Ultron ומ-Infinity War/Endgame, ממשיכה כאן מאירועי סדרת WandaVision (Disney+, לא חלק ממעקב הסרטים) — שם התגלה ה-Darkhold והחל מסעה אל Chaos Magic",
         "Wong, שהכרת מ-Doctor Strange ומ-No Way Home, ממלא כאן תפקיד מרכזי כ-Sorcerer Supreme",
       ],
     },
@@ -1410,6 +1410,7 @@ export const MOVIES: Movie[] = [
       connections: [
         "Carol Danvers, שהכרת מ-Captain Marvel, מתמודדת כעת עם השלכות המהפכה שהובילה נגד ה-Kree",
         "Monica Rambeau ו-Nick Fury, שהכרת מסרטים קודמים, חוזרים כאן בתפקידים מורחבים",
+        "הקשר לסדרות (Disney+, לא חלק ממעקב הסרטים): הרקע והכוחות של Kamala Khan מפותחים בסדרת Ms. Marvel, ומצבו הנוכחי של Fury — ניתוקו מ-S.H.I.E.L.D — מפותח בסדרת Secret Invasion",
       ],
     },
     review: {
@@ -1443,7 +1444,8 @@ export const MOVIES: Movie[] = [
       organizations: ["Time Variance Authority (TVA)", "גולי ה-Void"],
       objects: ["טכנולוגיית הזמן של ה-TVA", "טפרי ה-Adamantium של Wolverine"],
       connections: [
-        "ה-TVA, שהכרת מהמולטיוורס שנפרץ ב-No Way Home ו-ב-Doctor Strange in the Multiverse of Madness, מפקחת כאן על גורל יקום שלם",
+        "ה-TVA, שהכרת מסדרת Loki (Disney+), מפקחת כאן על גורל יקום שלם",
+        "הקשר לסדרות (Disney+, לא חלק ממעקב הסרטים): כל הרקע והכללים של ה-TVA ושל ריבוי היקומים מפותחים בסדרת Loki",
       ],
     },
     review: {
@@ -1479,6 +1481,7 @@ export const MOVIES: Movie[] = [
       connections: [
         "Sam Wilson, שקיבל את המגן בסוף Avengers: Endgame, נושא אותו כעת רשמית כ-Captain America",
         "Thaddeus Ross, שהכרת כבר מ-The Incredible Hulk ומ-Civil War, משמש כעת כנשיא ארצות הברית",
+        "הקשר לסדרות (Disney+, לא חלק ממעקב הסרטים): הרקע של Isaiah Bradley ומעמדו של Sam כ-Captain America מפותחים בסדרת The Falcon and the Winter Soldier",
       ],
     },
     review: {
@@ -1514,6 +1517,7 @@ export const MOVIES: Movie[] = [
       connections: [
         "Yelena Belova, שהכרת מ-Black Widow, ו-Bucky Barnes, שהכרת ממספר סרטים, מתאחדים כאן לצוות חדש",
         "Valentina, שהופיעה בקצרה ב-Black Widow, מתגלה כמנהלת מרכזית מאחורי הקלעים",
+        "הקשר לסדרות (Disney+, לא חלק ממעקב הסרטים): מסעו של John Walker כ-U.S. Agent והמזימות המתמשכות של Valentina מפותחים בסדרות Hawkeye ו-Secret Invasion",
       ],
     },
     review: {

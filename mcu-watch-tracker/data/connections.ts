@@ -84,7 +84,7 @@ export const CONNECTIONS: Connection[] = [
     title: "Bucky Barnes",
     chain: ["The First Avenger", "The Winter Soldier", "Civil War", "Endgame"],
     description:
-      "מחייל שנחשב מת, דרך מתנקש בשליטת מוח ועד ידיד קרוב שמסייע ל-Sam — המסע של Bucky חוצה כמעט את כל הסאגה.",
+      "מחייל שנחשב מת, דרך מתנקש בשליטת מוח ועד ידיד קרוב של Sam — המסע של Bucky בסרטים. השותפות הפעילה ביניהם ממשיכה ומעמיקה בסדרת The Falcon and the Winter Soldier (Disney+, לא חלק ממעקב הסרטים).",
     requires: [
       "captain-america-the-first-avenger",
       "captain-america-the-winter-soldier",
@@ -113,7 +113,7 @@ export const CONNECTIONS: Connection[] = [
     title: "האיום של Thanos",
     chain: ["רמז ב-Guardians of the Galaxy", "רמז ב-Age of Ultron", "Infinity War", "Endgame"],
     description:
-      "צלו של Thanos מרחף ברקע שנים לפני שהוא בכלל מופיע על המסך.",
+      "Thanos נראה לראשונה בסצנת הפוסט-קרדיטס של The Avengers, ואז צלו ממשיך לרחף ברקע דרך רמזים נוספים לפני שהוא הופך לנבל הראשי ב-Infinity War.",
     requires: [
       "guardians-of-the-galaxy",
       "avengers-age-of-ultron",
@@ -126,7 +126,7 @@ export const CONNECTIONS: Connection[] = [
     title: "Loki",
     chain: ["Thor", "The Avengers", "Thor: The Dark World", "Thor: Ragnarok", "Infinity War"],
     description:
-      "מהנבל הראשון של ה-MCU ועד קורבן בפתיחת Infinity War — המסע המפותל של Loki.",
+      "מנבל מוקדם ב-MCU ועד קורבן בפתיחת Infinity War — המסע המפותל של Loki.",
     requires: [
       "thor",
       "the-avengers",
@@ -331,7 +331,7 @@ export const CONNECTIONS: Connection[] = [
     title: "Bruce Banner מצטרף לצוות",
     chain: ["The Incredible Hulk", "The Avengers"],
     description:
-      "המדען שברח מהצבא לאורך סרט שלם מגויס בסופו של דבר בדיוק לצוות שממנו ניסה להימלט.",
+      "המדען שברח מ-Ross ומהצבא האמריקאי לאורך סרט שלם, מגויס בסופו של דבר על ידי S.H.I.E.L.D לצוות Avengers.",
     requires: ["the-incredible-hulk", "the-avengers"],
   },
   {
