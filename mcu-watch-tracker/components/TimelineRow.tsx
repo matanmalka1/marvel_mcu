@@ -3,11 +3,11 @@
 import { Check, Flag } from "lucide-react";
 import { useRef } from "react";
 
-import { TIMELINE_FLAG_LABELS } from "@/data/movies";
-import type { Movie, MovieStatus } from "@/types/movie";
+import { TIMELINE_FLAG_LABELS } from "@/data/movieCatalog";
+import type { MovieStatus, MovieSummary } from "@/types/movie";
 
 type TimelineRowProps = {
-  movie: Movie;
+  movie: MovieSummary;
   displayOrder: number;
   orderMode: "timeline" | "release";
   status: MovieStatus;

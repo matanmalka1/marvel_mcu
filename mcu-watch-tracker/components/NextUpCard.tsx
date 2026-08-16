@@ -2,11 +2,11 @@
 
 import { Check, PartyPopper } from "lucide-react";
 
-import { TIMELINE_FLAG_LABELS } from "@/data/movies";
-import type { Movie } from "@/types/movie";
+import { TIMELINE_FLAG_LABELS } from "@/data/movieCatalog";
+import type { MovieSummary } from "@/types/movie";
 
 type NextUpCardProps = {
-  movie: Movie | null;
+  movie: MovieSummary | null;
   totalMovies: number;
   onComplete: () => void;
 };

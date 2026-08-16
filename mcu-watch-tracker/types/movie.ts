@@ -71,6 +71,9 @@ export type Movie = {
   review?: MovieReview;
 };
 
+/** Lightweight metadata used by progress and timeline views. */
+export type MovieSummary = Omit<Movie, "knowledge" | "review">;
+
 export type MovieStatus = "watched" | "next" | "upcoming";
 
 /**

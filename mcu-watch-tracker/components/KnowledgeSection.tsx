@@ -3,13 +3,17 @@
 import { useState } from "react";
 
 import KnowledgeCard from "@/components/KnowledgeCard";
-import type { Movie } from "@/types/movie";
+import { MOVIES_IN_TIMELINE_ORDER } from "@/data/movies";
 
 export default function KnowledgeSection({
-  watchedMovies,
+  watchedIds,
 }: {
-  watchedMovies: Movie[];
+  watchedIds: readonly string[];
 }) {
+  const watchedSet = new Set(watchedIds);
+  const watchedMovies = MOVIES_IN_TIMELINE_ORDER.filter((movie) =>
+    watchedSet.has(movie.id),
+  );
   const [expandedIds, setExpandedIds] = useState<ReadonlySet<string>>(
     () => new Set(),
   );

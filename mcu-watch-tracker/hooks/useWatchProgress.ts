@@ -7,8 +7,8 @@ import {
   ENDGAME_ID,
   MOVIES_IN_TIMELINE_ORDER,
   MOVIE_IDS,
-} from "@/data/movies";
-import type { Movie } from "@/types/movie";
+} from "@/data/movieCatalog";
+import type { MovieSummary } from "@/types/movie";
 
 /** Versioned: bumping the suffix invalidates older, incompatible payloads. */
 const STORAGE_KEY = "mcu-watch-progress-v1";
@@ -60,8 +60,7 @@ export type WatchProgress = {
   hydrated: boolean;
   watchedIds: string[];
   watchedSet: ReadonlySet<string>;
-  watchedMovies: Movie[];
-  nextMovie: Movie | null;
+  nextMovie: MovieSummary | null;
   totalMovies: number;
   watchedCount: number;
   remainingCount: number;
@@ -208,11 +207,6 @@ export function useWatchProgress(): WatchProgress {
     [commit],
   );
 
-  const watchedMovies = useMemo(
-    () => MOVIES_IN_TIMELINE_ORDER.filter((movie) => watchedSet.has(movie.id)),
-    [watchedSet],
-  );
-
   const totalMovies = MOVIES_IN_TIMELINE_ORDER.length;
   const watchedCount = watchedSet.size;
   const endgameWatched = useMemo(
@@ -228,7 +222,6 @@ export function useWatchProgress(): WatchProgress {
     hydrated,
     watchedIds,
     watchedSet,
-    watchedMovies,
     nextMovie,
     totalMovies,
     watchedCount,

@@ -5,13 +5,16 @@ import { useCallback, useMemo, useState } from "react";
 import ConnectionsSection from "@/components/ConnectionsSection";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import KnowledgeSection from "@/components/KnowledgeSection";
+import LazyKnowledgeSection from "@/components/LazyKnowledgeSection";
 import NextUpCard from "@/components/NextUpCard";
 import ProgressOverview from "@/components/ProgressOverview";
 import Timeline from "@/components/Timeline";
 import UndoToast, { type UndoNotice } from "@/components/UndoToast";
 import { getUnlockedConnections } from "@/data/connections";
-import { getMovieById, MOVIES_IN_TIMELINE_ORDER } from "@/data/movies";
+import {
+  getMovieSummaryById,
+  MOVIES_IN_TIMELINE_ORDER,
+} from "@/data/movieCatalog";
 import { useWatchProgress } from "@/hooks/useWatchProgress";
 
 export default function HomePage() {
@@ -19,7 +22,7 @@ export default function HomePage() {
   const {
     hydrated,
     watchedSet,
-    watchedMovies,
+    watchedIds,
     nextMovie,
     totalMovies,
     watchedCount,
@@ -48,7 +51,7 @@ export default function HomePage() {
 
   const handleToggle = useCallback(
     (id: string) => {
-      const movie = getMovieById(id);
+      const movie = getMovieSummaryById(id);
       const wasWatched = watchedSet.has(id);
       toggleWatched(id);
       notify(
@@ -129,7 +132,7 @@ export default function HomePage() {
           endgamePercent={endgamePercent}
         />
 
-        <KnowledgeSection watchedMovies={watchedMovies} />
+        <LazyKnowledgeSection watchedIds={watchedIds} />
 
         <ConnectionsSection connections={connections} />
 

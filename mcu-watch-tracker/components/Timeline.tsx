@@ -4,11 +4,11 @@ import { useId, useMemo, useState } from "react";
 
 import SearchInput from "@/components/SearchInput";
 import TimelineRow from "@/components/TimelineRow";
-import { MOVIES_IN_RELEASE_ORDER } from "@/data/movies";
-import type { Movie, MovieStatus, Saga } from "@/types/movie";
+import { MOVIES_IN_RELEASE_ORDER } from "@/data/movieCatalog";
+import type { MovieStatus, MovieSummary, Saga } from "@/types/movie";
 
 type TimelineProps = {
-  movies: readonly Movie[];
+  movies: readonly MovieSummary[];
   watchedIds: ReadonlySet<string>;
   onToggle: (id: string) => void;
 };
@@ -96,7 +96,7 @@ export default function Timeline({
     ],
   );
 
-  const statusOf = (movie: Movie): MovieStatus => {
+  const statusOf = (movie: MovieSummary): MovieStatus => {
     if (watchedIds.has(movie.id)) return "watched";
     if (movie.id === nextVisibleOrderId) return "next";
     return "upcoming";
