@@ -154,7 +154,7 @@ export const CONNECTIONS: Connection[] = [
     title: "הזהות של Spider-Man",
     chain: ["Civil War", "Homecoming", "Far From Home", "No Way Home", "Brand New Day"],
     description:
-      "מנער שכונתי שגויס על ידי Tony Stark ועד גיבור אלמוני שנמחק מזיכרון כולם — זהותו של Peter Parker היא הימור מתמשך.",
+      "מנער שכונתי שגויס על ידי Tony Stark ועד גיבור-על ש-Peter Parker שמאחוריו נמחק מזיכרון כולם — זהותו של Peter Parker היא הימור מתמשך.",
     requires: [
       "captain-america-civil-war",
       "spider-man-homecoming",

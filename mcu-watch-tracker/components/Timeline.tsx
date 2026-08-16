@@ -26,8 +26,10 @@ export default function Timeline({
 
   const visibleMovies = useMemo(() => {
     if (!trimmedQuery) return movies;
-    return movies.filter((movie) =>
-      movie.title.toLowerCase().includes(trimmedQuery),
+    return movies.filter(
+      (movie) =>
+        movie.title.toLowerCase().includes(trimmedQuery) ||
+        movie.titleHe?.includes(trimmedQuery),
     );
   }, [movies, trimmedQuery]);
 

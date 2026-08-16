@@ -25,6 +25,7 @@ export const MOVIES: Movie[] = [
   {
     id: "captain-america-the-first-avenger",
     title: "Captain America: The First Avenger",
+    titleHe: "קפטן אמריקה: הנוקם הראשון",
     timelineOrder: 1,
     phase: 1,
     saga: "infinity",
@@ -64,6 +65,7 @@ export const MOVIES: Movie[] = [
   {
     id: "captain-marvel",
     title: "Captain Marvel",
+    titleHe: "קפטן מארוול",
     timelineOrder: 2,
     phase: 3,
     saga: "infinity",
@@ -106,6 +108,7 @@ export const MOVIES: Movie[] = [
   {
     id: "iron-man",
     title: "Iron Man",
+    titleHe: "איירון מן",
     timelineOrder: 3,
     phase: 1,
     saga: "infinity",
@@ -147,6 +150,7 @@ export const MOVIES: Movie[] = [
   {
     id: "iron-man-2",
     title: "Iron Man 2",
+    titleHe: "איירון מן 2",
     timelineOrder: 4,
     phase: 1,
     saga: "infinity",
@@ -196,6 +200,7 @@ export const MOVIES: Movie[] = [
   {
     id: "the-incredible-hulk",
     title: "The Incredible Hulk",
+    titleHe: "הענק הירוק",
     timelineOrder: 5,
     phase: 1,
     saga: "infinity",
@@ -237,6 +242,7 @@ export const MOVIES: Movie[] = [
   {
     id: "thor",
     title: "Thor",
+    titleHe: "ת'ור",
     timelineOrder: 6,
     phase: 1,
     saga: "infinity",
@@ -279,6 +285,7 @@ export const MOVIES: Movie[] = [
   {
     id: "the-avengers",
     title: "The Avengers",
+    titleHe: "הנוקמים",
     timelineOrder: 7,
     phase: 1,
     saga: "infinity",
@@ -308,7 +315,7 @@ export const MOVIES: Movie[] = [
       objects: ["ה-Tesseract", "השרביט של Loki", "מכשיר ה-Iridium"],
       connections: [
         "ה-Tesseract חוזר לזירה — מהמלחמה, דרך Captain Marvel, ועד S.H.I.E.L.D בהווה",
-        "Bruce Banner מ-The Incredible Hulk מגויס סוף-סוף לצוות שממנו ברח",
+        "Bruce Banner, שברח מ-Ross ומהצבא ב-The Incredible Hulk, מגויס סוף-סוף על ידי S.H.I.E.L.D לצוות Avengers",
         "Loki, שהכרת מ-Thor, חוזר כאיום מרכזי",
         "Nick Fury מגשים את מה שהתחיל לרמוז עליו כבר ב-Iron Man ו-Captain Marvel",
       ],
@@ -325,6 +332,7 @@ export const MOVIES: Movie[] = [
   {
     id: "thor-the-dark-world",
     title: "Thor: The Dark World",
+    titleHe: "ת'ור: העולם האפל",
     timelineOrder: 8,
     phase: 2,
     saga: "infinity",
@@ -368,6 +376,7 @@ export const MOVIES: Movie[] = [
   {
     id: "iron-man-3",
     title: "Iron Man 3",
+    titleHe: "איירון מן 3",
     timelineOrder: 9,
     phase: 2,
     saga: "infinity",
@@ -411,6 +420,7 @@ export const MOVIES: Movie[] = [
   {
     id: "captain-america-the-winter-soldier",
     title: "Captain America: The Winter Soldier",
+    titleHe: "קפטן אמריקה: חייל החורף",
     timelineOrder: 10,
     phase: 2,
     saga: "infinity",
@@ -449,12 +459,13 @@ export const MOVIES: Movie[] = [
       consensus:
         "מותח ומחוכם מבחינה פוליטית, Captain America: The Winter Soldier הוא פרק מעולה בקאנון האווינג'רס שבטוח יהנה את מעריצי מארוול.",
       source: "Rotten Tomatoes",
-      sourceUrl: "https://www.rottentomatoes.com/m/captain_america_the_winter_soldier",
+      sourceUrl: "https://www.rottentomatoes.com/m/captain_america_the_winter_soldier_2014",
     },
   },
   {
     id: "guardians-of-the-galaxy",
     title: "Guardians of the Galaxy",
+    titleHe: "שומרי הגלקסיה",
     timelineOrder: 11,
     phase: 2,
     saga: "infinity",
@@ -497,6 +508,7 @@ export const MOVIES: Movie[] = [
   {
     id: "guardians-of-the-galaxy-vol-2",
     title: "Guardians of the Galaxy Vol. 2",
+    titleHe: "שומרי הגלקסיה: חלק 2",
     timelineOrder: 12,
     phase: 3,
     saga: "infinity",
@@ -541,6 +553,7 @@ export const MOVIES: Movie[] = [
   {
     id: "avengers-age-of-ultron",
     title: "Avengers: Age of Ultron",
+    titleHe: "הנוקמים: עידן אולטרון",
     timelineOrder: 13,
     phase: 2,
     saga: "infinity",
@@ -586,6 +599,7 @@ export const MOVIES: Movie[] = [
   {
     id: "ant-man",
     title: "Ant-Man",
+    titleHe: "אנטמן",
     timelineOrder: 14,
     phase: 2,
     saga: "infinity",
@@ -626,6 +640,7 @@ export const MOVIES: Movie[] = [
   {
     id: "captain-america-civil-war",
     title: "Captain America: Civil War",
+    titleHe: "קפטן אמריקה: מלחמת האזרחים",
     timelineOrder: 15,
     phase: 3,
     saga: "infinity",
@@ -675,6 +690,7 @@ export const MOVIES: Movie[] = [
   {
     id: "black-widow",
     title: "Black Widow",
+    titleHe: "האלמנה השחורה",
     timelineOrder: 16,
     phase: 4,
     saga: "multiverse",
@@ -715,6 +731,7 @@ export const MOVIES: Movie[] = [
   {
     id: "black-panther",
     title: "Black Panther",
+    titleHe: "הפנתר השחור",
     timelineOrder: 17,
     phase: 3,
     saga: "infinity",
@@ -758,6 +775,7 @@ export const MOVIES: Movie[] = [
   {
     id: "spider-man-homecoming",
     title: "Spider-Man: Homecoming",
+    titleHe: "ספיידרמן: השיבה הביתה",
     timelineOrder: 18,
     phase: 3,
     saga: "infinity",
@@ -801,6 +819,7 @@ export const MOVIES: Movie[] = [
   {
     id: "doctor-strange",
     title: "Doctor Strange",
+    titleHe: "דוקטור סטריינג'",
     timelineOrder: 19,
     phase: 3,
     saga: "infinity",
@@ -839,6 +858,7 @@ export const MOVIES: Movie[] = [
   {
     id: "thor-ragnarok",
     title: "Thor: Ragnarok",
+    titleHe: "ת'ור: ראגנארוק",
     timelineOrder: 20,
     phase: 3,
     saga: "infinity",
@@ -876,12 +896,13 @@ export const MOVIES: Movie[] = [
       consensus:
         "מרגש, מצחיק, ומעל הכל כיפי — Thor: Ragnarok הוא הרפתקה קוסמית צבעונית שמציבה רף חדש לפרנצ'ייז שלו.",
       source: "Rotten Tomatoes",
-      sourceUrl: "https://www.rottentomatoes.com/m/thor_ragnarok",
+      sourceUrl: "https://www.rottentomatoes.com/m/thor_ragnarok_2017",
     },
   },
   {
     id: "ant-man-and-the-wasp",
     title: "Ant-Man and the Wasp",
+    titleHe: "אנטמן והצרעה",
     timelineOrder: 21,
     phase: 3,
     saga: "infinity",
@@ -923,6 +944,7 @@ export const MOVIES: Movie[] = [
   {
     id: "avengers-infinity-war",
     title: "Avengers: Infinity War",
+    titleHe: "הנוקמים: מלחמת האינסוף",
     timelineOrder: 22,
     phase: 3,
     saga: "infinity",
@@ -970,6 +992,7 @@ export const MOVIES: Movie[] = [
   {
     id: "avengers-endgame",
     title: "Avengers: Endgame",
+    titleHe: "הנוקמים: סוף המשחק",
     timelineOrder: 23,
     phase: 3,
     saga: "infinity",
@@ -1016,6 +1039,7 @@ export const MOVIES: Movie[] = [
   {
     id: "shang-chi-and-the-legend-of-the-ten-rings",
     title: "Shang-Chi and the Legend of the Ten Rings",
+    titleHe: "שאנג-צ'י ואגדת עשר הטבעות",
     timelineOrder: 24,
     phase: 4,
     saga: "multiverse",
@@ -1058,6 +1082,7 @@ export const MOVIES: Movie[] = [
   {
     id: "spider-man-far-from-home",
     title: "Spider-Man: Far From Home",
+    titleHe: "ספיידרמן: רחוק מהבית",
     timelineOrder: 25,
     phase: 3,
     saga: "infinity",
@@ -1102,6 +1127,7 @@ export const MOVIES: Movie[] = [
   {
     id: "eternals",
     title: "Eternals",
+    titleHe: "נצחיים",
     timelineOrder: 26,
     phase: 4,
     saga: "multiverse",
@@ -1145,6 +1171,7 @@ export const MOVIES: Movie[] = [
   {
     id: "spider-man-no-way-home",
     title: "Spider-Man: No Way Home",
+    titleHe: "ספיידרמן: אין דרך הביתה",
     timelineOrder: 27,
     phase: 4,
     saga: "multiverse",
@@ -1191,6 +1218,7 @@ export const MOVIES: Movie[] = [
   {
     id: "doctor-strange-in-the-multiverse-of-madness",
     title: "Doctor Strange in the Multiverse of Madness",
+    titleHe: "דוקטור סטריינג' בממדי הטירוף",
     timelineOrder: 28,
     phase: 4,
     saga: "multiverse",
@@ -1232,6 +1260,7 @@ export const MOVIES: Movie[] = [
   {
     id: "black-panther-wakanda-forever",
     title: "Black Panther: Wakanda Forever",
+    titleHe: "הפנתר השחור: ואקאנדה לנצח",
     timelineOrder: 29,
     phase: 4,
     saga: "multiverse",
@@ -1267,6 +1296,7 @@ export const MOVIES: Movie[] = [
   {
     id: "thor-love-and-thunder",
     title: "Thor: Love and Thunder",
+    titleHe: "ת'ור: אהבה ורעם",
     timelineOrder: 30,
     phase: 4,
     saga: "multiverse",
@@ -1302,6 +1332,7 @@ export const MOVIES: Movie[] = [
   {
     id: "ant-man-and-the-wasp-quantumania",
     title: "Ant-Man and the Wasp: Quantumania",
+    titleHe: "אנטמן והצרעה: קוונטומאניה",
     timelineOrder: 31,
     phase: 5,
     saga: "multiverse",
@@ -1344,6 +1375,7 @@ export const MOVIES: Movie[] = [
   {
     id: "guardians-of-the-galaxy-vol-3",
     title: "Guardians of the Galaxy Vol. 3",
+    titleHe: "שומרי הגלקסיה: חלק 3",
     timelineOrder: 32,
     phase: 5,
     saga: "multiverse",
@@ -1389,6 +1421,7 @@ export const MOVIES: Movie[] = [
   {
     id: "the-marvels",
     title: "The Marvels",
+    titleHe: "המארוולס",
     timelineOrder: 33,
     phase: 5,
     saga: "multiverse",
@@ -1425,6 +1458,7 @@ export const MOVIES: Movie[] = [
   {
     id: "deadpool-and-wolverine",
     title: "Deadpool & Wolverine",
+    titleHe: "דדפול & וולברין",
     timelineOrder: 34,
     phase: 5,
     saga: "multiverse",
@@ -1460,6 +1494,7 @@ export const MOVIES: Movie[] = [
   {
     id: "captain-america-brave-new-world",
     title: "Captain America: Brave New World",
+    titleHe: "קפטן אמריקה: עולם חדש מופלא",
     timelineOrder: 35,
     phase: 5,
     saga: "multiverse",
@@ -1496,6 +1531,7 @@ export const MOVIES: Movie[] = [
   {
     id: "thunderbolts",
     title: "Thunderbolts*",
+    titleHe: "ת'אנדרבולטס*",
     timelineOrder: 36,
     phase: 5,
     saga: "multiverse",
@@ -1517,7 +1553,7 @@ export const MOVIES: Movie[] = [
       connections: [
         "Yelena Belova, שהכרת מ-Black Widow, ו-Bucky Barnes, שהכרת ממספר סרטים, מתאחדים כאן לצוות חדש",
         "Valentina, שהופיעה בקצרה ב-Black Widow, מתגלה כמנהלת מרכזית מאחורי הקלעים",
-        "הקשר לסדרות (Disney+, לא חלק ממעקב הסרטים): מסעו של John Walker כ-U.S. Agent והמזימות המתמשכות של Valentina מפותחים בסדרות Hawkeye ו-Secret Invasion",
+        "הקשר לסדרות (Disney+, לא חלק ממעקב הסרטים): הפיכתו של John Walker ל-U.S. Agent ותחילת מעורבותה של Valentina מפותחים בסדרת The Falcon and the Winter Soldier, בעוד Yelena ממשיכה מסדרת Hawkeye",
       ],
     },
     review: {
@@ -1532,6 +1568,7 @@ export const MOVIES: Movie[] = [
   {
     id: "the-fantastic-four-first-steps",
     title: "The Fantastic Four: First Steps",
+    titleHe: "ארבעת המופלאים: צעדים ראשונים",
     timelineOrder: 37,
     phase: 6,
     saga: "multiverse",

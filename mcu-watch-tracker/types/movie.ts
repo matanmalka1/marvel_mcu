@@ -49,6 +49,8 @@ export type MovieReview = {
 export type Movie = {
   id: string;
   title: string;
+  /** Official Hebrew release title, used for search. Omitted when not yet released/titled in Israel. */
+  titleHe?: string;
   /** 1-based position in the chronological viewing order. */
   timelineOrder: number;
   /** Release phase. Never inferred from `timelineOrder`. */

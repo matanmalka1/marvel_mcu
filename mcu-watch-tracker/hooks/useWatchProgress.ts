@@ -95,6 +95,19 @@ export function useWatchProgress(): WatchProgress {
     setHydrated(true);
   }, []);
 
+  // Keeps tabs in sync: fires in other tabs whenever this key changes in localStorage.
+  useEffect(() => {
+    const handleStorage = (event: StorageEvent) => {
+      if (event.key !== STORAGE_KEY) return;
+      const stored = readStoredProgress();
+      const next = stored ?? [...DEFAULT_WATCHED_IDS];
+      watchedRef.current = next;
+      setWatchedIds(next);
+    };
+    window.addEventListener("storage", handleStorage);
+    return () => window.removeEventListener("storage", handleStorage);
+  }, []);
+
   useEffect(() => {
     if (!hydrated) return;
     try {
