@@ -1,4 +1,4 @@
-import { Check, Link2, Star } from "lucide-react";
+import { Check, ChevronDown, Link2, Star } from "lucide-react";
 
 import type { Movie } from "@/types/movie";
 
@@ -24,13 +24,21 @@ function ChipList({ label, items }: { label: string; items: string[] }) {
   );
 }
 
-export default function KnowledgeCard({ movie }: { movie: Movie }) {
+export default function KnowledgeCard({
+  movie,
+  expanded,
+  onToggle,
+}: {
+  movie: Movie;
+  expanded: boolean;
+  onToggle: () => void;
+}) {
   const slateNumber = String(movie.timelineOrder).padStart(2, "0");
   const knowledge = movie.knowledge;
   const review = movie.review;
 
   return (
-    <article className="flex flex-col rounded-2xl border border-[var(--border)] bg-[var(--bg-raised)] p-6">
+    <article className="flex flex-col rounded-2xl border border-[var(--border)] bg-[var(--bg-raised)] p-5 sm:p-6">
       <header className="flex items-start gap-3">
         <span className="font-slate mt-0.5 shrink-0 rounded-md border border-[var(--border)] px-2 py-1 text-xs text-[var(--muted)]">
           {slateNumber}
@@ -50,10 +58,23 @@ export default function KnowledgeCard({ movie }: { movie: Movie }) {
           <Check className="h-3 w-3" aria-hidden="true" />
           נצפה
         </span>
+        <button
+          type="button"
+          onClick={onToggle}
+          aria-expanded={expanded}
+          aria-controls={`knowledge-${movie.id}`}
+          aria-label={`${expanded ? "סגירת" : "פתיחת"} הסקירה של ${movie.title}`}
+          className="grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-[var(--border)] text-[var(--muted)] transition-colors hover:border-[var(--border-strong)] hover:text-[var(--text)]"
+        >
+          <ChevronDown
+            className={`h-4 w-4 transition-transform ${expanded ? "rotate-180" : ""}`}
+            aria-hidden="true"
+          />
+        </button>
       </header>
 
-      {knowledge ? (
-        <div className="mt-5 space-y-5">
+      {expanded && knowledge ? (
+        <div id={`knowledge-${movie.id}`} className="mt-5 space-y-5">
           <p className="text-sm leading-relaxed text-[var(--text)]/90">
             {knowledge.summary}
           </p>
@@ -134,15 +155,18 @@ export default function KnowledgeCard({ movie }: { movie: Movie }) {
             </div>
           ) : null}
         </div>
-      ) : (
-        <p className="mt-5 text-sm leading-relaxed text-[var(--muted)]">
+      ) : expanded ? (
+        <p
+          id={`knowledge-${movie.id}`}
+          className="mt-5 text-sm leading-relaxed text-[var(--muted)]"
+        >
           עוד לא נכתבה סקירה לסרט הזה. אפשר להוסיף אותה בקובץ{" "}
           <code dir="ltr" className="font-slate text-[var(--text)]">
             data/movies.ts
           </code>{" "}
           תחת המפתח <code dir="ltr" className="font-slate text-[var(--text)]">knowledge</code>.
         </p>
-      )}
+      ) : null}
     </article>
   );
 }
