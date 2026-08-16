@@ -3,9 +3,22 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "MCU Watch Tracker — המסע שלך ב־MCU",
+  applicationName: "MCU Watch Tracker",
+  title: {
+    default: "MCU Watch Tracker — המסע שלך ב־MCU",
+    template: "%s · MCU Watch Tracker",
+  },
   description:
     "מעקב צפייה בסרטי ה-MCU לפי ציר הזמן הכרונולוגי, כולל התקדמות, חיבורים בין הסרטים והגנה מפני ספוילרים.",
+  manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "MCU Tracker",
+  },
+  formatDetection: {
+    telephone: false,
+  },
 };
 
 export const viewport: Viewport = {

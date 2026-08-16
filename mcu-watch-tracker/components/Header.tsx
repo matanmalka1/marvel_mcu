@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { RotateCcw, Undo2 } from "lucide-react";
 
 type HeaderProps = {
@@ -23,12 +24,14 @@ export default function Header({
     <header className="sticky top-0 z-40 border-b border-[var(--border)] bg-[#07070a]/85 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-[1240px] items-center gap-3 px-4 sm:px-6">
         <div className="flex items-center gap-2.5">
-          <span
-            aria-hidden="true"
-            className="grid h-8 w-8 shrink-0 place-items-center rounded-md bg-[var(--accent)]/15 ring-1 ring-inset ring-[var(--accent)]/40"
-          >
-            <span className="h-2.5 w-2.5 rotate-45 bg-[var(--accent)]" />
-          </span>
+          <Image
+            src="/icons/brand-mark.png"
+            alt=""
+            width={32}
+            height={32}
+            priority
+            className="h-8 w-8 shrink-0 rounded-lg ring-1 ring-inset ring-white/10"
+          />
           <div>
             <p
               dir="ltr"
