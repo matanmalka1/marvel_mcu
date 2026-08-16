@@ -69,21 +69,24 @@ export function useWatchProgress(): WatchProgress {
   const [historyDepth, setHistoryDepth] = useState(0);
 
   useEffect(() => {
-    const timeout = window.setTimeout(() => {
-      const stored = readStoredProgress();
-      if (stored) {
-        watchedRef.current = stored;
-        setWatchedIds(stored);
-      }
-      setHydrated(true);
-    }, 0);
-    return () => window.clearTimeout(timeout);
+    const stored = readStoredProgress();
+    if (stored) {
+      watchedRef.current = stored;
+      // One-time hydration from localStorage (an external system) on mount,
+      // not state derived from props/state — the pattern this rule guards
+      // against doesn't apply here.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setWatchedIds(stored);
+    }
+    setHydrated(true);
   }, []);
 
   // Keeps tabs in sync: fires in other tabs whenever this key changes in localStorage.
   useEffect(() => {
     const handleStorage = (event: StorageEvent) => {
-      if (event.key !== WATCH_PROGRESS_STORAGE_KEY) return;
+      // event.key is null when the tab called localStorage.clear() rather
+      // than removing this key specifically — treat that as a remote change too.
+      if (event.key !== null && event.key !== WATCH_PROGRESS_STORAGE_KEY) return;
       const stored = readStoredProgress();
       const next = stored ?? [...DEFAULT_WATCHED_IDS];
 

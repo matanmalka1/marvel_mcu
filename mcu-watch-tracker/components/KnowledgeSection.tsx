@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import KnowledgeCard from "@/components/KnowledgeCard";
 import { MOVIES_IN_TIMELINE_ORDER } from "@/data/movies";
@@ -10,10 +10,10 @@ export default function KnowledgeSection({
 }: {
   watchedIds: readonly string[];
 }) {
-  const watchedSet = new Set(watchedIds);
-  const watchedMovies = MOVIES_IN_TIMELINE_ORDER.filter((movie) =>
-    watchedSet.has(movie.id),
-  );
+  const watchedMovies = useMemo(() => {
+    const watchedSet = new Set(watchedIds);
+    return MOVIES_IN_TIMELINE_ORDER.filter((movie) => watchedSet.has(movie.id));
+  }, [watchedIds]);
   const [expandedIds, setExpandedIds] = useState<ReadonlySet<string>>(() => new Set());
 
   const toggleExpanded = (id: string) => {

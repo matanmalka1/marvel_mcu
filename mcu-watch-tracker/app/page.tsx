@@ -40,7 +40,7 @@ export default function HomePage() {
   const connections = useMemo(() => getUnlockedConnections(watchedSet), [watchedSet]);
 
   const notify = useCallback((message: string) => {
-    setUndoNotice({ id: Date.now(), message });
+    setUndoNotice({ message });
   }, []);
 
   const handleToggle = useCallback(

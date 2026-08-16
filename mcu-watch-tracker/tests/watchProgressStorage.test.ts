@@ -14,6 +14,11 @@ describe("watch progress serialization", () => {
     ]);
   });
 
+  it("rejects a non-empty list where no id is recognized, but keeps a genuine empty list", () => {
+    expect(sanitizeWatched(["not-a-real-movie", "also-fake"])).toBeNull();
+    expect(sanitizeWatched([])).toEqual([]);
+  });
+
   it("rejects malformed and incompatible payloads", () => {
     expect(parseStoredProgress(null)).toBeNull();
     expect(parseStoredProgress({ version: 999, watched: [] })).toBeNull();

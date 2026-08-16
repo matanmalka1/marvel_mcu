@@ -8,12 +8,18 @@ export type StoredProgress = {
   watched: string[];
 };
 
-/** Keeps only known ids, drops duplicates, and rejects non-array values. */
+/**
+ * Keeps only known ids, drops duplicates, and rejects non-array values.
+ * A non-empty input where every id is unrecognized (wrong app's export,
+ * corrupted file) is treated as invalid rather than silently importing
+ * as "nothing watched".
+ */
 export function sanitizeWatched(value: unknown): string[] | null {
   if (!Array.isArray(value)) return null;
   const cleaned = value.filter(
     (id): id is string => typeof id === "string" && MOVIE_IDS.has(id),
   );
+  if (cleaned.length === 0 && value.length > 0) return null;
   return Array.from(new Set(cleaned));
 }
 

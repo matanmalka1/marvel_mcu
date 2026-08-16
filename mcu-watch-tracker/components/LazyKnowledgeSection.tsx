@@ -18,9 +18,10 @@ export default function LazyKnowledgeSection({
 }) {
   const anchorRef = useRef<HTMLDivElement>(null);
   const [shouldLoad, setShouldLoad] = useState(false);
+  const hasWatched = watchedIds.length > 0;
 
   useEffect(() => {
-    if (watchedIds.length === 0 || shouldLoad) return;
+    if (!hasWatched || shouldLoad) return;
     const anchor = anchorRef.current;
     if (!anchor) return;
 
@@ -34,7 +35,7 @@ export default function LazyKnowledgeSection({
     );
     observer.observe(anchor);
     return () => observer.disconnect();
-  }, [shouldLoad, watchedIds.length]);
+  }, [shouldLoad, hasWatched]);
 
   if (watchedIds.length === 0) {
     return (

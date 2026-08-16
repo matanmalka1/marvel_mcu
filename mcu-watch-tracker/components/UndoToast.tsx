@@ -4,7 +4,6 @@ import { Undo2, X } from "lucide-react";
 import { useEffect } from "react";
 
 export type UndoNotice = {
-  id: number;
   message: string;
 };
 

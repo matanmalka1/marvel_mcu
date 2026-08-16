@@ -53,7 +53,12 @@ export default function Timeline({ movies, watchedIds, onToggle }: TimelineProps
   const trimmedQuery = query.trim().toLowerCase();
 
   const orderedMovies = orderMode === "timeline" ? movies : MOVIES_IN_RELEASE_ORDER;
-  const nextVisibleOrderId = orderedMovies.find((movie) => !watchedIds.has(movie.id))?.id;
+  // Always derived from the canonical timeline order (not the selected view)
+  // so the "next" badge agrees with the Next Up card regardless of orderMode.
+  const nextMovieId = useMemo(
+    () => movies.find((movie) => !watchedIds.has(movie.id))?.id,
+    [movies, watchedIds],
+  );
   const phases = useMemo(
     () => Array.from(new Set(movies.map((movie) => movie.phase))).sort((a, b) => a - b),
     [movies],
@@ -84,7 +89,7 @@ export default function Timeline({ movies, watchedIds, onToggle }: TimelineProps
 
   const statusOf = (movie: MovieSummary): MovieStatus => {
     if (watchedIds.has(movie.id)) return "watched";
-    if (movie.id === nextVisibleOrderId) return "next";
+    if (movie.id === nextMovieId) return "next";
     return "upcoming";
   };
 
