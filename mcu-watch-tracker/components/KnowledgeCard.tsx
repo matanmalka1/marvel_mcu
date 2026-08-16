@@ -7,7 +7,7 @@ function ChipList({ label, items }: { label: string; items: string[] }) {
 
   return (
     <div>
-      <p className="font-slate text-[10px] uppercase tracking-[0.16em] text-[var(--muted)]">
+      <p className=" text-[10px] uppercase tracking-[0.16em] text-[var(--muted)]">
         {label}
       </p>
       <ul className="mt-2 flex flex-wrap gap-1.5">
