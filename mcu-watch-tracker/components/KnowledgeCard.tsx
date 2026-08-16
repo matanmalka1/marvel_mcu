@@ -42,7 +42,7 @@ export default function KnowledgeCard({ movie }: { movie: Movie }) {
           >
             {movie.title}
           </h3>
-          <p className="font-slate mt-1 text-[11px] text-[var(--muted)]">
+          <p className="mt-1 text-[11px] text-[var(--muted)]">
             Phase {movie.phase} · {movie.timelineLabel ?? "—"}
           </p>
         </div>
@@ -59,7 +59,7 @@ export default function KnowledgeCard({ movie }: { movie: Movie }) {
           </p>
 
           <div>
-            <p className="font-slate text-[10px] uppercase tracking-[0.16em] text-[var(--muted)]">
+            <p className="text-[10px] uppercase tracking-[0.16em] text-[var(--muted)]">
               מה למדת
             </p>
             <ul className="mt-2 space-y-2">
@@ -84,7 +84,7 @@ export default function KnowledgeCard({ movie }: { movie: Movie }) {
 
           {knowledge.connections && knowledge.connections.length > 0 ? (
             <div className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4">
-              <p className="font-slate flex items-center gap-1.5 text-[10px] uppercase tracking-[0.16em] text-[var(--muted)]">
+              <p className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.16em] text-[var(--muted)]">
                 <Link2 className="h-3 w-3" aria-hidden="true" />
                 חיבורים למה שכבר ראית
               </p>
@@ -103,7 +103,7 @@ export default function KnowledgeCard({ movie }: { movie: Movie }) {
 
           {review ? (
             <div className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4">
-              <p className="font-slate flex items-center gap-1.5 text-[10px] uppercase tracking-[0.16em] text-[var(--muted)]">
+              <p className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.16em] text-[var(--muted)]">
                 <Star className="h-3 w-3" aria-hidden="true" />
                 סקירה ביקורתית
               </p>

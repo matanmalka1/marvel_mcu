@@ -23,7 +23,7 @@ export default function KnowledgeSection({
             רק מהסרטים שכבר צפית בהם. שום דבר כאן לא חושף מה קורה בהמשך.
           </p>
         </div>
-        <p className="font-slate text-xs text-[var(--muted)]">
+        <p className="text-xs text-[var(--muted)]">
           {watchedMovies.length} סרטים
         </p>
       </div>

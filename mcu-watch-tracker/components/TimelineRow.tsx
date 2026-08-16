@@ -98,7 +98,7 @@ export default function TimelineRow({
             {movie.title}
           </span>
 
-          <span className="font-slate mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-[var(--muted)]">
+          <span className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-[var(--muted)]">
             <span>Phase {movie.phase}</span>
             {movie.timelineLabel ? (
               <>

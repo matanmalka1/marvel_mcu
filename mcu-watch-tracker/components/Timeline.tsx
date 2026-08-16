@@ -93,7 +93,7 @@ export default function Timeline({
         )}
       </div>
 
-      <p aria-live="polite" className="font-slate mt-3 text-xs text-[var(--muted)]">
+      <p aria-live="polite" className="mt-3 text-xs text-[var(--muted)]">
         {trimmedQuery
           ? `${visibleMovies.length} תוצאות מתוך ${movies.length}`
           : `${movies.length} סרטים`}

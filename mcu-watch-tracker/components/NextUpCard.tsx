@@ -46,7 +46,7 @@ export default function NextUpCard({
       </span>
 
       <div className="relative">
-        <p className="font-slate text-[11px] uppercase tracking-[0.3em] text-[var(--accent-soft)]">
+        <p className="text-[11px] uppercase tracking-[0.3em] text-[var(--accent-soft)]">
           הסרט הבא · Movie {slateNumber}
         </p>
 
@@ -57,7 +57,7 @@ export default function NextUpCard({
           {movie.title}
         </h2>
 
-        <dl className="font-slate mt-6 grid grid-cols-2 gap-x-4 gap-y-4 border-t border-[var(--border)] pt-5 text-xs sm:grid-cols-3">
+        <dl className="mt-6 grid grid-cols-2 gap-x-4 gap-y-4 border-t border-[var(--border)] pt-5 text-xs sm:grid-cols-3">
           <div>
             <dt className="text-[10px] uppercase tracking-[0.16em] text-[var(--muted)]">
               מיקום בציר
@@ -87,7 +87,7 @@ export default function NextUpCard({
             {movie.timelineFlags.map((flag) => (
               <li
                 key={flag}
-                className="font-slate rounded border border-[var(--border)] px-2 py-1 text-[10px] uppercase tracking-wider text-[var(--muted)]"
+                className="rounded border border-[var(--border)] px-2 py-1 text-[10px] uppercase tracking-wider text-[var(--muted)]"
               >
                 {TIMELINE_FLAG_LABELS[flag]}
               </li>

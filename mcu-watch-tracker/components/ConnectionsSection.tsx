@@ -42,7 +42,7 @@ export default function ConnectionsSection({
             חוטים שחוזרים בין הסרטים שראית. חיבורים חדשים נפתחים לבד ככל שתתקדם.
           </p>
         </div>
-        <p className="font-slate text-xs text-[var(--muted)]">
+        <p className="text-xs text-[var(--muted)]">
           {connections.length} חיבורים
         </p>
       </div>
