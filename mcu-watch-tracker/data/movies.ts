@@ -3,13 +3,19 @@ import type { Movie, TimelineFlag } from "@/types/movie";
 /**
  * SPOILER RULE
  * ────────────
- * Information that belongs to movie N may only ever be rendered once movie N is watched.
- * Concretely: `knowledge` is only written for movies the user has already finished, and the
- * UI reads it only for watched movies. Never add forward-looking notes to a movie's entry —
- * a viewer who is up to Iron Man 2 must be able to read the whole dashboard safely.
+ * `knowledge` and `review` are pre-written here for every movie in the array — that is no
+ * longer what keeps spoilers out of the UI. The guarantee is enforced entirely by
+ * watched-state filtering in the app: `app/page.tsx` only ever passes `watchedMovies`
+ * (movies present in the user's local watched-state) into `KnowledgeSection`, and
+ * `Timeline`/other components gate the same way. Nothing from this file renders until a
+ * movie is marked watched, regardless of what data sits here.
+ *
+ * Each movie's `connections` array still links back to earlier movies only (by
+ * `timelineOrder`), never forward — that convention is kept for narrative coherence even
+ * though the UI no longer depends on it for spoiler safety.
  *
  * Adding a movie later:
- *  1. append the entry (or fill in `knowledge` on an existing one)
+ *  1. append the entry with `knowledge`/`review` filled in
  *  2. add any newly unlocked threads to `data/connections.ts`
  * Nothing else needs to change.
  */
@@ -187,8 +193,6 @@ export const MOVIES: Movie[] = [
     },
   },
 
-  /* ── מכאן והלאה: מטא-דאטה בטוחה בלבד. אין תקצירים, אין דמויות, אין ספוילרים. ── */
-
   {
     id: "the-incredible-hulk",
     title: "The Incredible Hulk",
@@ -197,6 +201,38 @@ export const MOVIES: Movie[] = [
     saga: "infinity",
     releaseYear: 2008,
     timelineLabel: "2011",
+    knowledge: {
+      summary:
+        "מדען בשם Bruce Banner, שניסוי בקרינת גאמא הפך אותו למפלצת ירוקה בכל פרץ זעם, מנסה למצוא תרופה תוך בריחה מהצבא האמריקאי. כשקצין בריטי חסר סבלנות עובר טיפול דומה ומשתגע לגמרי, רק ה-Hulk יכול לעצור אותו.",
+      concepts: [
+        "קרינת גאמא היא מקור כוחו של Hulk — לא תאונה מבודדת, אלא ניסוי מכוון שהשתבש",
+        "Bruce Banner נמצא במנוסה מתמדת מהצבא האמריקאי, בראשות הגנרל Ross",
+        "ניסיון לשחזר את הכוח על אדם אחר יוצר יצור הרסני עוד יותר — Abomination",
+        "Tony Stark מופיע בסצנת סיום ומזכיר \"יוזמה\" — רמז ראשון למשהו גדול יותר",
+      ],
+      characters: [
+        "Bruce Banner / Hulk",
+        "Betty Ross",
+        "Emil Blonsky / Abomination",
+        "General Thaddeus Ross",
+        "Samuel Sterns",
+        "Tony Stark (הופעת אורח)",
+      ],
+      organizations: ["צבא ארצות הברית", "Culver University"],
+      objects: ["ניסוי קרינת הגאמא", "סרום הסופר-סולג'ר המקורי", "דגימות הדם של Banner"],
+      connections: [
+        "הרמז של Tony Stark על \"יוזמה\" מחבר ישירות ל-Nick Fury שפגשת ב-Iron Man ומצביע על מיזם גדול יותר",
+        "הניסיון לשחזר את סרום הסופר-סולג'ר קושר ישירות לניסוי המקורי מ-Captain America: The First Avenger",
+      ],
+    },
+    review: {
+      rottenTomatoesScore: 68,
+      metacriticScore: 61,
+      consensus:
+        "הסרט לא מגיע לגמרי להצלחה המרשימה שמעריצי הענק הירוק קיוו לה, אך מציע מספיק אקשן ירוק כדי לפצות על עלילה לעיתים דלה.",
+      source: "Rotten Tomatoes",
+      sourceUrl: "https://www.rottentomatoes.com/m/the_incredible_hulk",
+    },
   },
   {
     id: "thor",
@@ -206,6 +242,39 @@ export const MOVIES: Movie[] = [
     saga: "infinity",
     releaseYear: 2011,
     timelineLabel: "2011",
+    knowledge: {
+      summary:
+        "Thor, יורש אסגרד היהיר, מגורש לכדור הארץ ומאבד את כוחו לאחר שכמעט הצית מלחמה עם ענקי הקרח. רק כשהוא לומד ענווה ואהבה הוא מוכיח שהוא ראוי להרים שוב את הפטיש שלו, Mjolnir.",
+      concepts: [
+        "אסגרד וה-Nine Realms הם עולם קדום של ישויות רבות-עוצמה שכדור הארץ בקושי מודע להן",
+        "Mjolnir מוקסם כך שרק מי ש\"ראוי\" יכול להרימו",
+        "Loki, אחיו המאומץ של Thor, מתגלה כענק קרח מלידה ומתחיל לרקום מזימות",
+        "S.H.I.E.L.D עוקב אחרי נפילת הפטיש לכדור הארץ ומתעניין בטכנולוגיה חוצת-עולמות",
+      ],
+      characters: [
+        "Thor",
+        "Jane Foster",
+        "Loki",
+        "Odin",
+        "Erik Selvig",
+        "Heimdall",
+        "Sif",
+        "Darcy Lewis",
+      ],
+      organizations: ["המשפחה המלכותית של אסגרד", "ענקי הקרח מ-Jotunheim", "S.H.I.E.L.D"],
+      objects: ["Mjolnir", "Casket of Ancient Winters", "גשר ה-Bifrost", "Destroyer"],
+      connections: [
+        "S.H.I.E.L.D, שכבר פעל ברקע ב-Iron Man ו-Iron Man 2, מגיע ראשון לזירה כשמשהו נופל מהשמיים",
+      ],
+    },
+    review: {
+      rottenTomatoesScore: 77,
+      metacriticScore: 57,
+      consensus:
+        "בלוקבאסטר מסנוור שממתן את היקפו הרחב בהומור, שנינות ודרמה אנושית — Thor הוא בידור מארוול אדיר.",
+      source: "Rotten Tomatoes",
+      sourceUrl: "https://www.rottentomatoes.com/m/thor",
+    },
   },
   {
     id: "the-avengers",
