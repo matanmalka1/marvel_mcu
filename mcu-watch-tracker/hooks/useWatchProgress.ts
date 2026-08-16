@@ -69,12 +69,15 @@ export function useWatchProgress(): WatchProgress {
   const [historyDepth, setHistoryDepth] = useState(0);
 
   useEffect(() => {
-    const stored = readStoredProgress();
-    if (stored) {
-      watchedRef.current = stored;
-      setWatchedIds(stored);
-    }
-    setHydrated(true);
+    const timeout = window.setTimeout(() => {
+      const stored = readStoredProgress();
+      if (stored) {
+        watchedRef.current = stored;
+        setWatchedIds(stored);
+      }
+      setHydrated(true);
+    }, 0);
+    return () => window.clearTimeout(timeout);
   }, []);
 
   // Keeps tabs in sync: fires in other tabs whenever this key changes in localStorage.
