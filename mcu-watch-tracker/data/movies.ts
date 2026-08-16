@@ -284,6 +284,43 @@ export const MOVIES: Movie[] = [
     saga: "infinity",
     releaseYear: 2012,
     timelineLabel: "2012",
+    knowledge: {
+      summary:
+        "Loki גונב את ה-Tesseract ומתכנן לפתוח שער לפלישה חייזרית על כדור הארץ. Nick Fury מפעיל את Avengers Initiative ומאחד קבוצת גיבורים בלתי-צפויה כדי לעצור אותו לפני שניו יורק תיפול.",
+      concepts: [
+        "Avengers Initiative, שנרמז עליו כבר ב-Iron Man, יוצא סוף-סוף לפועל",
+        "Loki פועל בשירות ישות חייזרית עוצמתית מאחורי הקלעים, שמייצגת איום גדול בהרבה ממנו",
+        "ה-Tesseract הוא מקור אנרגיה קוסמי רב-עוצמה שכבר הופיע במלחמת העולם השנייה ואצל Fury",
+        "שיתוף פעולה בין גיבורים שונים בתכלית דורש התמודדות עם אגו וחוסר אמון לפני שהם הופכים לצוות",
+        "ניו יורק הופכת לזירת הקרב הראשונה של ה-Avengers כקבוצה",
+      ],
+      characters: [
+        "Tony Stark / Iron Man",
+        "Steve Rogers / Captain America",
+        "Bruce Banner / Hulk",
+        "Thor",
+        "Natasha Romanoff / Black Widow",
+        "Clint Barton / Hawkeye",
+        "Loki",
+        "Nick Fury",
+      ],
+      organizations: ["S.H.I.E.L.D / Avengers Initiative", "ה-Chitauri"],
+      objects: ["ה-Tesseract", "השרביט של Loki", "מכשיר ה-Iridium"],
+      connections: [
+        "ה-Tesseract חוזר לזירה — מהמלחמה, דרך Captain Marvel, ועד S.H.I.E.L.D בהווה",
+        "Bruce Banner מ-The Incredible Hulk מגויס סוף-סוף לצוות שממנו ברח",
+        "Loki, שהכרת מ-Thor, חוזר כאיום מרכזי",
+        "Nick Fury מגשים את מה שהתחיל לרמוז עליו כבר ב-Iron Man ו-Captain Marvel",
+      ],
+    },
+    review: {
+      rottenTomatoesScore: 91,
+      metacriticScore: 69,
+      consensus:
+        "הודות לתסריט שמדגיש את האנושיות של הגיבורים ושפע רגעי אקשן-על, The Avengers עומד בציפיות הגבוהות ומרים את הרף למארוול הקולנועית.",
+      source: "Rotten Tomatoes",
+      sourceUrl: "https://www.rottentomatoes.com/m/marvels_the_avengers",
+    },
   },
   {
     id: "thor-the-dark-world",
@@ -293,6 +330,40 @@ export const MOVIES: Movie[] = [
     saga: "infinity",
     releaseYear: 2013,
     timelineLabel: "2013",
+    knowledge: {
+      summary:
+        "כוח קדום בשם Aether, שפעם כמעט החזיר את היקום לחשכה, מתעורר מחדש ומאיים על Jane Foster. Thor נאלץ להסתמך על אחיו הכלוא, Loki, כדי להצילה ולעצור את ענקי האופל.",
+      concepts: [
+        "ה-Convergence הוא תופעה קוסמית נדירה שמיישרת בין תשעת העולמות",
+        "ה-Aether מתגלה כאבן אינסוף נוספת שהוסתרה מאז מלחמה עתיקה",
+        "Frigga, אמו של Thor, נהרגת תוך הגנה על Jane",
+        "Loki ו-Thor נאלצים לשתף פעולה זמנית חרף הבגידה מ-The Avengers",
+      ],
+      characters: [
+        "Thor",
+        "Jane Foster",
+        "Loki",
+        "Odin",
+        "Frigga",
+        "Erik Selvig",
+        "Heimdall",
+        "Malekith",
+      ],
+      organizations: ["אסגרד", "ה-Dark Elves מ-Svartalfheim"],
+      objects: ["ה-Aether", "Mjolnir", "גשר ה-Bifrost", "מכונת הפורטלים של Selvig"],
+      connections: [
+        "Loki, שנלכד בסוף The Avengers, מופיע כעת כאסיר באסגרד",
+        "Erik Selvig עדיין סובל מהשפעות שליטת המוח של Loki מ-The Avengers",
+      ],
+    },
+    review: {
+      rottenTomatoesScore: 67,
+      metacriticScore: 54,
+      consensus:
+        "לא בהכרח הסרט הטוב ביותר שיצא מיקום מארוול, אך Thor: The Dark World עדיין מציע הומור והימורים גבוהים כפי שהמעריצים ציפו.",
+      source: "Rotten Tomatoes",
+      sourceUrl: "https://www.rottentomatoes.com/m/thor_the_dark_world",
+    },
   },
   {
     id: "iron-man-3",
