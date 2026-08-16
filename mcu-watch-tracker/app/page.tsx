@@ -15,6 +15,7 @@ import { useWatchProgress } from "@/hooks/useWatchProgress";
 
 export default function HomePage() {
   const {
+    hydrated,
     watchedSet,
     watchedMovies,
     nextMovie,
@@ -38,7 +39,13 @@ export default function HomePage() {
   );
 
   return (
-    <div className="min-h-screen">
+    <div
+      className={`min-h-screen transition-opacity duration-200 ${
+        hydrated ? "opacity-100" : "pointer-events-none opacity-0"
+      }`}
+      data-hydrated={hydrated}
+      aria-busy={!hydrated}
+    >
       <Header
         watchedCount={watchedCount}
         totalMovies={totalMovies}
@@ -80,6 +87,12 @@ export default function HomePage() {
           onToggle={toggleWatched}
         />
       </main>
+
+      {!hydrated ? (
+        <p className="sr-only" role="status">
+          טוען את התקדמות הצפייה…
+        </p>
+      ) : null}
 
       <footer className="border-t border-[var(--border)]">
         <div className="mx-auto flex max-w-[1240px] flex-wrap items-center justify-between gap-2 px-4 py-8 text-xs text-[var(--muted)] sm:px-6">

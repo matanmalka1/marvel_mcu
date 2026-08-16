@@ -101,6 +101,11 @@ export function useWatchProgress(): WatchProgress {
       if (event.key !== STORAGE_KEY) return;
       const stored = readStoredProgress();
       const next = stored ?? [...DEFAULT_WATCHED_IDS];
+
+      // Remote changes establish a new source of truth. Keeping local undo
+      // entries here could restore stale progress and overwrite the other tab.
+      historyRef.current = [];
+      setHistoryDepth(0);
       watchedRef.current = next;
       setWatchedIds(next);
     };
