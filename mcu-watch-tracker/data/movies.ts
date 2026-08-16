@@ -1640,6 +1640,57 @@ export const MOVIES_IN_TIMELINE_ORDER: readonly Movie[] = [...MOVIES].sort(
   (a, b) => a.timelineOrder - b.timelineOrder,
 );
 
+const RELEASE_ORDER_IDS = [
+  "iron-man",
+  "the-incredible-hulk",
+  "iron-man-2",
+  "thor",
+  "captain-america-the-first-avenger",
+  "the-avengers",
+  "iron-man-3",
+  "thor-the-dark-world",
+  "captain-america-the-winter-soldier",
+  "guardians-of-the-galaxy",
+  "avengers-age-of-ultron",
+  "ant-man",
+  "captain-america-civil-war",
+  "doctor-strange",
+  "guardians-of-the-galaxy-vol-2",
+  "spider-man-homecoming",
+  "thor-ragnarok",
+  "black-panther",
+  "avengers-infinity-war",
+  "ant-man-and-the-wasp",
+  "captain-marvel",
+  "avengers-endgame",
+  "spider-man-far-from-home",
+  "black-widow",
+  "shang-chi-and-the-legend-of-the-ten-rings",
+  "eternals",
+  "spider-man-no-way-home",
+  "doctor-strange-in-the-multiverse-of-madness",
+  "thor-love-and-thunder",
+  "black-panther-wakanda-forever",
+  "ant-man-and-the-wasp-quantumania",
+  "guardians-of-the-galaxy-vol-3",
+  "the-marvels",
+  "deadpool-and-wolverine",
+  "captain-america-brave-new-world",
+  "thunderbolts",
+  "the-fantastic-four-first-steps",
+  "spider-man-brand-new-day",
+] as const;
+
+const MOVIES_BY_ID = new Map(MOVIES.map((movie) => [movie.id, movie]));
+
+export const MOVIES_IN_RELEASE_ORDER: readonly Movie[] = RELEASE_ORDER_IDS.map(
+  (id) => {
+    const movie = MOVIES_BY_ID.get(id);
+    if (!movie) throw new Error(`Unknown movie in release order: ${id}`);
+    return movie;
+  },
+);
+
 export const MOVIE_IDS: ReadonlySet<string> = new Set(MOVIES.map((m) => m.id));
 
 /** Starting progress: nothing watched yet. Reset returns here. */
@@ -1655,5 +1706,5 @@ export const TIMELINE_FLAG_LABELS: Record<TimelineFlag, string> = {
 };
 
 export function getMovieById(id: string): Movie | undefined {
-  return MOVIES.find((movie) => movie.id === id);
+  return MOVIES_BY_ID.get(id);
 }

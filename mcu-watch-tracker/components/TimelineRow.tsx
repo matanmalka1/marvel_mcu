@@ -8,6 +8,8 @@ import type { Movie, MovieStatus } from "@/types/movie";
 
 type TimelineRowProps = {
   movie: Movie;
+  displayOrder: number;
+  orderMode: "timeline" | "release";
   status: MovieStatus;
   onToggle: (id: string) => void;
 };
@@ -38,11 +40,13 @@ const STATUS_PILL_STYLES: Record<MovieStatus, string> = {
 
 export default function TimelineRow({
   movie,
+  displayOrder,
+  orderMode,
   status,
   onToggle,
 }: TimelineRowProps) {
   const isWatched = status === "watched";
-  const slateNumber = String(movie.timelineOrder).padStart(2, "0");
+  const slateNumber = String(displayOrder).padStart(2, "0");
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   // Toggling watched state resizes sections above the timeline (new knowledge
@@ -94,6 +98,14 @@ export default function TimelineRow({
 
           <span className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-[var(--muted)]">
             <span>Phase {movie.phase}</span>
+            {orderMode === "release" ? (
+              <>
+                <span aria-hidden="true" className="text-[var(--border-strong)]">
+                  ·
+                </span>
+                <span>{movie.releaseYear}</span>
+              </>
+            ) : null}
             {movie.timelineLabel ? (
               <>
                 <span aria-hidden="true" className="text-[var(--border-strong)]">

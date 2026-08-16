@@ -136,7 +136,6 @@ export default function HomePage() {
         <Timeline
           movies={MOVIES_IN_TIMELINE_ORDER}
           watchedIds={watchedSet}
-          nextMovieId={nextMovie?.id ?? null}
           onToggle={handleToggle}
         />
       </main>
