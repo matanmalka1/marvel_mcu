@@ -1601,13 +1601,8 @@ export const MOVIES_IN_TIMELINE_ORDER: readonly Movie[] = [...MOVIES].sort(
 
 export const MOVIE_IDS: ReadonlySet<string> = new Set(MOVIES.map((m) => m.id));
 
-/** The real, known progress. Reset returns here — never to zero. */
-export const DEFAULT_WATCHED_IDS: readonly string[] = [
-  "captain-america-the-first-avenger",
-  "captain-marvel",
-  "iron-man",
-  "iron-man-2",
-];
+/** Starting progress: nothing watched yet. Reset returns here. */
+export const DEFAULT_WATCHED_IDS: readonly string[] = [];
 
 export const ENDGAME_ID = "avengers-endgame";
 
