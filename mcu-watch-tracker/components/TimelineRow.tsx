@@ -1,6 +1,7 @@
 "use client";
 
 import { Check, Flag } from "lucide-react";
+import { useRef } from "react";
 
 import { TIMELINE_FLAG_LABELS } from "@/data/movies";
 import type { Movie, MovieStatus } from "@/types/movie";
@@ -42,12 +43,29 @@ export default function TimelineRow({
 }: TimelineRowProps) {
   const isWatched = status === "watched";
   const slateNumber = String(movie.timelineOrder).padStart(2, "0");
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  // Toggling watched state resizes sections above the timeline (new knowledge
+  // card, updated "next up" panel), which shifts this row on screen even
+  // though scrollY doesn't change. Re-anchor the viewport to this row so the
+  // click doesn't produce a visible jump.
+  const handleClick = () => {
+    const before = buttonRef.current?.getBoundingClientRect().top;
+    onToggle(movie.id);
+    requestAnimationFrame(() => {
+      const after = buttonRef.current?.getBoundingClientRect().top;
+      if (before === undefined || after === undefined) return;
+      const delta = after - before;
+      if (delta !== 0) window.scrollBy(0, delta);
+    });
+  };
 
   return (
     <li>
       <button
+        ref={buttonRef}
         type="button"
-        onClick={() => onToggle(movie.id)}
+        onClick={handleClick}
         aria-pressed={isWatched}
         aria-label={
           isWatched
