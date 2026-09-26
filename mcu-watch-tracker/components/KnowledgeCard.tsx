@@ -1,5 +1,7 @@
 import { Check, ChevronDown, Link2, Star } from "lucide-react";
 
+import KindBadge from "@/components/KindBadge";
+import { phaseColor } from "@/lib/phase";
 import type { Movie } from "@/types/movie";
 
 function ChipList({ label, items }: { label: string; items: string[] }) {
@@ -38,7 +40,18 @@ export default function KnowledgeCard({
   const review = movie.review;
 
   return (
-    <article className="flex flex-col rounded-2xl border border-[var(--border)] bg-[var(--bg-raised)] p-5 sm:p-6">
+    <article
+      className={`relative flex flex-col overflow-hidden rounded-2xl border bg-[var(--bg-raised)] p-5 transition-colors sm:p-6 ${
+        expanded
+          ? "border-[var(--border-strong)]"
+          : "border-[var(--border)] hover:border-[var(--border-strong)]"
+      }`}
+    >
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-y-0 start-0 w-0.5"
+        style={{ backgroundColor: phaseColor(movie.phase) }}
+      />
       <header className="flex items-start gap-3">
         <span className="font-slate mt-0.5 shrink-0 rounded-md border border-[var(--border)] px-2 py-1 text-xs text-[var(--muted)]">
           {slateNumber}
@@ -47,8 +60,11 @@ export default function KnowledgeCard({
           <h3 dir="ltr" className="font-display text-lg font-bold leading-snug">
             {movie.title}
           </h3>
-          <p className="mt-1 text-[11px] text-[var(--muted)]">
-            Phase {movie.phase} · {movie.timelineLabel ?? "—"}
+          <p className="mt-1.5 flex flex-wrap items-center gap-2 text-[11px] text-[var(--muted)]">
+            <span>
+              Phase {movie.phase} · {movie.timelineLabel ?? "—"}
+            </span>
+            {movie.kind !== "movie" ? <KindBadge movie={movie} /> : null}
           </p>
         </div>
         <span className="flex shrink-0 items-center gap-1 rounded-full border border-[var(--accent)]/35 bg-[var(--accent)]/10 px-2.5 py-1 text-[11px] text-[var(--accent-soft)]">
@@ -71,7 +87,7 @@ export default function KnowledgeCard({
       </header>
 
       {expanded && knowledge ? (
-        <div id={`knowledge-${movie.id}`} className="mt-5 space-y-5">
+        <div id={`knowledge-${movie.id}`} className="animate-rise-in mt-5 space-y-5">
           <p className="text-sm leading-relaxed text-[var(--text)]/90">
             {knowledge.summary}
           </p>
@@ -157,15 +173,7 @@ export default function KnowledgeCard({
           id={`knowledge-${movie.id}`}
           className="mt-5 text-sm leading-relaxed text-[var(--muted)]"
         >
-          עוד לא נכתבה סקירה לסרט הזה. אפשר להוסיף אותה בקובץ{" "}
-          <code dir="ltr" className="font-slate text-[var(--text)]">
-            data/movies.ts
-          </code>{" "}
-          תחת המפתח{" "}
-          <code dir="ltr" className="font-slate text-[var(--text)]">
-            knowledge
-          </code>
-          .
+          עוד לא נכתבה סקירה לכותר הזה.
         </p>
       ) : null}
     </article>

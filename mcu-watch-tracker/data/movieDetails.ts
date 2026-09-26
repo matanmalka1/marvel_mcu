@@ -1,8 +1,9 @@
+import { SERIES_DETAILS } from "@/data/seriesDetails";
 import type { Movie } from "@/types/movie";
 
-type MovieDetails = Pick<Movie, "knowledge" | "review">;
+export type MovieDetails = Pick<Movie, "knowledge" | "review">;
 
-export const MOVIE_DETAILS: Record<string, MovieDetails> = {
+const FILM_DETAILS: Record<string, MovieDetails> = {
   "captain-america-the-first-avenger": {
     knowledge: {
       summary:
@@ -1017,7 +1018,7 @@ export const MOVIE_DETAILS: Record<string, MovieDetails> = {
       organizations: ["Kamar-Taj", "Illuminati (יקום חלופי)"],
       objects: ["ה-Darkhold", "ספר Vishanti", "יכולת הקפיצה בין יקומים של America"],
       connections: [
-        "Wanda, שהכרת כ-Scarlet Witch מ-Age of Ultron ומ-Infinity War/Endgame, ממשיכה כאן מאירועי סדרת WandaVision (Disney+, לא חלק ממעקב הסרטים) — שם התגלה ה-Darkhold והחל מסעה אל Chaos Magic",
+        "Wanda, שהכרת כ-Scarlet Witch מ-Age of Ultron ומ-Infinity War/Endgame, ממשיכה כאן מאירועי סדרת WandaVision (Disney+) — שם התגלה ה-Darkhold והחל מסעה אל Chaos Magic",
         "Wong, שהכרת מ-Doctor Strange ומ-No Way Home, ממלא כאן תפקיד מרכזי כ-Sorcerer Supreme",
       ],
     },
@@ -1197,7 +1198,7 @@ export const MOVIE_DETAILS: Record<string, MovieDetails> = {
       connections: [
         "Carol Danvers, שהכרת מ-Captain Marvel, מתמודדת כעת עם השלכות המהפכה שהובילה נגד ה-Kree",
         "Monica Rambeau ו-Nick Fury, שהכרת מסרטים קודמים, חוזרים כאן בתפקידים מורחבים",
-        "הקשר לסדרות (Disney+, לא חלק ממעקב הסרטים): הרקע והכוחות של Kamala Khan מפותחים בסדרת Ms. Marvel, ומצבו הנוכחי של Fury — ניתוקו מ-S.H.I.E.L.D — מפותח בסדרת Secret Invasion",
+        "הקשר לסדרות (Disney+): הרקע והכוחות של Kamala Khan מפותחים בסדרת Ms. Marvel, ומצבו הנוכחי של Fury — ניתוקו מ-S.H.I.E.L.D — מפותח בסדרת Secret Invasion",
       ],
     },
     review: {
@@ -1231,7 +1232,7 @@ export const MOVIE_DETAILS: Record<string, MovieDetails> = {
       objects: ["טכנולוגיית הזמן של ה-TVA", "טפרי ה-Adamantium של Wolverine"],
       connections: [
         "ה-TVA, שהכרת מסדרת Loki (Disney+), מפקחת כאן על גורל יקום שלם",
-        "הקשר לסדרות (Disney+, לא חלק ממעקב הסרטים): כל הרקע והכללים של ה-TVA ושל ריבוי היקומים מפותחים בסדרת Loki",
+        "הקשר לסדרות (Disney+): כל הרקע והכללים של ה-TVA ושל ריבוי היקומים מפותחים בסדרת Loki",
       ],
     },
     review: {
@@ -1266,7 +1267,7 @@ export const MOVIE_DETAILS: Record<string, MovieDetails> = {
       connections: [
         "Sam Wilson, שקיבל את המגן בסוף Avengers: Endgame, נושא אותו כעת רשמית כ-Captain America",
         "Thaddeus Ross, שהכרת כבר מ-The Incredible Hulk ומ-Civil War, משמש כעת כנשיא ארצות הברית",
-        "הקשר לסדרות (Disney+, לא חלק ממעקב הסרטים): הרקע של Isaiah Bradley ומעמדו של Sam כ-Captain America מפותחים בסדרת The Falcon and the Winter Soldier",
+        "הקשר לסדרות (Disney+): הרקע של Isaiah Bradley ומעמדו של Sam כ-Captain America מפותחים בסדרת The Falcon and the Winter Soldier",
       ],
     },
     review: {
@@ -1302,7 +1303,7 @@ export const MOVIE_DETAILS: Record<string, MovieDetails> = {
       connections: [
         "Yelena Belova, שהכרת מ-Black Widow, ו-Bucky Barnes, שהכרת ממספר סרטים, מתאחדים כאן לצוות חדש",
         "Valentina, שהופיעה בקצרה ב-Black Widow, מתגלה כמנהלת מרכזית מאחורי הקלעים",
-        "הקשר לסדרות (Disney+, לא חלק ממעקב הסרטים): הפיכתו של John Walker ל-U.S. Agent ותחילת מעורבותה של Valentina מפותחים בסדרת The Falcon and the Winter Soldier, בעוד Yelena ממשיכה מסדרת Hawkeye",
+        "הקשר לסדרות (Disney+): הפיכתו של John Walker ל-U.S. Agent ותחילת מעורבותה של Valentina מפותחים בסדרת The Falcon and the Winter Soldier, בעוד Yelena ממשיכה מסדרת Hawkeye",
       ],
     },
     review: {
@@ -1384,4 +1385,10 @@ export const MOVIE_DETAILS: Record<string, MovieDetails> = {
       sourceUrl: "https://www.rottentomatoes.com/m/spider_man_brand_new_day",
     },
   },
+};
+
+/** Knowledge and reviews for every catalog title — films and Disney+ series alike. */
+export const MOVIE_DETAILS: Record<string, MovieDetails> = {
+  ...FILM_DETAILS,
+  ...SERIES_DETAILS,
 };

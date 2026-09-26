@@ -31,22 +31,25 @@ export default function KnowledgeSection({
   return (
     <section
       aria-labelledby="knowledge-heading"
-      className="mx-auto max-w-[1240px] px-4 py-12 sm:px-6"
+      className="mx-auto max-w-[1240px] px-4 py-14 sm:px-6"
     >
       <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
         <div>
+          <p className="font-slate text-[11px] uppercase tracking-[0.3em] text-[var(--accent-soft)]">
+            Knowledge
+          </p>
           <h2
             id="knowledge-heading"
-            className="font-display text-2xl font-bold sm:text-3xl"
+            className="font-display mt-2 text-2xl font-bold sm:text-3xl"
           >
             מה הבנת עד עכשיו
           </h2>
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[var(--muted)]">
-            רק מהסרטים שכבר צפית בהם. שום דבר כאן לא חושף מה קורה בהמשך.
+            רק ממה שכבר צפית בו. שום דבר כאן לא חושף מה קורה בהמשך.
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <p className="text-xs text-[var(--muted)]">{watchedMovies.length} סרטים</p>
+          <p className="text-xs text-[var(--muted)]">{watchedMovies.length} כותרים</p>
           {watchedMovies.length > 1 ? (
             <button
               type="button"
@@ -67,7 +70,7 @@ export default function KnowledgeSection({
 
       {watchedMovies.length === 0 ? (
         <p className="mt-8 rounded-2xl border border-dashed border-[var(--border)] p-8 text-center text-sm text-[var(--muted)]">
-          עדיין לא סימנת סרטים. סמן את הסרט הראשון בציר הזמן וההסבר יופיע כאן.
+          עדיין לא סימנת צפייה. סמן את הכותר הראשון בציר הזמן וההסבר יופיע כאן.
         </p>
       ) : (
         <div className="mt-8 grid items-start gap-4 lg:grid-cols-2">

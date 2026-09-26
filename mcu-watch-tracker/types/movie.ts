@@ -42,8 +42,16 @@ export type MovieReview = {
   sourceUrl: string;
 };
 
+/** Theatrical film, Disney+ series season, or one-off Disney+ special. */
+export type TitleKind = "movie" | "series" | "special";
+
+/**
+ * A single trackable title. Despite the historical name, this covers Disney+ series
+ * seasons and specials as well as films — `kind` tells them apart.
+ */
 export type Movie = {
   id: string;
+  kind: TitleKind;
   title: string;
   /** Official Hebrew release title, used for search. Omitted when not yet released/titled in Israel. */
   titleHe?: string;
@@ -56,6 +64,12 @@ export type Movie = {
   /** Narrative era, e.g. "1995" or "אחרי Endgame". */
   timelineLabel?: string;
   timelineFlags?: TimelineFlag[];
+  /** Series only: which season this entry tracks. */
+  season?: number;
+  /** Series only: number of episodes in the season. */
+  episodes?: number;
+  /** Animated rather than live-action. */
+  animated?: boolean;
   /** Major landmark in the timeline (currently: Avengers: Endgame). */
   milestone?: boolean;
   /**
@@ -71,6 +85,15 @@ export type Movie = {
 export type MovieSummary = Omit<Movie, "knowledge" | "review">;
 
 export type MovieStatus = "watched" | "next" | "upcoming";
+
+/** "timeline" = chronological story order, "release" = original release order. */
+export type OrderMode = "timeline" | "release";
+
+export type ViewPreferences = {
+  orderMode: OrderMode;
+  /** When false, Disney+ series and specials are hidden and excluded from progress. */
+  includeSeries: boolean;
+};
 
 /**
  * A thematic thread the viewer has already uncovered.

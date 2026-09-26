@@ -1,4 +1,4 @@
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Lock } from "lucide-react";
 
 import type { Connection } from "@/types/movie";
 
@@ -19,19 +19,26 @@ function Chain({ items }: { items: string[] }) {
 
 export default function ConnectionsSection({
   connections,
+  lockedCount,
 }: {
   connections: Connection[];
+  /** How many threads are still hidden. Only the count is shown — never their content. */
+  lockedCount: number;
 }) {
   return (
     <section
+      id="connections"
       aria-labelledby="connections-heading"
-      className="mx-auto max-w-[1240px] px-4 py-12 sm:px-6"
+      className="mx-auto max-w-[1240px] px-4 py-14 sm:px-6"
     >
       <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
         <div>
+          <p className="font-slate text-[11px] uppercase tracking-[0.3em] text-[var(--accent-soft)]">
+            Connections
+          </p>
           <h2
             id="connections-heading"
-            className="font-display text-2xl font-bold sm:text-3xl"
+            className="font-display mt-2 text-2xl font-bold sm:text-3xl"
           >
             החיבורים שכבר גילית
           </h2>
@@ -39,7 +46,9 @@ export default function ConnectionsSection({
             חוטים שחוזרים בין הסרטים שראית. חיבורים חדשים נפתחים לבד ככל שתתקדם.
           </p>
         </div>
-        <p className="text-xs text-[var(--muted)]">{connections.length} חיבורים</p>
+        <p className="font-slate text-xs text-[var(--muted)]">
+          {connections.length} / {connections.length + lockedCount} חיבורים
+        </p>
       </div>
 
       {connections.length === 0 ? (
@@ -52,10 +61,10 @@ export default function ConnectionsSection({
             <article
               key={connection.id}
               className={[
-                "rounded-2xl border p-6",
+                "rounded-2xl border p-6 transition-colors",
                 connection.wide
-                  ? "border-[var(--accent)]/30 bg-gradient-to-bl from-[var(--accent)]/[0.08] to-transparent md:col-span-2"
-                  : "border-[var(--border)] bg-[var(--surface)]",
+                  ? "border-[var(--accent)]/30 bg-gradient-to-bl from-[var(--accent)]/[0.1] to-transparent md:col-span-2"
+                  : "border-[var(--border)] bg-[var(--surface)] hover:border-[var(--border-strong)]",
               ].join(" ")}
             >
               <h3 className="font-display text-lg font-bold">{connection.title}</h3>
@@ -69,6 +78,13 @@ export default function ConnectionsSection({
           ))}
         </div>
       )}
+
+      {lockedCount > 0 ? (
+        <p className="mt-4 flex items-center gap-2 rounded-2xl border border-dashed border-[var(--border)] px-5 py-4 text-sm text-[var(--muted)]">
+          <Lock className="h-4 w-4 shrink-0" aria-hidden="true" />
+          עוד {lockedCount} חיבורים ממתינים — הם ייפתחו כשתצפה בכותרים שמרכיבים אותם.
+        </p>
+      ) : null}
     </section>
   );
 }

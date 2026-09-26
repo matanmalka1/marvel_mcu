@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 
 const KnowledgeSection = dynamic(() => import("@/components/KnowledgeSection"), {
   loading: () => (
-    <p className="mx-auto max-w-[1240px] px-4 py-12 text-sm text-[var(--muted)] sm:px-6">
+    <p className="mx-auto max-w-[1240px] px-4 py-14 text-sm text-[var(--muted)] sm:px-6">
       טוען את הידע שצברת…
     </p>
   ),
@@ -40,32 +40,36 @@ export default function LazyKnowledgeSection({
   if (watchedIds.length === 0) {
     return (
       <section
+        id="knowledge"
         aria-labelledby="knowledge-heading"
-        className="mx-auto max-w-[1240px] px-4 py-12 sm:px-6"
+        className="mx-auto max-w-[1240px] px-4 py-14 sm:px-6"
       >
+        <p className="font-slate text-[11px] uppercase tracking-[0.3em] text-[var(--accent-soft)]">
+          Knowledge
+        </p>
         <h2
           id="knowledge-heading"
-          className="font-display text-2xl font-bold sm:text-3xl"
+          className="font-display mt-2 text-2xl font-bold sm:text-3xl"
         >
           מה הבנת עד עכשיו
         </h2>
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[var(--muted)]">
-          רק מהסרטים שכבר צפית בהם. שום דבר כאן לא חושף מה קורה בהמשך.
+          רק ממה שכבר צפית בו. שום דבר כאן לא חושף מה קורה בהמשך.
         </p>
         <p className="mt-8 rounded-2xl border border-dashed border-[var(--border)] p-8 text-center text-sm text-[var(--muted)]">
-          עדיין לא סימנת סרטים. סמן את הסרט הראשון בציר הזמן וההסבר יופיע כאן.
+          עדיין לא סימנת צפייה. סמן את הכותר הראשון בציר הזמן וההסבר יופיע כאן.
         </p>
       </section>
     );
   }
 
   return (
-    <div ref={anchorRef}>
+    <div ref={anchorRef} id="knowledge">
       {shouldLoad ? (
         <KnowledgeSection watchedIds={watchedIds} />
       ) : (
         <div
-          className="mx-auto min-h-48 max-w-[1240px] px-4 py-12 sm:px-6"
+          className="mx-auto min-h-48 max-w-[1240px] px-4 py-14 sm:px-6"
           aria-hidden="true"
         />
       )}

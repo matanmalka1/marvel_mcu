@@ -84,7 +84,7 @@ export const CONNECTIONS: Connection[] = [
     title: "Bucky Barnes",
     chain: ["The First Avenger", "The Winter Soldier", "Civil War", "Endgame"],
     description:
-      "מחייל שנחשב מת, דרך מתנקש בשליטת מוח ועד ידיד קרוב של Sam — המסע של Bucky בסרטים. השותפות הפעילה ביניהם ממשיכה ומעמיקה בסדרת The Falcon and the Winter Soldier (Disney+, לא חלק ממעקב הסרטים).",
+      "מחייל שנחשב מת, דרך מתנקש בשליטת מוח ועד ידיד קרוב של Sam — המסע של Bucky בסרטים. השותפות הפעילה ביניהם ממשיכה ומעמיקה בסדרת The Falcon and the Winter Soldier (Disney+).",
     requires: [
       "captain-america-the-first-avenger",
       "captain-america-the-winter-soldier",
