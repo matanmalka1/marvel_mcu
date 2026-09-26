@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 
 import ConnectionsSection from "@/components/ConnectionsSection";
 import Header from "@/components/Header";
@@ -10,35 +10,48 @@ import NextUpCard from "@/components/NextUpCard";
 import ProgressOverview from "@/components/ProgressOverview";
 import Timeline from "@/components/Timeline";
 import UndoToast, { type UndoNotice } from "@/components/UndoToast";
-import { getUnlockedConnections } from "@/data/connections";
-import { getMovieSummaryById, MOVIES_IN_TIMELINE_ORDER } from "@/data/movieCatalog";
+import { CONNECTIONS, getUnlockedConnections } from "@/data/connections";
+import { getMovieSummaryById, isTitleIncluded } from "@/data/movieCatalog";
 import { useWatchProgress } from "@/hooks/useWatchProgress";
 
 export default function HomePage() {
   const [undoNotice, setUndoNotice] = useState<UndoNotice | null>(null);
+  const noticeIdRef = useRef(0);
   const {
     hydrated,
     watchedSet,
     watchedIds,
-    nextMovie,
-    totalMovies,
-    watchedCount,
-    remainingCount,
-    percentWatched,
-    endgameWatched,
-    endgameTotal,
-    endgamePercent,
+    preferences,
+    titles,
+    stats,
     canUndo,
     toggleWatched,
     completeNextMovie,
     undo,
     reset,
+    setOrderMode,
+    setIncludeSeries,
   } = useWatchProgress();
 
   const connections = useMemo(() => getUnlockedConnections(watchedSet), [watchedSet]);
 
+  // Watched series stay stored while excluded, but their knowledge is hidden with them.
+  const visibleWatchedIds = useMemo(
+    () =>
+      watchedIds.filter((id) => {
+        const movie = getMovieSummaryById(id);
+        return movie ? isTitleIncluded(movie, preferences.includeSeries) : false;
+      }),
+    [watchedIds, preferences.includeSeries],
+  );
+
+  const nextPosition = stats.nextTitle
+    ? titles.findIndex((title) => title.id === stats.nextTitle?.id) + 1
+    : 0;
+
   const notify = useCallback((message: string) => {
-    setUndoNotice({ message });
+    noticeIdRef.current += 1;
+    setUndoNotice({ id: noticeIdRef.current, message });
   }, []);
 
   const handleToggle = useCallback(
@@ -49,7 +62,7 @@ export default function HomePage() {
       notify(
         movie
           ? wasWatched
-            ? `${movie.title} הוסר מהסרטים שנצפו`
+            ? `${movie.title} הוסר מהרשימה שנצפתה`
             : `${movie.title} סומן כנצפה`
           : "ההתקדמות עודכנה",
       );
@@ -58,10 +71,10 @@ export default function HomePage() {
   );
 
   const handleCompleteNext = useCallback(() => {
-    if (!nextMovie) return;
+    if (!stats.nextTitle) return;
     completeNextMovie();
-    notify(`${nextMovie.title} סומן כנצפה`);
-  }, [completeNextMovie, nextMovie, notify]);
+    notify(`${stats.nextTitle.title} סומן כנצפה`);
+  }, [completeNextMovie, stats.nextTitle, notify]);
 
   const handleReset = useCallback(() => {
     reset();
@@ -77,6 +90,7 @@ export default function HomePage() {
 
   return (
     <div
+      id="top"
       className={`min-h-screen transition-opacity duration-200 ${
         hydrated ? "opacity-100" : "pointer-events-none opacity-0"
       }`}
@@ -84,42 +98,51 @@ export default function HomePage() {
       aria-busy={!hydrated}
     >
       <Header
-        watchedCount={watchedCount}
-        totalMovies={totalMovies}
-        percentWatched={percentWatched}
+        watchedCount={stats.watched}
+        totalMovies={stats.total}
+        percentWatched={stats.percent}
         canUndo={canUndo}
+        preferences={preferences}
         onUndo={handleUndo}
         onReset={handleReset}
+        onOrderModeChange={setOrderMode}
+        onIncludeSeriesChange={setIncludeSeries}
       />
 
       <main>
         <Hero
+          preferences={preferences}
+          watchedCount={stats.watched}
+          totalMovies={stats.total}
+          percentWatched={stats.percent}
           nextUp={
             <NextUpCard
-              movie={nextMovie}
-              totalMovies={totalMovies}
+              movie={stats.nextTitle}
+              queue={stats.queue}
+              position={nextPosition}
+              totalMovies={stats.total}
+              orderMode={preferences.orderMode}
               onComplete={handleCompleteNext}
             />
           }
         />
 
-        <ProgressOverview
-          watchedCount={watchedCount}
-          totalMovies={totalMovies}
-          remainingCount={remainingCount}
-          percentWatched={percentWatched}
-          endgameWatched={endgameWatched}
-          endgameTotal={endgameTotal}
-          endgamePercent={endgamePercent}
+        <ProgressOverview stats={stats} includeSeries={preferences.includeSeries} />
+
+        <LazyKnowledgeSection watchedIds={visibleWatchedIds} />
+
+        <ConnectionsSection
+          connections={connections}
+          lockedCount={CONNECTIONS.length - connections.length}
         />
 
-        <LazyKnowledgeSection watchedIds={watchedIds} />
-
-        <ConnectionsSection connections={connections} />
-
         <Timeline
-          movies={MOVIES_IN_TIMELINE_ORDER}
+          movies={titles}
           watchedIds={watchedSet}
+          nextMovieId={stats.nextTitle?.id}
+          orderMode={preferences.orderMode}
+          includeSeries={preferences.includeSeries}
+          onOrderModeChange={setOrderMode}
           onToggle={handleToggle}
         />
       </main>
@@ -132,7 +155,7 @@ export default function HomePage() {
 
       <footer className="border-t border-[var(--border)]">
         <div className="mx-auto flex max-w-[1240px] flex-wrap items-center justify-between gap-2 px-4 py-8 text-xs text-[var(--muted)] sm:px-6">
-          <p>ההתקדמות נשמרת במכשיר הזה בלבד.</p>
+          <p>ההתקדמות וההגדרות נשמרות במכשיר הזה בלבד.</p>
           <p className="font-slate">MCU Watch Tracker</p>
         </div>
       </footer>

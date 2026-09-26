@@ -2,26 +2,20 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
+import { DEFAULT_WATCHED_IDS, getOrderedTitles, MOVIE_IDS } from "@/data/movieCatalog";
+import { computeProgress, type ProgressStats } from "@/lib/progressStats";
 import {
-  DEFAULT_WATCHED_IDS,
-  ENDGAME_ID,
-  MOVIES_IN_TIMELINE_ORDER,
-  MOVIE_IDS,
-} from "@/data/movieCatalog";
-import {
+  DEFAULT_PREFERENCES,
   parseStoredProgress,
   serializeProgress,
   WATCH_PROGRESS_STORAGE_KEY,
+  type ParsedProgress,
 } from "@/lib/watchProgressStorage";
-import type { MovieSummary } from "@/types/movie";
+import type { MovieSummary, OrderMode, ViewPreferences } from "@/types/movie";
 
 const MAX_HISTORY = 25;
 
-const ENDGAME_ORDER =
-  MOVIES_IN_TIMELINE_ORDER.find((movie) => movie.id === ENDGAME_ID)?.timelineOrder ??
-  MOVIES_IN_TIMELINE_ORDER.length;
-
-function readStoredProgress(): string[] | null {
+function readStoredProgress(): ParsedProgress | null {
   if (typeof window === "undefined") return null;
 
   try {
@@ -36,45 +30,51 @@ function readStoredProgress(): string[] | null {
   }
 }
 
+function sameIds(a: readonly string[], b: readonly string[]): boolean {
+  return a.length === b.length && a.every((id, index) => id === b[index]);
+}
+
 export type WatchProgress = {
   /** True once localStorage has been read — the first paint uses the default progress. */
   hydrated: boolean;
   watchedIds: string[];
   watchedSet: ReadonlySet<string>;
-  nextMovie: MovieSummary | null;
-  totalMovies: number;
-  watchedCount: number;
-  remainingCount: number;
-  percentWatched: number;
-  endgameWatched: number;
-  endgameTotal: number;
-  endgamePercent: number;
+  preferences: ViewPreferences;
+  /** Tracked titles in the chosen order, series filtered out when they are excluded. */
+  titles: readonly MovieSummary[];
+  stats: ProgressStats;
   canUndo: boolean;
   toggleWatched: (id: string) => void;
   completeNextMovie: () => void;
   undo: () => void;
   reset: () => void;
+  setOrderMode: (mode: OrderMode) => void;
+  setIncludeSeries: (include: boolean) => void;
 };
 
 export function useWatchProgress(): WatchProgress {
   const [watchedIds, setWatchedIds] = useState<string[]>(() => [...DEFAULT_WATCHED_IDS]);
+  const [preferences, setPreferences] = useState<ViewPreferences>(DEFAULT_PREFERENCES);
   const [hydrated, setHydrated] = useState(false);
 
   // Mirrors state so actions can read the latest value without stale closures,
   // and so history is pushed exactly once per action (state updaters stay pure).
   const watchedRef = useRef<string[]>(watchedIds);
+  const preferencesRef = useRef<ViewPreferences>(preferences);
   const historyRef = useRef<string[][]>([]);
   const [historyDepth, setHistoryDepth] = useState(0);
 
   useEffect(() => {
     const stored = readStoredProgress();
     if (stored) {
-      watchedRef.current = stored;
+      watchedRef.current = stored.watched;
+      preferencesRef.current = stored.preferences;
       // One-time hydration from localStorage (an external system) on mount,
       // not state derived from props/state — the pattern this rule guards
       // against doesn't apply here.
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      setWatchedIds(stored);
+      setWatchedIds(stored.watched);
+      setPreferences(stored.preferences);
     }
     setHydrated(true);
   }, []);
@@ -86,14 +86,21 @@ export function useWatchProgress(): WatchProgress {
       // than removing this key specifically — treat that as a remote change too.
       if (event.key !== null && event.key !== WATCH_PROGRESS_STORAGE_KEY) return;
       const stored = readStoredProgress();
-      const next = stored ?? [...DEFAULT_WATCHED_IDS];
+      const nextWatched = stored?.watched ?? [...DEFAULT_WATCHED_IDS];
+      const nextPreferences = stored?.preferences ?? DEFAULT_PREFERENCES;
 
-      // Remote changes establish a new source of truth. Keeping local undo
-      // entries here could restore stale progress and overwrite the other tab.
+      preferencesRef.current = nextPreferences;
+      setPreferences(nextPreferences);
+
+      // A preference-only change leaves progress (and its undo history) alone.
+      if (sameIds(nextWatched, watchedRef.current)) return;
+
+      // Remote progress changes establish a new source of truth. Keeping local
+      // undo entries here could restore stale progress and overwrite the other tab.
       historyRef.current = [];
       setHistoryDepth(0);
-      watchedRef.current = next;
-      setWatchedIds(next);
+      watchedRef.current = nextWatched;
+      setWatchedIds(nextWatched);
     };
     window.addEventListener("storage", handleStorage);
     return () => window.removeEventListener("storage", handleStorage);
@@ -104,12 +111,12 @@ export function useWatchProgress(): WatchProgress {
     try {
       window.localStorage.setItem(
         WATCH_PROGRESS_STORAGE_KEY,
-        serializeProgress(watchedIds),
+        serializeProgress(watchedIds, preferences),
       );
     } catch {
       // Storage full or blocked — progress simply stays in memory for this session.
     }
-  }, [watchedIds, hydrated]);
+  }, [watchedIds, preferences, hydrated]);
 
   const commit = useCallback((compute: (previous: string[]) => string[]) => {
     const previous = watchedRef.current;
@@ -136,16 +143,16 @@ export function useWatchProgress(): WatchProgress {
   );
 
   const watchedSet = useMemo(() => new Set(watchedIds), [watchedIds]);
-
-  const nextMovie = useMemo(
-    () => MOVIES_IN_TIMELINE_ORDER.find((movie) => !watchedSet.has(movie.id)) ?? null,
-    [watchedSet],
-  );
+  const titles = getOrderedTitles(preferences.orderMode, preferences.includeSeries);
+  const stats = useMemo(() => computeProgress(titles, watchedSet), [titles, watchedSet]);
 
   const completeNextMovie = useCallback(() => {
     commit((previous) => {
+      const { orderMode, includeSeries } = preferencesRef.current;
       const currentSet = new Set(previous);
-      const next = MOVIES_IN_TIMELINE_ORDER.find((movie) => !currentSet.has(movie.id));
+      const next = getOrderedTitles(orderMode, includeSeries).find(
+        (title) => !currentSet.has(title.id),
+      );
       return next ? [...previous, next.id] : previous;
     });
   }, [commit]);
@@ -165,34 +172,34 @@ export function useWatchProgress(): WatchProgress {
     commit(() => [...DEFAULT_WATCHED_IDS]);
   }, [commit]);
 
-  const totalMovies = MOVIES_IN_TIMELINE_ORDER.length;
-  const watchedCount = watchedSet.size;
-  const endgameWatched = useMemo(
-    () =>
-      MOVIES_IN_TIMELINE_ORDER.filter(
-        (movie) => movie.timelineOrder <= ENDGAME_ORDER && watchedSet.has(movie.id),
-      ).length,
-    [watchedSet],
+  const updatePreferences = useCallback((patch: Partial<ViewPreferences>) => {
+    const next = { ...preferencesRef.current, ...patch };
+    preferencesRef.current = next;
+    setPreferences(next);
+  }, []);
+
+  const setOrderMode = useCallback(
+    (orderMode: OrderMode) => updatePreferences({ orderMode }),
+    [updatePreferences],
+  );
+  const setIncludeSeries = useCallback(
+    (includeSeries: boolean) => updatePreferences({ includeSeries }),
+    [updatePreferences],
   );
 
   return {
     hydrated,
     watchedIds,
     watchedSet,
-    nextMovie,
-    totalMovies,
-    watchedCount,
-    remainingCount: totalMovies - watchedCount,
-    percentWatched: totalMovies ? Math.round((watchedCount / totalMovies) * 100) : 0,
-    endgameWatched,
-    endgameTotal: ENDGAME_ORDER,
-    endgamePercent: ENDGAME_ORDER
-      ? Math.round((endgameWatched / ENDGAME_ORDER) * 100)
-      : 0,
+    preferences,
+    titles,
+    stats,
     canUndo: historyDepth > 0,
     toggleWatched,
     completeNextMovie,
     undo,
     reset,
+    setOrderMode,
+    setIncludeSeries,
   };
 }

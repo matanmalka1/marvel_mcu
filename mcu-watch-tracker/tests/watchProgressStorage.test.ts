@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  DEFAULT_PREFERENCES,
   parseStoredProgress,
   sanitizeWatched,
   serializeProgress,
@@ -30,8 +31,32 @@ describe("watch progress serialization", () => {
     ).toBeNull();
   });
 
-  it("round-trips a valid payload", () => {
-    const serialized = serializeProgress(["iron-man", "thor"]);
-    expect(parseStoredProgress(JSON.parse(serialized))).toEqual(["iron-man", "thor"]);
+  it("round-trips progress and preferences", () => {
+    const serialized = serializeProgress(["iron-man", "wandavision"], {
+      orderMode: "release",
+      includeSeries: true,
+    });
+    expect(parseStoredProgress(JSON.parse(serialized))).toEqual({
+      watched: ["iron-man", "wandavision"],
+      preferences: { orderMode: "release", includeSeries: true },
+    });
+  });
+
+  it("migrates v1 payloads to a films-only chronological view", () => {
+    expect(parseStoredProgress({ version: 1, watched: ["iron-man", "thor"] })).toEqual({
+      watched: ["iron-man", "thor"],
+      preferences: { orderMode: "timeline", includeSeries: false },
+    });
+  });
+
+  it("falls back to default preferences for invalid preference values", () => {
+    expect(
+      parseStoredProgress({
+        version: WATCH_PROGRESS_STORAGE_VERSION,
+        watched: [],
+        orderMode: "sideways",
+        includeSeries: "yes",
+      }),
+    ).toEqual({ watched: [], preferences: DEFAULT_PREFERENCES });
   });
 });

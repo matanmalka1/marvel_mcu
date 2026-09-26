@@ -28,6 +28,23 @@ describe("movie data integrity", () => {
     expect(new Set(Object.keys(MOVIE_DETAILS))).toEqual(new Set(ids));
   });
 
+  it("marks series seasons consistently", () => {
+    for (const movie of MOVIE_CATALOG) {
+      if (movie.kind === "series") {
+        expect(movie.season, movie.id).toBeGreaterThan(0);
+        expect(movie.episodes, movie.id).toBeGreaterThan(0);
+      } else {
+        expect(movie.season, movie.id).toBeUndefined();
+      }
+    }
+  });
+
+  it("gives every title written knowledge", () => {
+    for (const id of ids) {
+      expect(MOVIE_DETAILS[id]?.knowledge?.summary, id).toBeTruthy();
+    }
+  });
+
   it("keeps review scores and sources valid", () => {
     for (const details of Object.values(MOVIE_DETAILS)) {
       const review = details.review;
