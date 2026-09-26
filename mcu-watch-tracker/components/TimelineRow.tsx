@@ -5,7 +5,6 @@ import { useId, useRef, useState } from "react";
 
 import EpisodeTracker from "@/components/EpisodeTracker";
 import KindBadge from "@/components/KindBadge";
-import PosterArt from "@/components/PosterArt";
 import { TIMELINE_FLAG_LABELS } from "@/data/movieCatalog";
 import { formatReleaseDate, formatCountdown } from "@/lib/dates";
 import { phaseColor } from "@/lib/phase";
@@ -156,13 +155,6 @@ export default function TimelineRow({
           slateNumber
         )}
       </span>
-
-      <PosterArt
-        movie={movie}
-        size="xs"
-        muted={isUnreleased}
-        className="hidden sm:block"
-      />
 
       <span className="min-w-0 flex-1">
         <span className="flex min-w-0 items-baseline gap-2">

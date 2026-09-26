@@ -1,7 +1,6 @@
 import { CalendarClock } from "lucide-react";
 
 import KindBadge from "@/components/KindBadge";
-import PosterArt from "@/components/PosterArt";
 import { daysUntilRelease } from "@/data/movieCatalog";
 import { formatCountdown, formatReleaseDate } from "@/lib/dates";
 import type { MovieSummary } from "@/types/movie";
@@ -42,9 +41,8 @@ export default function ComingSoon({
           return (
             <li
               key={title.id}
-              className="flex w-[85%] shrink-0 snap-start gap-4 rounded-2xl border border-[var(--milestone)]/25 bg-gradient-to-bl from-[var(--milestone)]/[0.08] to-transparent p-4 sm:w-auto"
+              className="flex w-[85%] shrink-0 snap-start rounded-2xl border border-[var(--milestone)]/25 bg-gradient-to-bl from-[var(--milestone)]/[0.08] to-transparent p-4 sm:w-auto"
             >
-              <PosterArt movie={title} size="md" />
               <div className="flex min-w-0 flex-1 flex-col">
                 <div className="self-start">
                   <KindBadge movie={title} />

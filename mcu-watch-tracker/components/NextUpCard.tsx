@@ -4,7 +4,6 @@ import { Check, CheckCheck, Clock, PartyPopper } from "lucide-react";
 
 import EpisodeTracker from "@/components/EpisodeTracker";
 import KindBadge from "@/components/KindBadge";
-import PosterArt from "@/components/PosterArt";
 import { TIMELINE_FLAG_LABELS } from "@/data/movieCatalog";
 import { phaseColor } from "@/lib/phase";
 import { formatDuration } from "@/lib/progressStats";
@@ -95,9 +94,8 @@ export default function NextUpCard({
       />
 
       <div className="relative">
-        <div className="flex gap-5">
-          <PosterArt movie={movie} size="md" className="hidden shadow-2xl sm:block" />
-          <div className="min-w-0 flex-1">
+        <div>
+          <div>
             <div className="flex flex-wrap items-center gap-2">
               <p className="text-[11px] font-medium uppercase tracking-[0.25em] text-[var(--accent-soft)]">
                 הבא בתור
@@ -209,7 +207,11 @@ export default function NextUpCard({
             <ol className="mt-2.5 space-y-2">
               {queue.map((title) => (
                 <li key={title.id} className="flex items-center gap-2.5 text-sm">
-                  <PosterArt movie={title} size="xs" />
+                  <span
+                    aria-hidden="true"
+                    className="h-1.5 w-1.5 shrink-0 rounded-full"
+                    style={{ backgroundColor: phaseColor(title.phase) }}
+                  />
                   <span
                     dir="ltr"
                     className="min-w-0 flex-1 truncate text-[var(--text)]/85"
