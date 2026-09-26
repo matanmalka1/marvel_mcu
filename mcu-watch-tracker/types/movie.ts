@@ -61,6 +61,13 @@ export type Movie = {
   phase: number;
   saga: Saga;
   releaseYear: number;
+  /** First release date (ISO, US). Titles dated in the future are shown as "coming soon". */
+  releaseDate: string;
+  /**
+   * Total running time in minutes — for a series, the whole season. Series figures are
+   * rounded estimates. Undefined when not yet known.
+   */
+  runtimeMinutes?: number;
   /** Narrative era, e.g. "1995" or "אחרי Endgame". */
   timelineLabel?: string;
   timelineFlags?: TimelineFlag[];
@@ -84,10 +91,18 @@ export type Movie = {
 /** Lightweight metadata used by progress and timeline views. */
 export type MovieSummary = Omit<Movie, "knowledge" | "review">;
 
-export type MovieStatus = "watched" | "next" | "upcoming";
+/** `unreleased` = dated in the future; it can't be marked and doesn't count toward progress. */
+export type MovieStatus = "watched" | "in-progress" | "next" | "upcoming" | "unreleased";
 
 /** "timeline" = chronological story order, "release" = original release order. */
 export type OrderMode = "timeline" | "release";
+
+/** Personal notes the viewer keeps for a title. Not part of undo history. */
+export type JournalEntry = {
+  /** 1–5 stars. */
+  rating?: number;
+  note?: string;
+};
 
 export type ViewPreferences = {
   orderMode: OrderMode;

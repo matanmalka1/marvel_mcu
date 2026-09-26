@@ -1,8 +1,11 @@
 import { Check, ChevronDown, Link2, Star } from "lucide-react";
 
+import JournalPanel from "@/components/JournalPanel";
 import KindBadge from "@/components/KindBadge";
+import PosterArt from "@/components/PosterArt";
+import StarRating from "@/components/StarRating";
 import { phaseColor } from "@/lib/phase";
-import type { Movie } from "@/types/movie";
+import type { JournalEntry, Movie } from "@/types/movie";
 
 function ChipList({ label, items }: { label: string; items: string[] }) {
   if (items.length === 0) return null;
@@ -30,10 +33,16 @@ export default function KnowledgeCard({
   movie,
   expanded,
   onToggle,
+  journalEntry,
+  watchedAt,
+  onJournalChange,
 }: {
   movie: Movie;
   expanded: boolean;
   onToggle: () => void;
+  journalEntry: JournalEntry | undefined;
+  watchedAt: string | undefined;
+  onJournalChange: (patch: JournalEntry) => void;
 }) {
   const slateNumber = String(movie.timelineOrder).padStart(2, "0");
   const knowledge = movie.knowledge;
@@ -53,10 +62,11 @@ export default function KnowledgeCard({
         style={{ backgroundColor: phaseColor(movie.phase) }}
       />
       <header className="flex items-start gap-3">
-        <span className="font-slate mt-0.5 shrink-0 rounded-md border border-[var(--border)] px-2 py-1 text-xs text-[var(--muted)]">
-          {slateNumber}
-        </span>
+        <PosterArt movie={movie} size="sm" />
         <div className="min-w-0 flex-1">
+          <span className="font-slate text-[10px] text-[var(--muted)]">
+            #{slateNumber}
+          </span>
           <h3 dir="ltr" className="font-display text-lg font-bold leading-snug">
             {movie.title}
           </h3>
@@ -66,6 +76,15 @@ export default function KnowledgeCard({
             </span>
             {movie.kind !== "movie" ? <KindBadge movie={movie} /> : null}
           </p>
+          {journalEntry?.rating ? (
+            <div className="mt-1.5">
+              <StarRating
+                label={`הדירוג שלך ל-${movie.title}`}
+                value={journalEntry.rating}
+                size="sm"
+              />
+            </div>
+          ) : null}
         </div>
         <span className="flex shrink-0 items-center gap-1 rounded-full border border-[var(--accent)]/35 bg-[var(--accent)]/10 px-2.5 py-1 text-[11px] text-[var(--accent-soft)]">
           <Check className="h-3 w-3" aria-hidden="true" />
@@ -88,6 +107,12 @@ export default function KnowledgeCard({
 
       {expanded && knowledge ? (
         <div id={`knowledge-${movie.id}`} className="animate-rise-in mt-5 space-y-5">
+          <JournalPanel
+            title={movie.title}
+            entry={journalEntry}
+            watchedAt={watchedAt}
+            onChange={onJournalChange}
+          />
           <p className="text-sm leading-relaxed text-[var(--text)]/90">
             {knowledge.summary}
           </p>
@@ -169,12 +194,17 @@ export default function KnowledgeCard({
           ) : null}
         </div>
       ) : expanded ? (
-        <p
-          id={`knowledge-${movie.id}`}
-          className="mt-5 text-sm leading-relaxed text-[var(--muted)]"
-        >
-          עוד לא נכתבה סקירה לכותר הזה.
-        </p>
+        <div id={`knowledge-${movie.id}`} className="animate-rise-in mt-5 space-y-5">
+          <JournalPanel
+            title={movie.title}
+            entry={journalEntry}
+            watchedAt={watchedAt}
+            onChange={onJournalChange}
+          />
+          <p className="text-sm leading-relaxed text-[var(--muted)]">
+            עוד לא נכתבה סקירה לכותר הזה.
+          </p>
+        </div>
       ) : null}
     </article>
   );

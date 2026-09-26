@@ -10,6 +10,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 1,
     saga: "infinity",
     releaseYear: 2011,
+    releaseDate: "2011-07-22",
+    runtimeMinutes: 124,
     timelineLabel: "1943–1945",
   },
   {
@@ -21,6 +23,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 3,
     saga: "infinity",
     releaseYear: 2019,
+    releaseDate: "2019-03-08",
+    runtimeMinutes: 123,
     timelineLabel: "1995",
   },
   {
@@ -32,6 +36,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 1,
     saga: "infinity",
     releaseYear: 2008,
+    releaseDate: "2008-05-02",
+    runtimeMinutes: 126,
     timelineLabel: "2010",
   },
   {
@@ -43,6 +49,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 1,
     saga: "infinity",
     releaseYear: 2010,
+    releaseDate: "2010-05-07",
+    runtimeMinutes: 124,
     timelineLabel: "2011",
   },
   {
@@ -54,6 +62,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 1,
     saga: "infinity",
     releaseYear: 2008,
+    releaseDate: "2008-06-13",
+    runtimeMinutes: 112,
     timelineLabel: "2011",
   },
   {
@@ -65,6 +75,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 1,
     saga: "infinity",
     releaseYear: 2011,
+    releaseDate: "2011-05-06",
+    runtimeMinutes: 115,
     timelineLabel: "2011",
   },
   {
@@ -76,6 +88,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 1,
     saga: "infinity",
     releaseYear: 2012,
+    releaseDate: "2012-05-04",
+    runtimeMinutes: 143,
     timelineLabel: "2012",
   },
   {
@@ -87,6 +101,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 2,
     saga: "infinity",
     releaseYear: 2013,
+    releaseDate: "2013-11-08",
+    runtimeMinutes: 112,
     timelineLabel: "2013",
   },
   {
@@ -98,6 +114,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 2,
     saga: "infinity",
     releaseYear: 2013,
+    releaseDate: "2013-05-03",
+    runtimeMinutes: 130,
     timelineLabel: "2012–2013",
   },
   {
@@ -109,6 +127,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 2,
     saga: "infinity",
     releaseYear: 2014,
+    releaseDate: "2014-04-04",
+    runtimeMinutes: 136,
     timelineLabel: "2014",
   },
   {
@@ -120,6 +140,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 2,
     saga: "infinity",
     releaseYear: 2014,
+    releaseDate: "2014-08-01",
+    runtimeMinutes: 121,
     timelineLabel: "2014",
   },
   {
@@ -131,6 +153,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 3,
     saga: "infinity",
     releaseYear: 2017,
+    releaseDate: "2017-05-05",
+    runtimeMinutes: 136,
     timelineLabel: "2014",
   },
   {
@@ -142,6 +166,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 2,
     saga: "infinity",
     releaseYear: 2015,
+    releaseDate: "2015-05-01",
+    runtimeMinutes: 141,
     timelineLabel: "2015",
   },
   {
@@ -153,6 +179,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 2,
     saga: "infinity",
     releaseYear: 2015,
+    releaseDate: "2015-07-17",
+    runtimeMinutes: 117,
     timelineLabel: "2015",
   },
   {
@@ -164,6 +192,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 3,
     saga: "infinity",
     releaseYear: 2016,
+    releaseDate: "2016-05-06",
+    runtimeMinutes: 147,
     timelineLabel: "2016",
   },
   {
@@ -175,6 +205,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 4,
     saga: "multiverse",
     releaseYear: 2021,
+    releaseDate: "2021-07-09",
+    runtimeMinutes: 134,
     timelineLabel: "2016",
   },
   {
@@ -186,6 +218,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 3,
     saga: "infinity",
     releaseYear: 2018,
+    releaseDate: "2018-02-16",
+    runtimeMinutes: 134,
     timelineLabel: "2016",
   },
   {
@@ -197,6 +231,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 3,
     saga: "infinity",
     releaseYear: 2017,
+    releaseDate: "2017-07-07",
+    runtimeMinutes: 133,
     timelineLabel: "2016",
   },
   {
@@ -208,6 +244,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 3,
     saga: "infinity",
     releaseYear: 2016,
+    releaseDate: "2016-11-04",
+    runtimeMinutes: 115,
     timelineLabel: "2016–2017",
   },
   {
@@ -219,6 +257,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 3,
     saga: "infinity",
     releaseYear: 2017,
+    releaseDate: "2017-11-03",
+    runtimeMinutes: 130,
     timelineLabel: "2017",
   },
   {
@@ -230,6 +270,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 3,
     saga: "infinity",
     releaseYear: 2018,
+    releaseDate: "2018-07-06",
+    runtimeMinutes: 118,
     timelineLabel: "2018",
   },
   {
@@ -241,6 +283,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 3,
     saga: "infinity",
     releaseYear: 2018,
+    releaseDate: "2018-04-27",
+    runtimeMinutes: 149,
     timelineLabel: "2018",
   },
   {
@@ -252,6 +296,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 3,
     saga: "infinity",
     releaseYear: 2019,
+    releaseDate: "2019-04-26",
+    runtimeMinutes: 181,
     timelineLabel: "2018 · 2023",
     milestone: true,
   },
@@ -264,6 +310,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 4,
     saga: "multiverse",
     releaseYear: 2021,
+    releaseDate: "2021-09-03",
+    runtimeMinutes: 132,
     timelineLabel: "אחרי Endgame",
     timelineFlags: ["post-endgame"],
   },
@@ -276,6 +324,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 3,
     saga: "infinity",
     releaseYear: 2019,
+    releaseDate: "2019-07-02",
+    runtimeMinutes: 129,
     timelineLabel: "אחרי Endgame",
     timelineFlags: ["post-endgame"],
   },
@@ -288,6 +338,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 4,
     saga: "multiverse",
     releaseYear: 2021,
+    releaseDate: "2021-11-05",
+    runtimeMinutes: 156,
     timelineLabel: "אחרי Endgame · רקע עתיק",
     timelineFlags: ["post-endgame"],
   },
@@ -300,6 +352,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 4,
     saga: "multiverse",
     releaseYear: 2021,
+    releaseDate: "2021-12-17",
+    runtimeMinutes: 148,
     timelineLabel: "אחרי Endgame",
     timelineFlags: ["post-endgame", "multiverse"],
   },
@@ -312,6 +366,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 4,
     saga: "multiverse",
     releaseYear: 2022,
+    releaseDate: "2022-05-06",
+    runtimeMinutes: 126,
     timelineLabel: "אחרי Endgame",
     timelineFlags: ["post-endgame", "multiverse"],
   },
@@ -324,6 +380,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 4,
     saga: "multiverse",
     releaseYear: 2022,
+    releaseDate: "2022-11-11",
+    runtimeMinutes: 161,
     timelineLabel: "אחרי Endgame",
     timelineFlags: ["post-endgame"],
   },
@@ -336,6 +394,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 4,
     saga: "multiverse",
     releaseYear: 2022,
+    releaseDate: "2022-07-08",
+    runtimeMinutes: 119,
     timelineLabel: "אחרי Endgame",
     timelineFlags: ["post-endgame"],
   },
@@ -348,6 +408,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 5,
     saga: "multiverse",
     releaseYear: 2023,
+    releaseDate: "2023-02-17",
+    runtimeMinutes: 125,
     timelineLabel: "אחרי Endgame",
     timelineFlags: ["post-endgame", "multiverse"],
   },
@@ -360,6 +422,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 5,
     saga: "multiverse",
     releaseYear: 2023,
+    releaseDate: "2023-05-05",
+    runtimeMinutes: 150,
     timelineLabel: "אחרי Endgame",
     timelineFlags: ["post-endgame"],
   },
@@ -372,6 +436,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 5,
     saga: "multiverse",
     releaseYear: 2023,
+    releaseDate: "2023-11-10",
+    runtimeMinutes: 105,
     timelineLabel: "אחרי Endgame",
     timelineFlags: ["post-endgame"],
   },
@@ -384,6 +450,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 5,
     saga: "multiverse",
     releaseYear: 2024,
+    releaseDate: "2024-07-26",
+    runtimeMinutes: 128,
     timelineLabel: "לא לינארי",
     timelineFlags: ["post-endgame", "tva", "multiverse"],
   },
@@ -396,6 +464,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 5,
     saga: "multiverse",
     releaseYear: 2025,
+    releaseDate: "2025-02-14",
+    runtimeMinutes: 118,
     timelineLabel: "אחרי Endgame",
     timelineFlags: ["post-endgame"],
   },
@@ -408,6 +478,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 5,
     saga: "multiverse",
     releaseYear: 2025,
+    releaseDate: "2025-05-02",
+    runtimeMinutes: 127,
     timelineLabel: "אחרי Endgame",
     timelineFlags: ["post-endgame"],
   },
@@ -420,6 +492,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 6,
     saga: "multiverse",
     releaseYear: 2025,
+    releaseDate: "2025-07-25",
+    runtimeMinutes: 115,
     timelineLabel: "יקום חלופי",
     timelineFlags: ["alternate-universe"],
   },
@@ -431,6 +505,7 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 6,
     saga: "multiverse",
     releaseYear: 2026,
+    releaseDate: "2026-07-31",
     timelineLabel: "אחרי Endgame",
     timelineFlags: ["post-endgame"],
   },
@@ -443,6 +518,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 4,
     saga: "multiverse",
     releaseYear: 2021,
+    releaseDate: "2021-06-09",
+    runtimeMinutes: 300,
     timelineLabel: "מחוץ לזמן",
     timelineFlags: ["tva", "multiverse"],
     season: 1,
@@ -457,6 +534,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 4,
     saga: "multiverse",
     releaseYear: 2021,
+    releaseDate: "2021-08-11",
+    runtimeMinutes: 290,
     timelineLabel: "יקומים חלופיים",
     timelineFlags: ["alternate-universe", "multiverse"],
     season: 1,
@@ -472,6 +551,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 4,
     saga: "multiverse",
     releaseYear: 2021,
+    releaseDate: "2021-01-15",
+    runtimeMinutes: 350,
     timelineLabel: "אחרי Endgame",
     timelineFlags: ["post-endgame"],
     season: 1,
@@ -486,6 +567,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 4,
     saga: "multiverse",
     releaseYear: 2021,
+    releaseDate: "2021-03-19",
+    runtimeMinutes: 300,
     timelineLabel: "אחרי Endgame",
     timelineFlags: ["post-endgame"],
     season: 1,
@@ -500,6 +583,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 4,
     saga: "multiverse",
     releaseYear: 2021,
+    releaseDate: "2021-11-24",
+    runtimeMinutes: 300,
     timelineLabel: "אחרי Endgame",
     timelineFlags: ["post-endgame"],
     season: 1,
@@ -514,6 +599,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 4,
     saga: "multiverse",
     releaseYear: 2022,
+    releaseDate: "2022-03-30",
+    runtimeMinutes: 280,
     timelineLabel: "אחרי Endgame",
     timelineFlags: ["post-endgame"],
     season: 1,
@@ -528,6 +615,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 5,
     saga: "multiverse",
     releaseYear: 2024,
+    releaseDate: "2024-01-09",
+    runtimeMinutes: 200,
     timelineLabel: "אחרי Endgame",
     timelineFlags: ["post-endgame"],
     season: 1,
@@ -542,6 +631,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 4,
     saga: "multiverse",
     releaseYear: 2022,
+    releaseDate: "2022-08-18",
+    runtimeMinutes: 290,
     timelineLabel: "אחרי Endgame",
     timelineFlags: ["post-endgame"],
     season: 1,
@@ -556,6 +647,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 4,
     saga: "multiverse",
     releaseYear: 2022,
+    releaseDate: "2022-06-08",
+    runtimeMinutes: 270,
     timelineLabel: "אחרי Endgame",
     timelineFlags: ["post-endgame"],
     season: 1,
@@ -569,6 +662,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 4,
     saga: "multiverse",
     releaseYear: 2022,
+    releaseDate: "2022-10-07",
+    runtimeMinutes: 53,
     timelineLabel: "אחרי Endgame",
     timelineFlags: ["post-endgame"],
   },
@@ -580,6 +675,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 4,
     saga: "multiverse",
     releaseYear: 2022,
+    releaseDate: "2022-11-25",
+    runtimeMinutes: 44,
     timelineLabel: "אחרי Endgame",
     timelineFlags: ["post-endgame"],
   },
@@ -592,6 +689,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 5,
     saga: "multiverse",
     releaseYear: 2023,
+    releaseDate: "2023-06-21",
+    runtimeMinutes: 270,
     timelineLabel: "אחרי Endgame",
     timelineFlags: ["post-endgame"],
     season: 1,
@@ -606,6 +705,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 5,
     saga: "multiverse",
     releaseYear: 2023,
+    releaseDate: "2023-10-05",
+    runtimeMinutes: 300,
     timelineLabel: "מחוץ לזמן",
     timelineFlags: ["tva", "multiverse"],
     season: 2,
@@ -620,6 +721,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 5,
     saga: "multiverse",
     releaseYear: 2023,
+    releaseDate: "2023-12-22",
+    runtimeMinutes: 280,
     timelineLabel: "יקומים חלופיים",
     timelineFlags: ["alternate-universe", "multiverse"],
     season: 2,
@@ -635,6 +738,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 5,
     saga: "multiverse",
     releaseYear: 2024,
+    releaseDate: "2024-12-22",
+    runtimeMinutes: 240,
     timelineLabel: "יקומים חלופיים",
     timelineFlags: ["alternate-universe", "multiverse"],
     season: 3,
@@ -650,6 +755,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 5,
     saga: "multiverse",
     releaseYear: 2024,
+    releaseDate: "2024-09-18",
+    runtimeMinutes: 360,
     timelineLabel: "אחרי Endgame",
     timelineFlags: ["post-endgame"],
     season: 1,
@@ -664,6 +771,8 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 5,
     saga: "multiverse",
     releaseYear: 2025,
+    releaseDate: "2025-03-04",
+    runtimeMinutes: 450,
     timelineLabel: "אחרי Endgame",
     timelineFlags: ["post-endgame"],
     season: 1,
@@ -678,10 +787,34 @@ export const MOVIE_CATALOG: MovieSummary[] = [
     phase: 5,
     saga: "multiverse",
     releaseYear: 2025,
+    releaseDate: "2025-06-24",
+    runtimeMinutes: 270,
     timelineLabel: "אחרי Endgame",
     timelineFlags: ["post-endgame"],
     season: 1,
     episodes: 6,
+  },
+  {
+    id: "avengers-doomsday",
+    kind: "movie",
+    title: "Avengers: Doomsday",
+    titleHe: "הנוקמים: יום הדין",
+    timelineOrder: 57,
+    phase: 6,
+    saga: "multiverse",
+    releaseYear: 2026,
+    releaseDate: "2026-12-18",
+  },
+  {
+    id: "avengers-secret-wars",
+    kind: "movie",
+    title: "Avengers: Secret Wars",
+    titleHe: "הנוקמים: מלחמות סודיות",
+    timelineOrder: 58,
+    phase: 6,
+    saga: "multiverse",
+    releaseYear: 2027,
+    releaseDate: "2027-12-17",
   },
 ];
 
@@ -747,6 +880,8 @@ const RELEASE_ORDER_IDS = [
   "ironheart",
   "the-fantastic-four-first-steps",
   "spider-man-brand-new-day",
+  "avengers-doomsday",
+  "avengers-secret-wars",
 ] as const;
 
 const MOVIES_BY_ID = new Map(MOVIE_CATALOG.map((movie) => [movie.id, movie]));
@@ -808,4 +943,34 @@ export function getOrderedTitles(
   includeSeries: boolean,
 ): readonly MovieSummary[] {
   return ORDERED_TITLES[orderMode][includeSeries ? "all" : "movies"];
+}
+
+/**
+ * The date the catalog was last reviewed. Used as "today" during the static render so
+ * server and client agree; the client swaps in the real date after hydration.
+ */
+export const CATALOG_AS_OF = "2026-09-26";
+
+/** Local calendar date as YYYY-MM-DD. */
+export function toIsoDate(date: Date): string {
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${date.getFullYear()}-${month}-${day}`;
+}
+
+export function isReleased(
+  movie: Pick<MovieSummary, "releaseDate">,
+  today: string,
+): boolean {
+  return movie.releaseDate <= today;
+}
+
+/** Whole days from `today` until release; 0 or less means released. */
+export function daysUntilRelease(
+  movie: Pick<MovieSummary, "releaseDate">,
+  today: string,
+): number {
+  const ms =
+    Date.parse(`${movie.releaseDate}T00:00:00Z`) - Date.parse(`${today}T00:00:00Z`);
+  return Math.round(ms / 86_400_000);
 }

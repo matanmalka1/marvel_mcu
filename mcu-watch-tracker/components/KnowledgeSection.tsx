@@ -4,12 +4,22 @@ import { useMemo, useState } from "react";
 
 import KnowledgeCard from "@/components/KnowledgeCard";
 import { MOVIES_IN_TIMELINE_ORDER } from "@/data/movies";
+import type { Journal } from "@/lib/watchProgressStorage";
+import type { JournalEntry } from "@/types/movie";
+
+export type KnowledgeSectionProps = {
+  watchedIds: readonly string[];
+  watchedAt: Readonly<Record<string, string>>;
+  journal: Journal;
+  onJournalChange: (id: string, patch: JournalEntry) => void;
+};
 
 export default function KnowledgeSection({
   watchedIds,
-}: {
-  watchedIds: readonly string[];
-}) {
+  watchedAt,
+  journal,
+  onJournalChange,
+}: KnowledgeSectionProps) {
   const watchedMovies = useMemo(() => {
     const watchedSet = new Set(watchedIds);
     return MOVIES_IN_TIMELINE_ORDER.filter((movie) => watchedSet.has(movie.id));
@@ -80,6 +90,9 @@ export default function KnowledgeSection({
               movie={movie}
               expanded={expandedIds.has(movie.id)}
               onToggle={() => toggleExpanded(movie.id)}
+              journalEntry={journal[movie.id]}
+              watchedAt={watchedAt[movie.id]}
+              onJournalChange={(patch) => onJournalChange(movie.id, patch)}
             />
           ))}
         </div>

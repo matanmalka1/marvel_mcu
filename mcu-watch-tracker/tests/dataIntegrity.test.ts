@@ -2,6 +2,8 @@ import { describe, expect, it } from "vitest";
 
 import { CONNECTIONS } from "@/data/connections";
 import {
+  CATALOG_AS_OF,
+  isReleased,
   MOVIE_CATALOG,
   MOVIES_IN_RELEASE_ORDER,
   MOVIES_IN_TIMELINE_ORDER,
@@ -24,8 +26,28 @@ describe("movie data integrity", () => {
     expect(new Set(releaseIds)).toEqual(new Set(ids));
   });
 
-  it("has one detail record for every catalog movie", () => {
-    expect(new Set(Object.keys(MOVIE_DETAILS))).toEqual(new Set(ids));
+  it("has one detail record for every released title, none for unreleased ones", () => {
+    const released = MOVIE_CATALOG.filter((movie) => isReleased(movie, CATALOG_AS_OF));
+    expect(new Set(Object.keys(MOVIE_DETAILS))).toEqual(
+      new Set(released.map((movie) => movie.id)),
+    );
+  });
+
+  it("has valid release dates that match the year and the release order", () => {
+    for (const movie of MOVIE_CATALOG) {
+      expect(movie.releaseDate, movie.id).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      expect(movie.releaseDate.slice(0, 4), movie.id).toBe(String(movie.releaseYear));
+    }
+    const dates = MOVIES_IN_RELEASE_ORDER.map((movie) => movie.releaseDate);
+    expect(dates).toEqual([...dates].sort());
+  });
+
+  it("gives released titles a plausible runtime", () => {
+    for (const movie of MOVIE_CATALOG) {
+      if (movie.runtimeMinutes === undefined) continue;
+      expect(movie.runtimeMinutes, movie.id).toBeGreaterThan(30);
+      expect(movie.runtimeMinutes, movie.id).toBeLessThan(600);
+    }
   });
 
   it("marks series seasons consistently", () => {
@@ -39,8 +61,8 @@ describe("movie data integrity", () => {
     }
   });
 
-  it("gives every title written knowledge", () => {
-    for (const id of ids) {
+  it("gives every released title written knowledge", () => {
+    for (const id of Object.keys(MOVIE_DETAILS)) {
       expect(MOVIE_DETAILS[id]?.knowledge?.summary, id).toBeTruthy();
     }
   });
