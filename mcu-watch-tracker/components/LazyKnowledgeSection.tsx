@@ -3,6 +3,8 @@
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 
+import type { KnowledgeSectionProps } from "@/components/KnowledgeSection";
+
 const KnowledgeSection = dynamic(() => import("@/components/KnowledgeSection"), {
   loading: () => (
     <p className="mx-auto max-w-[1240px] px-4 py-14 text-sm text-[var(--muted)] sm:px-6">
@@ -11,11 +13,8 @@ const KnowledgeSection = dynamic(() => import("@/components/KnowledgeSection"), 
   ),
 });
 
-export default function LazyKnowledgeSection({
-  watchedIds,
-}: {
-  watchedIds: readonly string[];
-}) {
+export default function LazyKnowledgeSection(props: KnowledgeSectionProps) {
+  const { watchedIds } = props;
   const anchorRef = useRef<HTMLDivElement>(null);
   const [shouldLoad, setShouldLoad] = useState(false);
   const hasWatched = watchedIds.length > 0;
@@ -66,7 +65,7 @@ export default function LazyKnowledgeSection({
   return (
     <div ref={anchorRef} id="knowledge">
       {shouldLoad ? (
-        <KnowledgeSection watchedIds={watchedIds} />
+        <KnowledgeSection {...props} />
       ) : (
         <div
           className="mx-auto min-h-48 max-w-[1240px] px-4 py-14 sm:px-6"

@@ -2,6 +2,7 @@
 
 import { useCallback, useMemo, useRef, useState } from "react";
 
+import ComingSoon from "@/components/ComingSoon";
 import ConnectionsSection from "@/components/ConnectionsSection";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
@@ -10,6 +11,7 @@ import NextUpCard from "@/components/NextUpCard";
 import ProgressOverview from "@/components/ProgressOverview";
 import Timeline from "@/components/Timeline";
 import UndoToast, { type UndoNotice } from "@/components/UndoToast";
+import WatchHistory from "@/components/WatchHistory";
 import { CONNECTIONS, getUnlockedConnections } from "@/data/connections";
 import { getMovieSummaryById, isTitleIncluded } from "@/data/movieCatalog";
 import { useWatchProgress } from "@/hooks/useWatchProgress";
@@ -19,14 +21,19 @@ export default function HomePage() {
   const noticeIdRef = useRef(0);
   const {
     hydrated,
+    today,
+    progress,
     watchedSet,
     watchedIds,
+    journal,
     preferences,
     titles,
     stats,
     canUndo,
     toggleWatched,
+    toggleEpisode,
     completeNextMovie,
+    updateJournal,
     undo,
     reset,
     setOrderMode,
@@ -44,6 +51,8 @@ export default function HomePage() {
       }),
     [watchedIds, preferences.includeSeries],
   );
+
+  const visibleIds = useMemo(() => new Set(titles.map((title) => title.id)), [titles]);
 
   const nextPosition = stats.nextTitle
     ? titles.findIndex((title) => title.id === stats.nextTitle?.id) + 1
@@ -70,11 +79,28 @@ export default function HomePage() {
     [notify, toggleWatched, watchedSet],
   );
 
+  const handleToggleEpisode = useCallback(
+    (id: string, episode: number) => {
+      const movie = getMovieSummaryById(id);
+      const wasWatched =
+        watchedSet.has(id) || (progress.episodes[id]?.includes(episode) ?? false);
+      toggleEpisode(id, episode);
+      notify(
+        `${movie?.title ?? "הסדרה"} · פרק ${episode} ${wasWatched ? "סומן כלא נצפה" : "סומן כנצפה"}`,
+      );
+    },
+    [notify, progress.episodes, toggleEpisode, watchedSet],
+  );
+
   const handleCompleteNext = useCallback(() => {
     if (!stats.nextTitle) return;
     completeNextMovie();
-    notify(`${stats.nextTitle.title} סומן כנצפה`);
-  }, [completeNextMovie, stats.nextTitle, notify]);
+    notify(
+      stats.nextEpisode
+        ? `${stats.nextTitle.title} · פרק ${stats.nextEpisode} סומן כנצפה`
+        : `${stats.nextTitle.title} סומן כנצפה`,
+    );
+  }, [completeNextMovie, stats.nextTitle, stats.nextEpisode, notify]);
 
   const handleReset = useCallback(() => {
     reset();
@@ -118,18 +144,39 @@ export default function HomePage() {
           nextUp={
             <NextUpCard
               movie={stats.nextTitle}
+              nextEpisode={stats.nextEpisode}
+              watchedEpisodes={
+                stats.nextTitle ? (progress.episodes[stats.nextTitle.id] ?? []) : []
+              }
               queue={stats.queue}
               position={nextPosition}
               totalMovies={stats.total}
               orderMode={preferences.orderMode}
               onComplete={handleCompleteNext}
+              onCompleteTitle={handleToggle}
+              onToggleEpisode={handleToggleEpisode}
             />
           }
         />
 
         <ProgressOverview stats={stats} includeSeries={preferences.includeSeries} />
 
-        <LazyKnowledgeSection watchedIds={visibleWatchedIds} />
+        <ComingSoon titles={stats.unreleased} today={today} />
+
+        <WatchHistory
+          progress={progress}
+          journal={journal}
+          visibleIds={visibleIds}
+          watchedMinutes={stats.watchedMinutes}
+          today={today}
+        />
+
+        <LazyKnowledgeSection
+          watchedIds={visibleWatchedIds}
+          watchedAt={progress.watchedAt}
+          journal={journal}
+          onJournalChange={updateJournal}
+        />
 
         <ConnectionsSection
           connections={connections}
@@ -139,11 +186,14 @@ export default function HomePage() {
         <Timeline
           movies={titles}
           watchedIds={watchedSet}
+          episodes={progress.episodes}
+          today={today}
           nextMovieId={stats.nextTitle?.id}
           orderMode={preferences.orderMode}
           includeSeries={preferences.includeSeries}
           onOrderModeChange={setOrderMode}
           onToggle={handleToggle}
+          onToggleEpisode={handleToggleEpisode}
         />
       </main>
 

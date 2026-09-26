@@ -6,7 +6,7 @@ import { useId, useMemo } from "react";
 import SearchInput from "@/components/SearchInput";
 import SegmentedControl from "@/components/SegmentedControl";
 import TimelineRow from "@/components/TimelineRow";
-import { ENDGAME_ID } from "@/data/movieCatalog";
+import { daysUntilRelease, ENDGAME_ID, isReleased } from "@/data/movieCatalog";
 import {
   hasActiveFilters,
   useTimelineFilters,
@@ -20,11 +20,15 @@ type TimelineProps = {
   /** Tracked titles, already in the viewer's chosen order. */
   movies: readonly MovieSummary[];
   watchedIds: ReadonlySet<string>;
+  /** Partially watched series → watched episode numbers. */
+  episodes: Readonly<Record<string, number[]>>;
+  today: string;
   nextMovieId: string | undefined;
   orderMode: OrderMode;
   includeSeries: boolean;
   onOrderModeChange: (mode: OrderMode) => void;
   onToggle: (id: string) => void;
+  onToggleEpisode: (id: string, episode: number) => void;
 };
 
 type Group = {
@@ -82,6 +86,7 @@ function groupTitles(
   visible: readonly MovieSummary[],
   all: readonly MovieSummary[],
   orderMode: OrderMode,
+  today: string,
 ): Group[] {
   const endgameIndex = all.findIndex((movie) => movie.id === ENDGAME_ID);
   const indexById = new Map(all.map((movie, index) => [movie.id, index]));
@@ -91,7 +96,11 @@ function groupTitles(
     let key: string;
     let label: string;
     let color: string;
-    if (orderMode === "release") {
+    if (!isReleased(movie, today)) {
+      key = "coming-soon";
+      label = "בקרוב";
+      color = "var(--milestone)";
+    } else if (orderMode === "release") {
       key = `phase-${movie.phase}`;
       label = `Phase ${movie.phase}`;
       color = phaseColor(movie.phase);
@@ -115,11 +124,14 @@ function groupTitles(
 export default function Timeline({
   movies,
   watchedIds,
+  episodes,
+  today,
   nextMovieId,
   orderMode,
   includeSeries,
   onOrderModeChange,
   onToggle,
+  onToggleEpisode,
 }: TimelineProps) {
   const { filters, updateFilters, clearFilters } = useTimelineFilters();
   const searchId = useId();
@@ -161,13 +173,15 @@ export default function Timeline({
   );
 
   const groups = useMemo(
-    () => groupTitles(visibleMovies, movies, orderMode),
-    [visibleMovies, movies, orderMode],
+    () => groupTitles(visibleMovies, movies, orderMode, today),
+    [visibleMovies, movies, orderMode, today],
   );
 
   const statusOf = (movie: MovieSummary): MovieStatus => {
     if (watchedIds.has(movie.id)) return "watched";
+    if (!isReleased(movie, today)) return "unreleased";
     if (movie.id === nextMovieId) return "next";
+    if (episodes[movie.id]?.length) return "in-progress";
     return "upcoming";
   };
 
@@ -310,6 +324,8 @@ export default function Timeline({
                         }
                         orderMode={orderMode}
                         status={statusOf(movie)}
+                        watchedEpisodes={episodes[movie.id] ?? []}
+                        daysUntil={daysUntilRelease(movie, today)}
                         railAbove={
                           filtersActive || !previous
                             ? null
@@ -321,6 +337,7 @@ export default function Timeline({
                             : watched && watchedIds.has(next.id)
                         }
                         onToggle={onToggle}
+                        onToggleEpisode={onToggleEpisode}
                       />
                     );
                   })}
