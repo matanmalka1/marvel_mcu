@@ -3,10 +3,10 @@
 import { CalendarCheck, Clock, History, Star, Tv } from "lucide-react";
 import { useMemo, useState } from "react";
 
-import PosterArt from "@/components/PosterArt";
 import StarRating from "@/components/StarRating";
 import { getMovieSummaryById, toIsoDate } from "@/data/movieCatalog";
 import { formatWatchedAt } from "@/lib/dates";
+import { phaseColor } from "@/lib/phase";
 import type { ProgressState } from "@/lib/progressState";
 import { formatDuration } from "@/lib/progressStats";
 import type { Journal } from "@/lib/watchProgressStorage";
@@ -118,9 +118,8 @@ export default function WatchHistory({
           {inProgress.map(({ movie, episodes }) => (
             <li
               key={movie.id}
-              className="flex items-center gap-2 rounded-full border border-[var(--series)]/30 bg-[var(--series)]/[0.06] py-1 pe-3 ps-1 text-xs"
+              className="flex items-center gap-2 rounded-full border border-[var(--series)]/30 bg-[var(--series)]/[0.06] px-3 py-1.5 text-xs"
             >
-              <PosterArt movie={movie} size="xs" className="!w-6" />
               <span dir="ltr" className="font-medium">
                 {movie.title}
               </span>
@@ -144,7 +143,11 @@ export default function WatchHistory({
               const entry = journal[movie.id];
               return (
                 <li key={movie.id} className="flex items-center gap-3 px-4 py-3">
-                  <PosterArt movie={movie} size="xs" />
+                  <span
+                    aria-hidden="true"
+                    className="h-1.5 w-1.5 shrink-0 rounded-full"
+                    style={{ backgroundColor: phaseColor(movie.phase) }}
+                  />
                   <div className="min-w-0 flex-1">
                     <p dir="ltr" className="font-display truncate text-sm font-semibold">
                       {movie.title}

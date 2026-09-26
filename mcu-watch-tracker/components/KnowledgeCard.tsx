@@ -2,7 +2,6 @@ import { Check, ChevronDown, Link2, Star } from "lucide-react";
 
 import JournalPanel from "@/components/JournalPanel";
 import KindBadge from "@/components/KindBadge";
-import PosterArt from "@/components/PosterArt";
 import StarRating from "@/components/StarRating";
 import { phaseColor } from "@/lib/phase";
 import type { JournalEntry, Movie } from "@/types/movie";
@@ -62,11 +61,10 @@ export default function KnowledgeCard({
         style={{ backgroundColor: phaseColor(movie.phase) }}
       />
       <header className="flex items-start gap-3">
-        <PosterArt movie={movie} size="sm" />
+        <span className="font-slate mt-0.5 shrink-0 rounded-md border border-[var(--border)] px-2 py-1 text-xs text-[var(--muted)]">
+          {slateNumber}
+        </span>
         <div className="min-w-0 flex-1">
-          <span className="font-slate text-[10px] text-[var(--muted)]">
-            #{slateNumber}
-          </span>
           <h3 dir="ltr" className="font-display text-lg font-bold leading-snug">
             {movie.title}
           </h3>
